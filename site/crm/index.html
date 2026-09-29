@@ -1,0 +1,2052 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>BTS Lead Pipeline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap">
+<style>
+:root {
+  --midnight: #0F1729;
+  --midnight-soft: #1A2340;
+  --paper: #F8F6F3;
+  --brass: #B89B5E;
+  --brass-light: #D4BC82;
+  --brass-dim: #8A7445;
+  --forest: #3B5F4A;
+  --forest-light: #4D7A5E;
+  --charcoal: #2B2D2F;
+  --drift: #E5DFD6;
+  --mist: #8C8780;
+  --white: #FFFFFF;
+  --red: #C0392B;
+  --orange: #E67E22;
+  --green: #27AE60;
+  --blue: #2980B9;
+
+  --font-display: 'Cormorant', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+
+  --bg: var(--paper);
+  --bg-surface: var(--white);
+  --bg-surface-alt: #F0EDE8;
+  --bg-sidebar: var(--midnight);
+  --text: var(--charcoal);
+  --text-secondary: var(--mist);
+  --text-inverse: var(--paper);
+  --border: #D5CFC6;
+  --border-light: #E8E4DD;
+  --shadow: rgba(15,23,41,0.06);
+  --shadow-md: rgba(15,23,41,0.1);
+  --accent: var(--brass);
+  --accent-hover: var(--brass-light);
+
+  --stage-new: #3498DB;
+  --stage-contacted: #9B59B6;
+  --stage-qualified: #E67E22;
+  --stage-survey: #2ECC71;
+  --stage-proposal: #F39C12;
+  --stage-won: #27AE60;
+  --stage-lost: #C0392B;
+  --stage-complete: #1ABC9C;
+  --stage-review: #8E44AD;
+
+  --sidebar-w: 220px;
+  --detail-w: 420px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111318;
+    --bg-surface: #1A1D24;
+    --bg-surface-alt: #22252E;
+    --bg-sidebar: #0A0E18;
+    --text: #E0DDD8;
+    --text-secondary: #8A857E;
+    --text-inverse: #E0DDD8;
+    --border: #2E3038;
+    --border-light: #252830;
+    --shadow: rgba(0,0,0,0.2);
+    --shadow-md: rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111318;
+  --bg-surface: #1A1D24;
+  --bg-surface-alt: #22252E;
+  --bg-sidebar: #0A0E18;
+  --text: #E0DDD8;
+  --text-secondary: #8A857E;
+  --text-inverse: #E0DDD8;
+  --border: #2E3038;
+  --border-light: #252830;
+  --shadow: rgba(0,0,0,0.2);
+  --shadow-md: rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  color: var(--text-inverse);
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+}
+.sidebar-brand {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-brand h1 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brass);
+  letter-spacing: 0.02em;
+}
+.sidebar-brand span {
+  font-size: 0.7rem;
+  color: rgba(248,246,243,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+.sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 500;
+  color: rgba(248,246,243,0.55);
+  cursor: pointer; transition: all 0.15s;
+  border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item:hover { color: var(--paper); background: rgba(255,255,255,0.06); }
+.nav-item.active { color: var(--brass); background: rgba(184,155,94,0.12); }
+.nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.nav-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.7rem;
+  color: rgba(248,246,243,0.3);
+}
+.presence-dots { display: flex; gap: 4px; margin-top: 8px; }
+.presence-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* MAIN AREA */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  gap: 16px;
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 6px;
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--bg-surface); color: var(--text);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.btn:hover { border-color: var(--accent); }
+.btn svg { width: 16px; height: 16px; }
+.btn-primary {
+  background: var(--brass); color: var(--midnight);
+  border-color: var(--brass);
+}
+.btn-primary:hover { background: var(--brass-light); border-color: var(--brass-light); }
+.btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+.btn-ghost { border: none; background: none; color: var(--text-secondary); }
+.btn-ghost:hover { color: var(--text); }
+.btn-danger { color: var(--red); border-color: var(--red); }
+.btn-danger:hover { background: var(--red); color: white; }
+
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 12px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--bg);
+  min-width: 200px;
+}
+.search-box input {
+  border: none; background: none; outline: none;
+  font-family: var(--font-body); font-size: 0.82rem;
+  color: var(--text); width: 100%;
+}
+.search-box svg { width: 16px; height: 16px; color: var(--text-secondary); flex-shrink: 0; }
+
+.content { flex: 1; overflow: auto; position: relative; }
+
+/* DASHBOARD */
+.dashboard { padding: 24px; }
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--bg-surface); border: 1px solid var(--border-light);
+  border-radius: 8px; padding: 20px;
+}
+.stat-label {
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-secondary);
+  font-weight: 600;
+}
+.stat-value {
+  font-family: var(--font-display); font-size: 2rem;
+  font-weight: 700; color: var(--text); margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-sub {
+  font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;
+}
+.dashboard-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.dash-panel {
+  background: var(--bg-surface); border: 1px solid var(--border-light);
+  border-radius: 8px; padding: 20px;
+}
+.dash-panel-title {
+  font-size: 0.8rem; font-weight: 600; color: var(--text);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.funnel-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border-light);
+}
+.funnel-bar:last-child { border-bottom: none; }
+.funnel-stage {
+  font-size: 0.75rem; font-weight: 500; width: 110px; flex-shrink: 0;
+}
+.funnel-fill {
+  flex: 1; height: 24px; border-radius: 4px;
+  background: var(--bg-surface-alt); overflow: hidden; position: relative;
+}
+.funnel-fill-bar {
+  height: 100%; border-radius: 4px; transition: width 0.4s ease;
+  min-width: 2px;
+}
+.funnel-count {
+  font-size: 0.75rem; font-weight: 600; width: 30px;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.activity-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.8rem;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.7rem;
+}
+.activity-text { flex: 1; color: var(--text); }
+.activity-text strong { font-weight: 600; }
+.activity-time { font-size: 0.7rem; color: var(--text-secondary); white-space: nowrap; }
+
+/* PIPELINE / KANBAN */
+.pipeline {
+  display: flex; gap: 16px;
+  padding: 20px 24px;
+  overflow-x: auto; overflow-y: hidden;
+  height: 100%;
+  align-items: flex-start;
+}
+.kanban-col {
+  min-width: 260px; width: 260px;
+  background: var(--bg-surface-alt);
+  border-radius: 8px;
+  display: flex; flex-direction: column;
+  max-height: 100%;
+  flex-shrink: 0;
+}
+.kanban-header {
+  padding: 14px 14px 10px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 2px solid transparent;
+}
+.kanban-header-left { display: flex; align-items: center; gap: 8px; }
+.kanban-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.kanban-title {
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.kanban-count {
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg);
+  padding: 1px 8px; border-radius: 10px;
+}
+.kanban-cards {
+  flex: 1; overflow-y: auto; padding: 8px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kanban-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 6px; padding: 12px;
+  cursor: pointer; transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.kanban-card:hover {
+  box-shadow: 0 2px 8px var(--shadow-md);
+  border-color: var(--accent);
+}
+.kanban-card.dragging { opacity: 0.5; }
+.kanban-card-name {
+  font-size: 0.85rem; font-weight: 600; color: var(--text);
+  margin-bottom: 4px;
+}
+.kanban-card-info {
+  font-size: 0.72rem; color: var(--text-secondary);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.kanban-card-tags {
+  display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;
+}
+.tag {
+  font-size: 0.65rem; font-weight: 600; padding: 2px 8px;
+  border-radius: 3px; text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tag-service { background: rgba(59,95,74,0.12); color: var(--forest); }
+.tag-source { background: rgba(184,155,94,0.12); color: var(--brass-dim); }
+
+/* LIST VIEW */
+.list-view { padding: 0; }
+.list-table {
+  width: 100%; border-collapse: collapse;
+}
+.list-table th {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-secondary);
+  padding: 12px 16px; text-align: left;
+  border-bottom: 2px solid var(--border-light);
+  background: var(--bg-surface);
+  position: sticky; top: 0; z-index: 5;
+  cursor: pointer; white-space: nowrap;
+}
+.list-table th:hover { color: var(--text); }
+.list-table td {
+  padding: 12px 16px; border-bottom: 1px solid var(--border-light);
+  font-size: 0.82rem; vertical-align: middle;
+}
+.list-table tr { cursor: pointer; transition: background 0.1s; }
+.list-table tbody tr:hover { background: var(--bg-surface-alt); }
+.stage-pill {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 0.7rem; font-weight: 600; white-space: nowrap;
+  color: white;
+}
+
+/* LEAD DETAIL PANEL */
+.detail-overlay {
+  position: fixed; inset: 0; background: rgba(15,23,41,0.4);
+  z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.detail-overlay.open { opacity: 1; pointer-events: auto; }
+.detail-panel {
+  position: fixed; top: 0; right: -480px; bottom: 0;
+  width: min(480px, 100vw); background: var(--bg-surface);
+  box-shadow: -4px 0 24px var(--shadow-md);
+  z-index: 101; transition: right 0.25s ease;
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.detail-panel.open { right: 0; }
+.detail-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--border-light);
+}
+.detail-header h2 {
+  font-family: var(--font-display); font-size: 1.3rem;
+  font-weight: 600; color: var(--text);
+}
+.detail-body { flex: 1; overflow-y: auto; }
+.detail-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+.detail-section-title {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.detail-field {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 6px 0;
+}
+.detail-field-label {
+  font-size: 0.78rem; color: var(--text-secondary);
+}
+.detail-field-value {
+  font-size: 0.82rem; font-weight: 500; color: var(--text);
+  text-align: right; max-width: 55%;
+}
+.detail-stage-select {
+  width: 100%; padding: 8px 12px; border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.82rem;
+  cursor: pointer;
+}
+.detail-notes {
+  width: 100%; min-height: 80px; padding: 10px 12px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.82rem;
+  resize: vertical;
+}
+.detail-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-light);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+
+/* ACTIVITY LOG in detail */
+.activity-log { display: flex; flex-direction: column; gap: 0; }
+.log-entry {
+  display: flex; gap: 10px; padding: 8px 0;
+  font-size: 0.78rem; border-bottom: 1px solid var(--border-light);
+}
+.log-entry:last-child { border-bottom: none; }
+.log-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  margin-top: 6px; flex-shrink: 0;
+}
+.log-content { flex: 1; }
+.log-time { font-size: 0.68rem; color: var(--text-secondary); }
+
+/* ADD LEAD MODAL */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(15,23,41,0.5);
+  z-index: 200; display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-surface); border-radius: 10px;
+  width: min(520px, 100%); max-height: 90vh;
+  overflow-y: auto; box-shadow: 0 8px 32px var(--shadow-md);
+}
+.modal-header {
+  padding: 20px 24px; border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h2 {
+  font-family: var(--font-display); font-size: 1.2rem;
+  font-weight: 600; color: var(--text);
+}
+.modal-body { padding: 20px 24px; }
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 0.75rem; font-weight: 600;
+  color: var(--text-secondary); margin-bottom: 4px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.form-input {
+  width: 100%; padding: 9px 12px; border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.85rem;
+}
+.form-input:focus { outline: none; border-color: var(--accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-footer {
+  padding: 16px 24px; border-top: 1px solid var(--border-light);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--midnight); color: var(--paper);
+  padding: 10px 20px; border-radius: 8px;
+  font-size: 0.82rem; font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  z-index: 300; opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+.toast.show { opacity: 1; }
+
+/* RECRUITMENT */
+.nav-label {
+  font-size: 0.62rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.12em; color: rgba(248,246,243,0.3);
+  padding: 4px 12px 2px;
+}
+.nav-badge {
+  margin-left: auto; font-size: 0.65rem; font-weight: 600;
+  background: rgba(184,155,94,0.18); color: var(--brass-light);
+  padding: 1px 7px; border-radius: 10px; font-variant-numeric: tabular-nums;
+}
+.nav-badge:empty { display: none; }
+.rec-wrap { padding: 24px; }
+.vac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.vac-card {
+  background: var(--bg-surface); border: 1px solid var(--border-light);
+  border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 14px;
+}
+.vac-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.vac-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; line-height: 1.1; color: var(--text); }
+.vac-sub { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; }
+.vac-status {
+  font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 3px 9px; border-radius: 10px; white-space: nowrap; color: #fff;
+}
+.vac-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.75rem; color: var(--text-secondary); }
+.vac-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.vac-stat { background: var(--bg-surface-alt); border-radius: 6px; padding: 10px 12px; }
+.vac-stat b { display: block; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.vac-stat span { font-size: 0.68rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.vac-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--bg-surface-alt); }
+.vac-bar div { height: 100%; }
+.vac-actions { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+.vac-site { font-size: 0.7rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.vac-site::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--site-dot, var(--mist)); }
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; padding: 16px 24px 0; }
+.chip {
+  font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+  padding: 5px 12px; border-radius: 14px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--bg-surface); color: var(--text);
+}
+.chip.active { background: var(--midnight); border-color: var(--midnight); color: var(--paper); }
+.chip b { font-weight: 600; margin-left: 4px; opacity: 0.7; font-variant-numeric: tabular-nums; }
+.cand-board { height: calc(100% - 50px); }
+.tag-vac { background: rgba(41,128,185,0.12); color: var(--blue); }
+.tag-cv { background: rgba(39,174,96,0.14); color: var(--green); }
+.tag-nocv { background: rgba(192,57,43,0.1); color: var(--red); }
+.empty-note { font-size: 0.8rem; color: var(--text-secondary); padding: 10px 4px; }
+.paste-box {
+  background: var(--bg-surface-alt); border: 1px dashed var(--border);
+  border-radius: 8px; padding: 12px; margin-bottom: 18px;
+}
+.paste-box .form-label { margin-bottom: 6px; }
+.paste-box textarea { min-height: 70px; font-size: 0.78rem; }
+.paste-hint { font-size: 0.72rem; color: var(--text-secondary); margin-top: 6px; }
+.check-row { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text); cursor: pointer; }
+.check-row input { width: 16px; height: 16px; accent-color: var(--forest); }
+.detail-link { color: var(--blue); text-decoration: none; font-weight: 600; }
+.detail-link:hover { text-decoration: underline; }
+.detail-field select.form-input { width: auto; max-width: 60%; padding: 5px 8px; font-size: 0.8rem; }
+@media (max-width: 768px) {
+  .vac-grid { grid-template-columns: 1fr; }
+  .rec-wrap { padding: 16px; }
+  .filter-chips { padding: 12px 16px 0; }
+}
+
+/* HOSTED MODE: login, banner, files */
+.login-overlay { position: fixed; inset: 0; z-index: 400; background: var(--bg-sidebar); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { width: min(380px, 100%); background: var(--bg-surface); border-radius: 12px; padding: 32px 28px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.login-card h1 { font-family: var(--font-display); font-size: 1.6rem; color: var(--brass-dim); margin-bottom: 2px; }
+.login-card p { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 22px; }
+.login-msg { color: var(--red); font-size: 0.8rem; margin-top: 12px; min-height: 1em; }
+.demo-banner { position: fixed; left: 50%; transform: translateX(-50%); top: calc(10px + env(safe-area-inset-top, 0px)); z-index: 250; background: #FFF1C2; color: #6B4E00; border: 1px solid #E8C96A; border-radius: 8px; padding: 8px 14px; font-size: 0.78rem; font-weight: 500; max-width: min(620px, 92vw); text-align: center; }
+.logout-btn { margin-top: 8px; font-family: inherit; font-size: 0.72rem; color: rgba(248,246,243,0.6); background: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 4px 10px; cursor: pointer; }
+.logout-btn:hover { color: var(--paper); border-color: rgba(255,255,255,0.35); }
+.file-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.file-links a { font-size: 0.78rem; font-weight: 600; color: var(--blue); text-decoration: none; border: 1px solid var(--border); border-radius: 5px; padding: 4px 10px; }
+.file-links a.pending { opacity: 0.5; pointer-events: none; }
+.detail-text { font-size: 0.82rem; color: var(--text); white-space: pre-wrap; line-height: 1.55; }
+.tag-web { background: rgba(41,128,185,0.12); color: var(--blue); }
+
+/* MOBILE SIDEBAR */
+.mobile-toggle {
+  display: none; position: fixed; top: 12px; left: 12px;
+  z-index: 60; background: var(--bg-surface);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px; cursor: pointer;
+}
+.mobile-toggle svg { width: 20px; height: 20px; color: var(--text); }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed; inset: 0; right: auto;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease; z-index: 55;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-toggle { display: block; }
+  .topbar { padding-left: 56px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .detail-panel { width: 100vw; }
+  .pipeline { padding: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+<script src="../config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>Blame the Stars</h1>
+    <span>Leads &amp; Recruitment CRM</span>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-view="dashboard">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item" data-view="pipeline">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Pipeline
+    </button>
+    <button class="nav-item" data-view="list">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+      All Leads
+    </button>
+    <div class="nav-divider"></div>
+    <div class="nav-label">Recruitment</div>
+    <button class="nav-item" data-view="vacancies">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m-7 0h18a1 1 0 011 1v12a2 2 0 01-2 2H4a2 2 0 01-2-2V7a1 1 0 011-1z"/></svg>
+      Vacancies
+      <span class="nav-badge" id="badgeVacancies"></span>
+    </button>
+    <button class="nav-item" data-view="candidates">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      Candidates
+      <span class="nav-badge" id="badgeCandidates"></span>
+    </button>
+    <div class="nav-divider"></div>
+    <button class="nav-item" id="btnExport">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Export CSV
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div>BTS CRM v1.1</div>
+    <div id="whoami" style="margin-top:4px;word-break:break-all;"></div>
+    <button type="button" id="btnLogout" class="logout-btn" onclick="doLogout()" hidden>Sign out</button>
+    <div class="presence-dots" id="presenceDots"></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <h2 class="topbar-title" id="topbarTitle">Dashboard</h2>
+    <div class="topbar-actions">
+      <div class="search-box">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search leads..." id="searchInput">
+      </div>
+      <button class="btn btn-primary" id="btnAddLead">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+        <span id="btnAddLabel">Add Lead</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="content" id="content">
+    <!-- Views injected by JS -->
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-overlay" id="detailOverlay"></div>
+<div class="detail-panel" id="detailPanel">
+  <div class="detail-header">
+    <h2 id="detailName">Lead</h2>
+    <button class="btn btn-ghost btn-sm" id="detailClose" aria-label="Close">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="detail-body" id="detailBody"></div>
+  <div class="detail-footer">
+    <button class="btn btn-danger btn-sm" id="detailDelete">Delete Lead</button>
+    <button class="btn btn-primary btn-sm" id="detailSave">Save Changes</button>
+  </div>
+</div>
+
+<!-- ADD LEAD MODAL -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>New Lead</h2>
+      <button class="btn btn-ghost btn-sm" id="modalClose" aria-label="Close">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form id="addForm">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f_name">Full Name *</label>
+            <input class="form-input" type="text" id="f_name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f_email">Email</label>
+            <input class="form-input" type="email" id="f_email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f_phone">Phone</label>
+            <input class="form-input" type="tel" id="f_phone">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f_location">Location</label>
+            <select class="form-input" id="f_location">
+              <option value="">Select area</option>
+              <option>Aveiro</option><option>Porto</option>
+              <option>Douro Valley</option><option>Braga</option>
+              <option>Viseu</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f_service">Service Type</label>
+            <select class="form-input" id="f_service">
+              <option value="">Select service</option>
+              <option>Full Renovation</option><option>New Build</option>
+              <option>Kitchen &amp; Bath</option><option>Roofing</option>
+              <option>Pool Construction</option><option>Landscaping</option>
+              <option>Infrastructure</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f_property">Property Type</label>
+            <select class="form-input" id="f_property">
+              <option value="">Select type</option>
+              <option>Villa</option><option>Townhouse</option>
+              <option>Apartment</option><option>Rural/Quinta</option>
+              <option>Commercial</option><option>Land Only</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f_budget">Budget Range</label>
+            <select class="form-input" id="f_budget">
+              <option value="">Select range</option>
+              <option>Under €25K</option><option>€25K – €50K</option>
+              <option>€50K – €100K</option><option>€100K – €250K</option>
+              <option>€250K+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f_source">Lead Source</label>
+            <select class="form-input" id="f_source">
+              <option value="">Select source</option>
+              <option>Website</option><option>Referral</option>
+              <option>Facebook</option><option>Instagram</option>
+              <option>Google</option><option>WhatsApp</option>
+              <option>Walk-in</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f_notes">Notes</label>
+          <textarea class="form-input" id="f_notes" rows="3" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm" id="modalCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-sm">Create Lead</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- VACANCY MODAL -->
+<div class="modal-overlay" id="vacModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="vacModalTitle">New Vacancy</h2>
+      <button class="btn btn-ghost btn-sm" data-close="vacModal" aria-label="Close">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form id="vacForm">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="v_title">Job Title (PT) *</label>
+            <input class="form-input" type="text" id="v_title" required placeholder="e.g. Pedreiro">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="v_title_en">Job Title (EN)</label>
+            <input class="form-input" type="text" id="v_title_en" placeholder="e.g. Stonemason">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="v_location">Location</label>
+            <input class="form-input" type="text" id="v_location" placeholder="Aveiro · Porto · Douro Valley">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="v_type">Contract</label>
+            <select class="form-input" id="v_type">
+              <option>Full-time</option><option>Part-time</option><option>Fixed-term</option><option>Per project</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="v_experience">Min. Experience</label>
+            <input class="form-input" type="text" id="v_experience" placeholder="e.g. 3+ years">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="v_openings">People Needed</label>
+            <input class="form-input" type="number" id="v_openings" min="1" value="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="v_status">Status</label>
+            <select class="form-input" id="v_status">
+              <option value="open">Open</option><option value="paused">Paused</option><option value="filled">Filled</option><option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Website</label>
+            <label class="check-row" style="padding-top:8px;"><input type="checkbox" id="v_on_site"> Published on website</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="v_duties">Duties</label>
+          <textarea class="form-input" id="v_duties" rows="3" style="resize:vertical;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="v_requirements">Requirements</label>
+          <textarea class="form-input" id="v_requirements" rows="3" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" id="vacDelete" style="margin-right:auto;" hidden>Delete</button>
+        <button type="button" class="btn btn-sm" data-close="vacModal">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-sm" id="vacSubmit">Create Vacancy</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CANDIDATE MODAL -->
+<div class="modal-overlay" id="candModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>New Candidate</h2>
+      <button class="btn btn-ghost btn-sm" data-close="candModal" aria-label="Close">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form id="candForm">
+      <div class="modal-body">
+        <div class="paste-box">
+          <label class="form-label" for="c_paste">Paste WhatsApp application</label>
+          <textarea class="form-input" id="c_paste" placeholder="Candidatura de emprego — BTS&#10;Vaga: Pedreiro&#10;Nome: …"></textarea>
+          <div class="paste-hint" id="c_paste_hint">Paste the message a candidate sent from the website — the fields below fill in automatically.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="c_name">Full Name *</label>
+            <input class="form-input" type="text" id="c_name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c_phone">Phone / WhatsApp</label>
+            <input class="form-input" type="tel" id="c_phone">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="c_email">Email</label>
+            <input class="form-input" type="email" id="c_email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c_vacancy">Vacancy</label>
+            <select class="form-input" id="c_vacancy"></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="c_experience">Experience</label>
+            <select class="form-input" id="c_experience">
+              <option value="">Select</option>
+              <option>Less than 1 year</option><option>1–3 years</option><option>3–5 years</option>
+              <option>5–10 years</option><option>More than 10 years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c_availability">Available From</label>
+            <select class="form-input" id="c_availability">
+              <option value="">Select</option>
+              <option>Immediately</option><option>Within 2 weeks</option>
+              <option>Within 1 month</option><option>More than 1 month</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="c_city">Lives In</label>
+            <input class="form-input" type="text" id="c_city">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c_permit">Work Permit (PT)</label>
+            <select class="form-input" id="c_permit">
+              <option value="">Select</option><option>Yes</option><option>In progress</option><option>No</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="c_source">Source</label>
+            <select class="form-input" id="c_source">
+              <option>WhatsApp</option><option>Email</option><option>Website</option>
+              <option>Referral</option><option>Walk-in</option><option>Job board</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CV</label>
+            <label class="check-row" style="padding-top:8px;"><input type="checkbox" id="c_cv"> CV received</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c_notes">Notes / Experience</label>
+          <textarea class="form-input" id="c_notes" rows="3" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm" data-close="candModal">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-sm">Add Candidate</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="demo-banner" id="demoBanner" hidden>Demo mode — sample data only. Connect the backend in config.js to use real leads.</div>
+
+<!-- LOGIN (hosted mode) -->
+<div class="login-overlay" id="loginOverlay" hidden>
+  <form class="login-card" onsubmit="doLogin(event)">
+    <h1>Blame the Stars</h1>
+    <p>Leads &amp; Recruitment CRM</p>
+    <label class="form-label" for="loginEmail">Email</label>
+    <input class="form-input" type="email" id="loginEmail" autocomplete="username" required>
+    <label class="form-label" for="loginPass" style="margin-top:12px;">Password</label>
+    <input class="form-input" type="password" id="loginPass" autocomplete="current-password" required>
+    <button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center;margin-top:18px;">Sign in</button>
+    <div class="login-msg" id="loginMsg"></div>
+  </form>
+</div>
+
+<script>
+const STAGES = [
+  { key: 'new', label: 'New', color: '#3498DB' },
+  { key: 'contacted', label: 'Contacted', color: '#9B59B6' },
+  { key: 'qualified', label: 'Qualified', color: '#E67E22' },
+  { key: 'survey_booked', label: 'Survey Booked', color: '#2ECC71' },
+  { key: 'proposal_sent', label: 'Proposal Sent', color: '#F39C12' },
+  { key: 'won', label: 'Won', color: '#27AE60' },
+  { key: 'lost', label: 'Lost', color: '#C0392B' },
+  { key: 'complete', label: 'Complete', color: '#1ABC9C' },
+  { key: 'review_requested', label: 'Review Requested', color: '#8E44AD' }
+];
+
+const stageMap = Object.fromEntries(STAGES.map(s => [s.key, s]));
+
+const CAND_STAGES = [
+  { key: 'applied', label: 'Applied', color: '#3498DB' },
+  { key: 'screening', label: 'Phone Screen', color: '#9B59B6' },
+  { key: 'interview', label: 'Interview', color: '#E67E22' },
+  { key: 'trial', label: 'Trial Day', color: '#F39C12' },
+  { key: 'offer', label: 'Offer', color: '#16A085' },
+  { key: 'hired', label: 'Hired', color: '#27AE60' },
+  { key: 'rejected', label: 'Not Selected', color: '#C0392B' }
+];
+const candStageMap = Object.fromEntries(CAND_STAGES.map(s => [s.key, s]));
+const VAC_STATUS = {
+  open: { label: 'Open', color: '#27AE60' },
+  paused: { label: 'Paused', color: '#E67E22' },
+  filled: { label: 'Filled', color: '#2980B9' },
+  closed: { label: 'Closed', color: '#8C8780' }
+};
+
+let db = null, user = null, downloads = null, room = null;
+let leads = [];
+let activities = [];
+let vacancies = [];
+let candidates = [];
+let candFilter = 'all';
+let detailMode = 'lead';
+let editingVacancyId = null;
+let currentView = 'dashboard';
+let selectedLeadId = null;
+let searchQuery = '';
+let myId = null;
+
+// ──── HOSTED MODE: Supabase backend (used when not running inside claude.ai) ────
+let sbClient = null;
+function makeSupabaseDb(client) {
+  class Coll {
+    constructor(table) { this.table = table; this.order = null; this.max = null; }
+    orderBy(field, dir = 'asc') { this.order = [field, dir]; return this; }
+    limit(n) { this.max = n; return this; }
+    async add(obj) {
+      const { data, error } = await client.from(this.table).insert(obj).select('id').single();
+      if (error) { showToast('Save failed: ' + error.message); throw error; }
+      return { id: data.id };
+    }
+    onSnapshot(cb, errCb) {
+      let timer = null;
+      const load = async () => {
+        let q = client.from(this.table).select('*');
+        if (this.order) q = q.order(this.order[0], { ascending: this.order[1] !== 'desc' });
+        if (this.max) q = q.limit(this.max);
+        const { data, error } = await q;
+        if (error) { if (errCb) errCb(error); return; }
+        cb({ docs: data.map(r => ({ id: r.id, exists: true, data: () => { const { id, ...rest } = r; return rest; } })) });
+      };
+      load();
+      client.channel('rt-' + this.table)
+        .on('postgres_changes', { event: '*', schema: 'public', table: this.table }, () => { clearTimeout(timer); timer = setTimeout(load, 250); })
+        .subscribe();
+    }
+  }
+  const check = r => { if (r.error) { showToast('Save failed: ' + r.error.message); throw r.error; } return r; };
+  return {
+    collection: table => new Coll(table),
+    doc: path => {
+      const [table, id] = path.split('/');
+      return {
+        update: patch => client.from(table).update(patch).eq('id', id).then(check),
+        delete: () => client.from(table).delete().eq('id', id).then(check)
+      };
+    }
+  };
+}
+async function signedUrl(path) {
+  if (!sbClient || !path) return null;
+  const { data } = await sbClient.storage.from('uploads').createSignedUrl(path, 3600);
+  return data ? data.signedUrl : null;
+}
+async function fillFileLinks(root) {
+  for (const a of root.querySelectorAll('a[data-path]')) {
+    const url = await signedUrl(a.dataset.path);
+    if (url) { a.href = url; a.classList.remove('pending'); }
+  }
+}
+function showLogin(message) {
+  document.getElementById('loginOverlay').hidden = false;
+  document.getElementById('loginMsg').textContent = message || '';
+}
+async function doLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  const { error } = await sbClient.auth.signInWithPassword({ email, password });
+  btn.disabled = false;
+  if (error) { document.getElementById('loginMsg').textContent = error.message; return; }
+  location.reload();
+}
+async function doLogout() {
+  if (sbClient) await sbClient.auth.signOut();
+  location.reload();
+}
+
+async function init() {
+  const cfg = window.BTS_CONFIG || {};
+  const hosted = !window.claude && cfg.supabaseUrl && cfg.supabaseKey && window.supabase;
+  if (hosted) {
+    sbClient = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey);
+    const { data: { session } } = await sbClient.auth.getSession();
+    if (!session) { bindEvents(); showLogin(); return; }
+    myId = session.user.id;
+    const { data: staffRow } = await sbClient.from('staff').select('user_id').eq('user_id', myId).maybeSingle();
+    if (!staffRow) {
+      const b = document.getElementById('demoBanner');
+      b.textContent = 'This login is not on the staff list yet, so no data is shown. Run the last line of schema.sql with your email in the Supabase SQL Editor.';
+      b.hidden = false;
+    }
+    db = makeSupabaseDb(sbClient);
+    document.getElementById('btnLogout').hidden = false;
+    document.getElementById('whoami').textContent = session.user.email;
+  } else {
+    [db, user, downloads, room] = await Promise.all([
+      window.claude?.use('db'),
+      window.claude?.use('user'),
+      window.claude?.use('downloads'),
+      window.claude?.use('room')
+    ]);
+    if (user) {
+      myId = await user.id();
+    }
+    if (!db) document.getElementById('demoBanner').hidden = false;
+  }
+
+  if (db) {
+    db.collection('leads').orderBy('created_at', 'desc').onSnapshot(snap => {
+      leads = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
+      render();
+    }, err => { console.error('leads sub error', err); });
+
+    db.collection('activities').orderBy('created_at', 'desc').limit(50).onSnapshot(snap => {
+      activities = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
+      render();
+    }, err => { console.error('activities sub error', err); });
+
+    db.collection('vacancies').orderBy('created_at', 'asc').onSnapshot(snap => {
+      vacancies = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
+      render();
+    }, err => { console.error('vacancies sub error', err); });
+
+    db.collection('candidates').orderBy('created_at', 'desc').onSnapshot(snap => {
+      candidates = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
+      render();
+    }, err => { console.error('candidates sub error', err); });
+  } else {
+    seedDemoData();
+    render();
+  }
+
+  if (room) {
+    room.onPeers(change => {
+      const dots = document.getElementById('presenceDots');
+      if (!dots) return;
+      dots.innerHTML = change.peers
+        .filter(p => p.kind === 'viewer')
+        .map(p => `<div class="presence-dot" style="background:${p.presence.color || '#27AE60'}" title="${p.isMe ? 'You' : 'Team member'}"></div>`)
+        .join('');
+    });
+    room.presence({ color: randomColor() });
+  }
+
+  bindEvents();
+  render();
+}
+
+function randomColor() {
+  const colors = ['#27AE60','#3498DB','#E67E22','#9B59B6','#E74C3C','#1ABC9C'];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function seedDemoData() {
+  const now = Date.now();
+  leads = [
+    { id: 'demo1', name: 'James & Sarah Mitchell', email: 'mitchell@example.com', phone: '+44 7700 123456', location: 'Aveiro', service: 'Full Renovation', property_type: 'Villa', budget: '€100K – €250K', source: 'Website', stage: 'qualified', notes: 'British couple, retiring to Portugal. Own a 1960s villa near Aveiro lagoon. Want full modernisation.', created_at: now - 86400000 * 12, updated_at: now - 86400000 * 2 },
+    { id: 'demo2', name: 'Hans Weber', email: 'hans.w@example.de', phone: '+49 171 2345678', location: 'Porto', service: 'New Build', property_type: 'Townhouse', budget: '€250K+', source: 'Referral', stage: 'proposal_sent', notes: 'German architect, wants contemporary design. Has land in Foz do Douro.', created_at: now - 86400000 * 20, updated_at: now - 86400000 * 1 },
+    { id: 'demo3', name: 'Marie Dupont', email: 'marie.d@example.fr', phone: '+33 6 12 34 56 78', location: 'Douro Valley', service: 'Pool Construction', property_type: 'Rural/Quinta', budget: '€50K – €100K', source: 'Instagram', stage: 'survey_booked', notes: 'French expat. Quinta in Peso da Régua. Wants infinity pool with valley views.', created_at: now - 86400000 * 8, updated_at: now - 86400000 * 3 },
+    { id: 'demo4', name: 'Tom van der Berg', email: 'tom@example.nl', phone: '+31 6 12345678', location: 'Aveiro', service: 'Kitchen & Bath', property_type: 'Apartment', budget: '€25K – €50K', source: 'Facebook', stage: 'contacted', notes: 'Dutch digital nomad. Apartment near Costa Nova. Wants modern kitchen.', created_at: now - 86400000 * 5, updated_at: now - 86400000 * 1 },
+    { id: 'demo5', name: 'Linda & Robert Chen', email: 'chen.lr@example.com', phone: '+1 415 555 1234', location: 'Porto', service: 'Full Renovation', property_type: 'Townhouse', budget: '€100K – €250K', source: 'Google', stage: 'new', notes: 'American couple with Golden Visa. Townhouse in Cedofeita needs complete overhaul.', created_at: now - 86400000 * 2, updated_at: now - 86400000 * 1 },
+    { id: 'demo6', name: 'Peter Johansson', email: 'peter.j@example.se', phone: '+46 70 123 4567', location: 'Braga', service: 'Roofing', property_type: 'Villa', budget: 'Under €25K', source: 'WhatsApp', stage: 'won', notes: 'Swedish retiree. Urgent roof repair after winter storms.', created_at: now - 86400000 * 30, updated_at: now - 86400000 * 5 },
+    { id: 'demo7', name: 'Sofia Martins-Brown', email: 'sofia@example.co.uk', phone: '+44 7911 123456', location: 'Aveiro', service: 'Landscaping', property_type: 'Villa', budget: '€25K – €50K', source: 'Referral', stage: 'complete', notes: 'Anglo-Portuguese. Garden redesign with native plants. Completed Q2.', created_at: now - 86400000 * 60, updated_at: now - 86400000 * 10 },
+    { id: 'demo8', name: 'Klaus & Ingrid Fischer', email: 'fischer@example.at', phone: '+43 664 1234567', location: 'Douro Valley', service: 'Infrastructure', property_type: 'Land Only', budget: '€50K – €100K', source: 'Website', stage: 'lost', notes: 'Austrian couple. Wanted septic + access road for rural plot. Went with cheaper contractor.', created_at: now - 86400000 * 45, updated_at: now - 86400000 * 15 }
+  ];
+  activities = [
+    { id: 'a1', lead_id: 'demo5', type: 'created', content: 'Lead created from website enquiry', created_at: now - 86400000 * 2 },
+    { id: 'a2', lead_id: 'demo2', type: 'stage_change', content: 'Stage changed to Proposal Sent', created_at: now - 86400000 * 1 },
+    { id: 'a3', lead_id: 'demo4', type: 'call', content: 'Called to discuss kitchen layout preferences', created_at: now - 86400000 * 1 },
+    { id: 'a4', lead_id: 'demo3', type: 'note', content: 'Site survey scheduled for next Thursday', created_at: now - 86400000 * 3 },
+    { id: 'a5', lead_id: 'demo1', type: 'email', content: 'Sent renovation timeline and cost breakdown', created_at: now - 86400000 * 2 },
+    { id: 'a6', lead_id: 'demo6', type: 'stage_change', content: 'Stage changed to Won', created_at: now - 86400000 * 5 }
+  ];
+  vacancies = [
+    { id: 'vac_pedreiro', title: 'Pedreiro', title_en: 'Stonemason · Bricklayer', location: 'Aveiro · Porto · Douro Valley', type: 'Full-time', experience: '3+ years', openings: 1, status: 'open', on_site: true, duties: '', requirements: '', created_at: now, updated_at: now },
+    { id: 'vac_cofragem', title: 'Carpinteiro de Cofragem', title_en: 'Formwork Carpenter', location: 'Aveiro · Porto · Douro Valley', type: 'Full-time', experience: '2+ years', openings: 1, status: 'open', on_site: true, duties: '', requirements: '', created_at: now, updated_at: now }
+  ];
+  candidates = [];
+}
+
+function bindEvents() {
+  document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentView = btn.dataset.view;
+      document.querySelectorAll('.nav-item[data-view]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateTopbar();
+      render();
+      closeMobileSidebar();
+    });
+  });
+
+  document.getElementById('btnAddLead').addEventListener('click', () => {
+    if (currentView === 'vacancies') openVacancyModal(null);
+    else if (currentView === 'candidates') openCandidateModal();
+    else document.getElementById('addModal').classList.add('open');
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCancel').addEventListener('click', closeModal);
+
+  document.getElementById('addForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    await createLead();
+  });
+
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => {
+    document.getElementById(b.dataset.close).classList.remove('open');
+  }));
+  document.getElementById('vacForm').addEventListener('submit', async e => { e.preventDefault(); await saveVacancy(); });
+  document.getElementById('vacDelete').addEventListener('click', deleteVacancy);
+  document.getElementById('candForm').addEventListener('submit', async e => { e.preventDefault(); await createCandidate(); });
+  document.getElementById('c_paste').addEventListener('input', e => fillFromWhatsApp(e.target.value));
+
+  document.getElementById('detailOverlay').addEventListener('click', closeDetail);
+  document.getElementById('detailClose').addEventListener('click', closeDetail);
+  document.getElementById('detailSave').addEventListener('click', saveDetail);
+  document.getElementById('detailDelete').addEventListener('click', deleteLead);
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchQuery = e.target.value.toLowerCase();
+    render();
+  });
+
+  document.getElementById('btnExport').addEventListener('click', exportCSV);
+  document.getElementById('mobileToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+}
+
+const VIEW_META = {
+  dashboard: { title: 'Dashboard', add: 'Add Lead', search: 'Search leads...' },
+  pipeline: { title: 'Pipeline', add: 'Add Lead', search: 'Search leads...' },
+  list: { title: 'All Leads', add: 'Add Lead', search: 'Search leads...' },
+  vacancies: { title: 'Vacancies', add: 'Add Vacancy', search: 'Search vacancies...' },
+  candidates: { title: 'Candidates', add: 'Add Candidate', search: 'Search candidates...' }
+};
+function updateTopbar() {
+  const m = VIEW_META[currentView] || VIEW_META.dashboard;
+  document.getElementById('topbarTitle').textContent = m.title;
+  document.getElementById('btnAddLabel').textContent = m.add;
+  document.getElementById('searchInput').placeholder = m.search;
+}
+
+function closeMobileSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function closeModal() {
+  document.getElementById('addModal').classList.remove('open');
+  document.getElementById('addForm').reset();
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.getElementById('detailPanel').classList.remove('open');
+  selectedLeadId = null;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function fmtDate(ts) {
+  if (!ts) return '—';
+  const d = new Date(ts);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function fmtRelative(ts) {
+  const diff = Date.now() - ts;
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return days + 'd ago';
+  return fmtDate(ts);
+}
+
+function filteredLeads() {
+  if (!searchQuery) return leads;
+  return leads.filter(l =>
+    (l.name || '').toLowerCase().includes(searchQuery) ||
+    (l.email || '').toLowerCase().includes(searchQuery) ||
+    (l.location || '').toLowerCase().includes(searchQuery) ||
+    (l.service || '').toLowerCase().includes(searchQuery) ||
+    (l.stage || '').toLowerCase().includes(searchQuery)
+  );
+}
+
+// ──── CREATE ────
+async function createLead() {
+  const lead = {
+    name: document.getElementById('f_name').value.trim(),
+    email: document.getElementById('f_email').value.trim(),
+    phone: document.getElementById('f_phone').value.trim(),
+    location: document.getElementById('f_location').value,
+    service: document.getElementById('f_service').value,
+    property_type: document.getElementById('f_property').value,
+    budget: document.getElementById('f_budget').value,
+    source: document.getElementById('f_source').value,
+    stage: 'new',
+    notes: document.getElementById('f_notes').value.trim(),
+    created_at: Date.now(),
+    updated_at: Date.now()
+  };
+  if (!lead.name) return;
+
+  if (db) {
+    const ref = await db.collection('leads').add(lead);
+    await logActivity(ref.id, 'created', 'Lead created');
+  } else {
+    lead.id = 'l_' + Date.now();
+    leads.unshift(lead);
+    activities.unshift({ id: 'a_' + Date.now(), lead_id: lead.id, type: 'created', content: 'Lead created', created_at: Date.now() });
+    render();
+  }
+  closeModal();
+  showToast('Lead created');
+}
+
+async function logActivity(leadId, type, content) {
+  const entry = { lead_id: leadId, type, content, created_at: Date.now(), created_by: myId || 'unknown' };
+  if (db) {
+    await db.collection('activities').add(entry);
+  } else {
+    entry.id = 'a_' + Date.now();
+    activities.unshift(entry);
+  }
+}
+
+// ──── DETAIL ────
+function openDetail(leadId) {
+  selectedLeadId = leadId;
+  const lead = leads.find(l => l.id === leadId);
+  if (!lead) return;
+  detailMode = 'lead';
+  document.getElementById('detailDelete').textContent = 'Delete Lead';
+
+  document.getElementById('detailName').textContent = lead.name;
+  const body = document.getElementById('detailBody');
+  const leadActivities = activities.filter(a => a.lead_id === leadId);
+
+  body.innerHTML = `
+    <div class="detail-section">
+      <div class="detail-section-title">Stage</div>
+      <select class="detail-stage-select" id="detailStage">
+        ${STAGES.map(s => `<option value="${s.key}" ${s.key === lead.stage ? 'selected' : ''}>${s.label}</option>`).join('')}
+      </select>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Contact</div>
+      <div class="detail-field"><span class="detail-field-label">Email</span><span class="detail-field-value">${esc(lead.email || '—')}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Phone</span><span class="detail-field-value">${esc(lead.phone || '—')}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Source</span><span class="detail-field-value">${esc(lead.source || '—')}</span></div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Property</div>
+      <div class="detail-field"><span class="detail-field-label">Location</span><span class="detail-field-value">${esc(lead.location || '—')}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Service</span><span class="detail-field-value">${esc(lead.service || '—')}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Type</span><span class="detail-field-value">${esc(lead.property_type || '—')}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Budget</span><span class="detail-field-value">${esc(lead.budget || '—')}</span></div>
+      ${lead.timing ? `<div class="detail-field"><span class="detail-field-label">Desired start</span><span class="detail-field-value">${esc(lead.timing)}</span></div>` : ''}
+    </div>
+    ${(lead.description || lead.calc || (lead.photo_paths && lead.photo_paths.length)) ? `
+    <div class="detail-section">
+      <div class="detail-section-title">Request from website</div>
+      ${lead.calc && lead.calc.summary ? `<div class="detail-field"><span class="detail-field-label">Calculator</span><span class="detail-field-value">${esc(lead.calc.summary)}</span></div>` : ''}
+      ${lead.description ? `<div class="detail-text" style="margin-top:8px;">${esc(lead.description)}</div>` : ''}
+      ${lead.photo_paths && lead.photo_paths.length ? `<div class="file-links" style="margin-top:12px;">${lead.photo_paths.map((p, i) => `<a class="pending" data-path="${esc(p)}" target="_blank" rel="noopener">File ${i + 1}</a>`).join('')}</div>` : ''}
+    </div>` : ''}
+    <div class="detail-section">
+      <div class="detail-section-title">Notes</div>
+      <textarea class="detail-notes" id="detailNotes">${esc(lead.notes || '')}</textarea>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Timeline</div>
+      <div class="detail-field"><span class="detail-field-label">Created</span><span class="detail-field-value">${fmtDate(lead.created_at)}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Updated</span><span class="detail-field-value">${fmtDate(lead.updated_at)}</span></div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Activity Log</div>
+      <div class="activity-log">
+        ${leadActivities.length === 0 ? '<div style="font-size:0.78rem;color:var(--text-secondary)">No activity yet</div>' :
+          leadActivities.map(a => `
+            <div class="log-entry">
+              <div class="log-dot" style="background:${a.type === 'stage_change' ? 'var(--brass)' : a.type === 'call' ? 'var(--blue)' : a.type === 'email' ? 'var(--forest)' : 'var(--mist)'}"></div>
+              <div class="log-content">${esc(a.content)}<div class="log-time">${fmtRelative(a.created_at)}</div></div>
+            </div>
+          `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+  fillFileLinks(document.getElementById('detailBody'));
+}
+
+async function saveDetail() {
+  if (detailMode === 'candidate') return saveCandidate();
+  const lead = leads.find(l => l.id === selectedLeadId);
+  if (!lead) return;
+  const newStage = document.getElementById('detailStage').value;
+  const newNotes = document.getElementById('detailNotes').value;
+  const stageChanged = newStage !== lead.stage;
+
+  if (db) {
+    await db.doc('leads/' + selectedLeadId).update({
+      stage: newStage, notes: newNotes, updated_at: Date.now()
+    });
+    if (stageChanged) {
+      await logActivity(selectedLeadId, 'stage_change', `Stage changed to ${stageMap[newStage]?.label || newStage}`);
+    }
+  } else {
+    lead.stage = newStage;
+    lead.notes = newNotes;
+    lead.updated_at = Date.now();
+    if (stageChanged) {
+      activities.unshift({ id: 'a_' + Date.now(), lead_id: selectedLeadId, type: 'stage_change', content: `Stage changed to ${stageMap[newStage]?.label || newStage}`, created_at: Date.now() });
+    }
+    render();
+  }
+  showToast('Lead updated');
+  closeDetail();
+}
+
+async function deleteLead() {
+  if (detailMode === 'candidate') return deleteCandidate();
+  if (!selectedLeadId) return;
+  if (db) {
+    await db.doc('leads/' + selectedLeadId).delete();
+  } else {
+    leads = leads.filter(l => l.id !== selectedLeadId);
+    activities = activities.filter(a => a.lead_id !== selectedLeadId);
+    render();
+  }
+  showToast('Lead deleted');
+  closeDetail();
+}
+
+// ──── EXPORT ────
+async function exportCSV() {
+  const header = 'Name,Email,Phone,Location,Service,Property Type,Budget,Source,Stage,Notes,Created,Updated';
+  const rows = leads.map(l =>
+    [l.name, l.email, l.phone, l.location, l.service, l.property_type, l.budget, l.source, stageMap[l.stage]?.label || l.stage, (l.notes||'').replace(/"/g,'""'), fmtDate(l.created_at), fmtDate(l.updated_at)]
+    .map(v => `"${v || ''}"`)
+    .join(',')
+  );
+  const csv = header + '\n' + rows.join('\n');
+  if (downloads) {
+    try { await downloads.save({ filename: 'bts-leads-export.csv', data: csv }); showToast('Export saved'); }
+    catch(e) { if (e.code !== 'declined') showToast('Export failed'); }
+  } else if (sbClient) {
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bts-leads-export.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    showToast('Export saved');
+  } else {
+    showToast('Export unavailable in this view');
+  }
+}
+
+// ──── ESCAPE HTML ────
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// ──── RENDER ────
+function render() {
+  const c = document.getElementById('content');
+  if (currentView === 'dashboard') renderDashboard(c);
+  else if (currentView === 'pipeline') renderPipeline(c);
+  else if (currentView === 'vacancies') renderVacancies(c);
+  else if (currentView === 'candidates') renderCandidates(c);
+  else renderList(c);
+  renderBadges();
+}
+
+function renderDashboard(c) {
+  const fl = filteredLeads();
+  const total = fl.length;
+  const active = fl.filter(l => !['won','lost','complete'].includes(l.stage)).length;
+  const won = fl.filter(l => l.stage === 'won' || l.stage === 'complete').length;
+  const lost = fl.filter(l => l.stage === 'lost').length;
+  const convRate = total > 0 ? Math.round((won / total) * 100) : 0;
+
+  const stageCounts = {};
+  STAGES.forEach(s => stageCounts[s.key] = 0);
+  fl.forEach(l => { if (stageCounts[l.stage] !== undefined) stageCounts[l.stage]++; });
+  const maxCount = Math.max(1, ...Object.values(stageCounts));
+
+  const recentActs = activities.slice(0, 8);
+  const actTypeIcon = { created: '➕', stage_change: '↗', call: '📞', email: '✉', note: '📝' };
+  const actTypeColor = { created: 'var(--green)', stage_change: 'var(--brass)', call: 'var(--blue)', email: 'var(--forest)', note: 'var(--mist)' };
+
+  c.innerHTML = `
+    <div class="dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-value">${total}</div><div class="stat-sub">All time</div></div>
+        <div class="stat-card"><div class="stat-label">Active Pipeline</div><div class="stat-value">${active}</div><div class="stat-sub">In progress</div></div>
+        <div class="stat-card"><div class="stat-label">Won / Complete</div><div class="stat-value" style="color:var(--green)">${won}</div><div class="stat-sub">${convRate}% conversion</div></div>
+        <div class="stat-card"><div class="stat-label">Lost</div><div class="stat-value" style="color:var(--red)">${lost}</div><div class="stat-sub">${total > 0 ? Math.round((lost/total)*100) : 0}% loss rate</div></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="dash-panel">
+          <div class="dash-panel-title">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 16 4-8 4 4 6-10"/></svg>
+            Pipeline Funnel
+          </div>
+          ${STAGES.map(s => `
+            <div class="funnel-bar">
+              <div class="funnel-stage" style="color:${s.color}">${s.label}</div>
+              <div class="funnel-fill"><div class="funnel-fill-bar" style="width:${(stageCounts[s.key]/maxCount)*100}%;background:${s.color}"></div></div>
+              <div class="funnel-count">${stageCounts[s.key]}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="dash-panel">
+          <div class="dash-panel-title">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Recent Activity
+          </div>
+          ${recentActs.length === 0 ? '<div style="font-size:0.8rem;color:var(--text-secondary)">No activity yet. Add your first lead to get started.</div>' :
+            recentActs.map(a => {
+              const lead = leads.find(l => l.id === a.lead_id);
+              return `
+              <div class="activity-item" style="cursor:pointer" onclick="openDetail('${esc(a.lead_id)}')">
+                <div class="activity-icon" style="background:${actTypeColor[a.type] || 'var(--mist)'}20;color:${actTypeColor[a.type] || 'var(--mist)'}">${actTypeIcon[a.type] || '•'}</div>
+                <div class="activity-text"><strong>${esc(lead?.name || 'Unknown')}</strong> — ${esc(a.content)}</div>
+                <div class="activity-time">${fmtRelative(a.created_at)}</div>
+              </div>`;
+            }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPipeline(c) {
+  const fl = filteredLeads();
+  const pipelineStages = STAGES.filter(s => !['complete','review_requested'].includes(s.key));
+
+  c.innerHTML = `
+    <div class="pipeline">
+      ${pipelineStages.map(s => {
+        const stageLeads = fl.filter(l => l.stage === s.key);
+        return `
+        <div class="kanban-col" data-stage="${s.key}"
+             ondragover="event.preventDefault();this.style.outline='2px solid var(--brass)'"
+             ondragleave="this.style.outline='none'"
+             ondrop="handleDrop(event,'${s.key}');this.style.outline='none'">
+          <div class="kanban-header" style="border-bottom-color:${s.color}">
+            <div class="kanban-header-left">
+              <div class="kanban-dot" style="background:${s.color}"></div>
+              <span class="kanban-title">${s.label}</span>
+            </div>
+            <span class="kanban-count">${stageLeads.length}</span>
+          </div>
+          <div class="kanban-cards">
+            ${stageLeads.map(l => `
+              <div class="kanban-card" draggable="true"
+                   ondragstart="event.dataTransfer.setData('text/plain','${l.id}');this.classList.add('dragging')"
+                   ondragend="this.classList.remove('dragging')"
+                   onclick="openDetail('${esc(l.id)}')"
+                   style="border-left-color:${s.color}">
+                <div class="kanban-card-name">${esc(l.name)}</div>
+                <div class="kanban-card-info">
+                  ${l.location ? `<span>📍 ${esc(l.location)}</span>` : ''}
+                  ${l.budget ? `<span>💰 ${esc(l.budget)}</span>` : ''}
+                </div>
+                <div class="kanban-card-tags">
+                  ${l.service ? `<span class="tag tag-service">${esc(l.service)}</span>` : ''}
+                  ${l.source ? `<span class="tag tag-source">${esc(l.source)}</span>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+async function handleDrop(e, newStage) {
+  e.preventDefault();
+  const leadId = e.dataTransfer.getData('text/plain');
+  const lead = leads.find(l => l.id === leadId);
+  if (!lead || lead.stage === newStage) return;
+
+  if (db) {
+    await db.doc('leads/' + leadId).update({ stage: newStage, updated_at: Date.now() });
+    await logActivity(leadId, 'stage_change', `Stage changed to ${stageMap[newStage]?.label || newStage}`);
+  } else {
+    lead.stage = newStage;
+    lead.updated_at = Date.now();
+    activities.unshift({ id: 'a_' + Date.now(), lead_id: leadId, type: 'stage_change', content: `Stage changed to ${stageMap[newStage]?.label || newStage}`, created_at: Date.now() });
+    render();
+  }
+  showToast(`Moved to ${stageMap[newStage]?.label || newStage}`);
+}
+window.handleDrop = handleDrop;
+window.openDetail = openDetail;
+
+function renderList(c) {
+  const fl = filteredLeads();
+  c.innerHTML = `
+    <div class="list-view">
+      <table class="list-table">
+        <thead><tr>
+          <th>Name</th><th>Location</th><th>Service</th><th>Budget</th><th>Source</th><th>Stage</th><th>Created</th>
+        </tr></thead>
+        <tbody>
+          ${fl.length === 0 ? '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-secondary)">No leads found</td></tr>' :
+            fl.map(l => `
+            <tr onclick="openDetail('${esc(l.id)}')">
+              <td><strong>${esc(l.name)}</strong><div style="font-size:0.72rem;color:var(--text-secondary)">${esc(l.email || '')}</div></td>
+              <td>${esc(l.location || '—')}</td>
+              <td>${esc(l.service || '—')}</td>
+              <td>${esc(l.budget || '—')}</td>
+              <td>${esc(l.source || '—')}</td>
+              <td><span class="stage-pill" style="background:${stageMap[l.stage]?.color || '#888'}">${stageMap[l.stage]?.label || l.stage}</span></td>
+              <td style="white-space:nowrap">${fmtDate(l.created_at)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+// ──── RECRUITMENT ────
+const ACTIVE_CAND = c => !['hired', 'rejected'].includes(c.stage);
+
+function goView(view) {
+  currentView = view;
+  document.querySelectorAll('.nav-item[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+  updateTopbar();
+  render();
+}
+
+function renderBadges() {
+  const open = vacancies.filter(v => v.status === 'open').length;
+  const active = candidates.filter(ACTIVE_CAND).length;
+  document.getElementById('badgeVacancies').textContent = open || '';
+  document.getElementById('badgeCandidates').textContent = active || '';
+}
+
+function vacTitle(id) {
+  if (!id) return 'Spontaneous';
+  const v = vacancies.find(v => v.id === id);
+  return v ? v.title : 'Removed vacancy';
+}
+
+function renderVacancies(c) {
+  const q = searchQuery;
+  const list = vacancies.filter(v => !q ||
+    [v.title, v.title_en, v.location].some(s => (s || '').toLowerCase().includes(q)));
+  const order = { open: 0, paused: 1, filled: 2, closed: 3 };
+  list.sort((a, b) => (order[a.status] ?? 9) - (order[b.status] ?? 9));
+
+  c.innerHTML = `
+    <div class="rec-wrap">
+      ${list.length === 0 ? '<div class="empty-note">No vacancies yet. Use “Add Vacancy” to create one.</div>' : ''}
+      <div class="vac-grid">
+        ${list.map(v => {
+          const cs = candidates.filter(x => x.vacancy_id === v.id);
+          const active = cs.filter(ACTIVE_CAND).length;
+          const hired = cs.filter(x => x.stage === 'hired').length;
+          const st = VAC_STATUS[v.status] || VAC_STATUS.open;
+          const bar = cs.length ? CAND_STAGES.map(s => {
+            const n = cs.filter(x => x.stage === s.key).length;
+            return n ? `<div style="width:${(n / cs.length) * 100}%;background:${s.color}" title="${s.label}: ${n}"></div>` : '';
+          }).join('') : '';
+          return `
+          <div class="vac-card">
+            <div class="vac-top">
+              <div>
+                <div class="vac-title">${esc(v.title)}</div>
+                <div class="vac-sub">${esc(v.title_en || '')}</div>
+              </div>
+              <span class="vac-status" style="background:${st.color}">${st.label}</span>
+            </div>
+            <div class="vac-meta">
+              ${v.location ? `<span>📍 ${esc(v.location)}</span>` : ''}
+              ${v.type ? `<span>🕒 ${esc(v.type)}</span>` : ''}
+              ${v.experience ? `<span>🧰 ${esc(v.experience)}</span>` : ''}
+              <span>👷 ${hired} / ${Number(v.openings) || 1} hired</span>
+            </div>
+            <div class="vac-stats">
+              <div class="vac-stat"><b>${cs.length}</b><span>Applicants</span></div>
+              <div class="vac-stat"><b>${active}</b><span>In progress</span></div>
+              <div class="vac-stat"><b style="color:var(--green)">${hired}</b><span>Hired</span></div>
+            </div>
+            <div class="vac-bar">${bar}</div>
+            <div class="vac-site" style="--site-dot:${v.on_site ? 'var(--green)' : 'var(--mist)'}">${v.on_site ? 'Published on website' : 'Not on website'} · since ${fmtDate(v.created_at)}</div>
+            <div class="vac-actions">
+              <button class="btn btn-sm btn-primary" onclick="showCandidatesFor('${esc(v.id)}')">View candidates</button>
+              <button class="btn btn-sm" onclick="openCandidateModal('${esc(v.id)}')">+ Candidate</button>
+              <button class="btn btn-sm btn-ghost" onclick="openVacancyModal('${esc(v.id)}')">Edit</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+function showCandidatesFor(vacId) { candFilter = vacId; goView('candidates'); }
+
+function filteredCandidates() {
+  return candidates.filter(x => {
+    if (candFilter !== 'all' && (x.vacancy_id || '') !== (candFilter === 'spontaneous' ? '' : candFilter)) return false;
+    if (!searchQuery) return true;
+    return [x.name, x.phone, x.email, x.city, vacTitle(x.vacancy_id)].some(s => (s || '').toLowerCase().includes(searchQuery));
+  });
+}
+
+function renderCandidates(c) {
+  const list = filteredCandidates();
+  const chips = [{ id: 'all', label: 'All', n: candidates.length }]
+    .concat(vacancies.map(v => ({ id: v.id, label: v.title, n: candidates.filter(x => x.vacancy_id === v.id).length })))
+    .concat([{ id: 'spontaneous', label: 'Spontaneous', n: candidates.filter(x => !x.vacancy_id).length }]);
+
+  c.innerHTML = `
+    <div class="filter-chips">
+      ${chips.map(ch => `<button class="chip ${candFilter === ch.id ? 'active' : ''}" onclick="setCandFilter('${esc(ch.id)}')">${esc(ch.label)}<b>${ch.n}</b></button>`).join('')}
+    </div>
+    <div class="pipeline cand-board">
+      ${CAND_STAGES.map(s => {
+        const items = list.filter(x => x.stage === s.key);
+        return `
+        <div class="kanban-col"
+             ondragover="event.preventDefault();this.style.outline='2px solid var(--brass)'"
+             ondragleave="this.style.outline='none'"
+             ondrop="handleCandDrop(event,'${s.key}');this.style.outline='none'">
+          <div class="kanban-header" style="border-bottom-color:${s.color}">
+            <div class="kanban-header-left">
+              <div class="kanban-dot" style="background:${s.color}"></div>
+              <span class="kanban-title">${s.label}</span>
+            </div>
+            <span class="kanban-count">${items.length}</span>
+          </div>
+          <div class="kanban-cards">
+            ${items.length === 0 && s.key === 'applied' && candidates.length === 0 ? '<div class="empty-note">No candidates yet. When an application arrives on WhatsApp, click “Add Candidate” and paste the message.</div>' : ''}
+            ${items.map(x => `
+              <div class="kanban-card" draggable="true"
+                   ondragstart="event.dataTransfer.setData('text/plain','${esc(x.id)}');this.classList.add('dragging')"
+                   ondragend="this.classList.remove('dragging')"
+                   onclick="openCandidate('${esc(x.id)}')"
+                   style="border-left-color:${s.color}">
+                <div class="kanban-card-name">${esc(x.name)}</div>
+                <div class="kanban-card-info">
+                  ${x.experience ? `<span>🧰 ${esc(x.experience)}</span>` : ''}
+                  ${x.city ? `<span>📍 ${esc(x.city)}</span>` : ''}
+                  ${x.availability ? `<span>📅 ${esc(x.availability)}</span>` : ''}
+                </div>
+                <div class="kanban-card-tags">
+                  <span class="tag tag-vac">${esc(vacTitle(x.vacancy_id))}</span>
+                  <span class="tag ${x.cv_received ? 'tag-cv' : 'tag-nocv'}">${x.cv_received ? 'CV ✓' : 'No CV'}</span>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function setCandFilter(id) { candFilter = id; render(); }
+
+async function handleCandDrop(e, newStage) {
+  e.preventDefault();
+  const id = e.dataTransfer.getData('text/plain');
+  const cand = candidates.find(x => x.id === id);
+  if (!cand || cand.stage === newStage) return;
+  await updateCandidate(cand, { stage: newStage }, `Moved to ${candStageMap[newStage].label}`);
+  showToast(`Moved to ${candStageMap[newStage].label}`);
+}
+
+async function updateCandidate(cand, fields, historyText) {
+  const now = Date.now();
+  const history = (cand.history || []).slice(-49);
+  if (historyText) history.push({ at: now, text: historyText });
+  const patch = { ...fields, history, updated_at: now };
+  if (db) {
+    await db.doc('candidates/' + cand.id).update(patch);
+  } else {
+    Object.assign(cand, patch);
+    render();
+  }
+}
+
+// Vacancy modal
+function openVacancyModal(id) {
+  editingVacancyId = id;
+  const v = id ? vacancies.find(x => x.id === id) : null;
+  const set = (k, val) => { document.getElementById(k).value = val; };
+  set('v_title', v?.title || '');
+  set('v_title_en', v?.title_en || '');
+  set('v_location', v?.location || 'Aveiro · Porto · Douro Valley');
+  set('v_type', v?.type || 'Full-time');
+  set('v_experience', v?.experience || '');
+  set('v_openings', v?.openings || 1);
+  set('v_status', v?.status || 'open');
+  set('v_duties', v?.duties || '');
+  set('v_requirements', v?.requirements || '');
+  document.getElementById('v_on_site').checked = v ? !!v.on_site : false;
+  document.getElementById('vacModalTitle').textContent = v ? 'Edit Vacancy' : 'New Vacancy';
+  document.getElementById('vacSubmit').textContent = v ? 'Save Changes' : 'Create Vacancy';
+  const del = document.getElementById('vacDelete');
+  del.hidden = !v; del.dataset.armed = ''; del.textContent = 'Delete';
+  document.getElementById('vacModal').classList.add('open');
+}
+
+async function saveVacancy() {
+  const val = id => document.getElementById(id).value.trim();
+  const data = {
+    title: val('v_title'), title_en: val('v_title_en'), location: val('v_location'),
+    type: val('v_type'), experience: val('v_experience'),
+    openings: Math.max(1, parseInt(val('v_openings'), 10) || 1),
+    status: val('v_status'), on_site: document.getElementById('v_on_site').checked,
+    duties: val('v_duties'), requirements: val('v_requirements'), updated_at: Date.now()
+  };
+  if (!data.title) return;
+  if (editingVacancyId) {
+    if (db) await db.doc('vacancies/' + editingVacancyId).update(data);
+    else { Object.assign(vacancies.find(x => x.id === editingVacancyId), data); render(); }
+    showToast('Vacancy updated');
+  } else {
+    data.created_at = Date.now();
+    if (db) await db.collection('vacancies').add(data);
+    else { vacancies.push({ id: 'v_' + Date.now(), ...data }); render(); }
+    showToast('Vacancy created');
+  }
+  document.getElementById('vacModal').classList.remove('open');
+}
+
+async function deleteVacancy() {
+  const btn = document.getElementById('vacDelete');
+  if (!btn.dataset.armed) {
+    const n = candidates.filter(x => x.vacancy_id === editingVacancyId).length;
+    btn.dataset.armed = '1';
+    btn.textContent = n ? `Delete? ${n} candidate(s) keep their record` : 'Click again to delete';
+    return;
+  }
+  if (db) await db.doc('vacancies/' + editingVacancyId).delete();
+  else { vacancies = vacancies.filter(x => x.id !== editingVacancyId); render(); }
+  document.getElementById('vacModal').classList.remove('open');
+  showToast('Vacancy deleted');
+}
+
+// Candidate modal
+function vacancyOptions(selected) {
+  const opts = vacancies.map(v => `<option value="${esc(v.id)}" ${v.id === selected ? 'selected' : ''}>${esc(v.title)}${v.status !== 'open' ? ' (' + (VAC_STATUS[v.status]?.label || v.status) + ')' : ''}</option>`);
+  opts.push(`<option value="" ${!selected ? 'selected' : ''}>Spontaneous application</option>`);
+  return opts.join('');
+}
+
+function openCandidateModal(vacId) {
+  document.getElementById('candForm').reset();
+  const preset = vacId || (candFilter !== 'all' && candFilter !== 'spontaneous' ? candFilter : (vacancies.find(v => v.status === 'open')?.id || ''));
+  document.getElementById('c_vacancy').innerHTML = vacancyOptions(preset);
+  document.getElementById('c_paste_hint').textContent = 'Paste the message a candidate sent from the website — the fields below fill in automatically.';
+  document.getElementById('candModal').classList.add('open');
+}
+
+const PT_VALUES = {
+  'menos de 1 ano': 'Less than 1 year', '1–3 anos': '1–3 years', '3–5 anos': '3–5 years',
+  '5–10 anos': '5–10 years', 'mais de 10 anos': 'More than 10 years',
+  'imediata': 'Immediately', 'dentro de 2 semanas': 'Within 2 weeks',
+  'dentro de 1 mês': 'Within 1 month', 'mais de 1 mês': 'More than 1 month',
+  'sim': 'Yes', 'em processo': 'In progress', 'não': 'No'
+};
+const PASTE_KEYS = {
+  'vaga': 'vacancy', 'position': 'vacancy',
+  'nome': 'c_name', 'name': 'c_name',
+  'telefone': 'c_phone', 'phone': 'c_phone',
+  'email': 'c_email',
+  'experiência': 'c_experience', 'experience': 'c_experience',
+  'disponibilidade': 'c_availability', 'available from': 'c_availability',
+  'residência': 'c_city', 'lives in': 'c_city',
+  'autorização de trabalho': 'c_permit', 'work permit': 'c_permit',
+  'experiência profissional': 'c_notes', 'about my experience': 'c_notes'
+};
+
+function fillFromWhatsApp(text) {
+  let filled = 0;
+  text.split(/\r?\n/).forEach(line => {
+    const m = line.match(/^\s*([^:]{2,40}):\s*(.+)$/);
+    if (!m) return;
+    const key = PASTE_KEYS[m[1].trim().toLowerCase()];
+    let value = m[2].trim();
+    if (!key) return;
+    if (key === 'vacancy') {
+      const lv = value.toLowerCase();
+      const hit = vacancies.find(v => lv.includes(v.title.toLowerCase()));
+      document.getElementById('c_vacancy').value = hit ? hit.id : '';
+      filled++;
+      return;
+    }
+    value = PT_VALUES[value.toLowerCase()] || value;
+    document.getElementById(key).value = value;
+    filled++;
+  });
+  if (filled) {
+    document.getElementById('c_source').value = 'WhatsApp';
+    document.getElementById('c_paste_hint').textContent = `✓ Filled ${filled} field${filled > 1 ? 's' : ''} from the message. Tick “CV received” once the CV has arrived.`;
+  }
+}
+
+async function createCandidate() {
+  const val = id => document.getElementById(id).value.trim();
+  const now = Date.now();
+  const cand = {
+    name: val('c_name'), phone: val('c_phone'), email: val('c_email'),
+    vacancy_id: document.getElementById('c_vacancy').value,
+    experience: val('c_experience'), availability: val('c_availability'),
+    city: val('c_city'), permit: val('c_permit'), source: val('c_source'),
+    cv_received: document.getElementById('c_cv').checked,
+    notes: val('c_notes'), stage: 'applied',
+    history: [{ at: now, text: 'Application received via ' + (val('c_source') || 'unknown') }],
+    created_at: now, updated_at: now
+  };
+  if (!cand.name) return;
+  if (db) await db.collection('candidates').add(cand);
+  else { candidates.unshift({ id: 'c_' + now, ...cand }); render(); }
+  document.getElementById('candModal').classList.remove('open');
+  showToast('Candidate added');
+}
+
+// Candidate detail (reuses the side panel)
+function waLink(phone) {
+  let d = (phone || '').replace(/\D/g, '');
+  if (!d) return '';
+  if (d.length === 9) d = '351' + d;
+  return 'https://wa.me/' + d;
+}
+
+function openCandidate(id) {
+  const x = candidates.find(c => c.id === id);
+  if (!x) return;
+  selectedLeadId = id;
+  detailMode = 'candidate';
+  const del = document.getElementById('detailDelete');
+  del.textContent = 'Delete Candidate'; del.dataset.armed = '';
+  document.getElementById('detailName').textContent = x.name;
+  const wa = waLink(x.phone);
+  const field = (label, value) => `<div class="detail-field"><span class="detail-field-label">${label}</span><span class="detail-field-value">${value}</span></div>`;
+  const history = (x.history || []).slice().reverse();
+
+  document.getElementById('detailBody').innerHTML = `
+    <div class="detail-section">
+      <div class="detail-section-title">Stage</div>
+      <select class="detail-stage-select" id="candStage">
+        ${CAND_STAGES.map(s => `<option value="${s.key}" ${s.key === x.stage ? 'selected' : ''}>${s.label}</option>`).join('')}
+      </select>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Application</div>
+      <div class="detail-field"><span class="detail-field-label">Vacancy</span><select class="form-input" id="candVacancy">${vacancyOptions(x.vacancy_id)}</select></div>
+      <div class="detail-field"><span class="detail-field-label">CV</span><label class="check-row"><input type="checkbox" id="candCv" ${x.cv_received ? 'checked' : ''}> Received</label></div>
+      ${field('Experience', esc(x.experience || '—'))}
+      ${field('Available from', esc(x.availability || '—'))}
+      ${field('Work permit', esc(x.permit || '—'))}
+      ${field('Source', esc(x.source || '—'))}
+      ${x.cv_path ? `<div class="file-links" style="margin-top:8px;"><a class="pending" data-path="${esc(x.cv_path)}" target="_blank" rel="noopener">Open CV</a></div>` : ''}
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Contact</div>
+      ${field('Phone', x.phone ? esc(x.phone) + (wa ? ` · <a class="detail-link" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : '') : '—')}
+      ${field('Email', esc(x.email || '—'))}
+      ${field('Lives in', esc(x.city || '—'))}
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Notes</div>
+      <textarea class="detail-notes" id="candNotes">${esc(x.notes || '')}</textarea>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">History</div>
+      <div class="activity-log">
+        ${history.length === 0 ? '<div style="font-size:0.78rem;color:var(--text-secondary)">No history yet</div>' :
+          history.map(h => `<div class="log-entry"><div class="log-dot" style="background:var(--brass)"></div><div class="log-content">${esc(h.text)}<div class="log-time">${fmtRelative(h.at)}</div></div></div>`).join('')}
+      </div>
+    </div>`;
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+  fillFileLinks(document.getElementById('detailBody'));
+}
+
+async function saveCandidate() {
+  const x = candidates.find(c => c.id === selectedLeadId);
+  if (!x) return;
+  const stage = document.getElementById('candStage').value;
+  const vacancy_id = document.getElementById('candVacancy').value;
+  const cv_received = document.getElementById('candCv').checked;
+  const notes = document.getElementById('candNotes').value;
+  const changes = [];
+  if (stage !== x.stage) changes.push(`Moved to ${candStageMap[stage].label}`);
+  if (vacancy_id !== (x.vacancy_id || '')) changes.push(`Vacancy changed to ${vacTitle(vacancy_id)}`);
+  if (cv_received && !x.cv_received) changes.push('CV received');
+  await updateCandidate(x, { stage, vacancy_id, cv_received, notes }, changes.join(' · ') || null);
+  showToast('Candidate updated');
+  closeDetail();
+}
+
+async function deleteCandidate() {
+  const btn = document.getElementById('detailDelete');
+  if (!btn.dataset.armed) { btn.dataset.armed = '1'; btn.textContent = 'Click again to delete'; return; }
+  if (db) await db.doc('candidates/' + selectedLeadId).delete();
+  else { candidates = candidates.filter(c => c.id !== selectedLeadId); render(); }
+  showToast('Candidate deleted');
+  closeDetail();
+}
+
+Object.assign(window, { goView, showCandidatesFor, setCandFilter, handleCandDrop, openVacancyModal, openCandidateModal, openCandidate });
+
+init();
+</script>
+</body>
+</html>
