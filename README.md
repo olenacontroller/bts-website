@@ -9,8 +9,9 @@
 
 ## Где всё находится сейчас
 
-- **Сайт:** https://olenacontroller.github.io/bts-website/
-- **CRM:** https://olenacontroller.github.io/bts-website/crm/ (вход по email и паролю из Supabase)
+- **Сайт:** https://bts-grupo.com (старый адрес olenacontroller.github.io/bts-website перенаправляет сюда)
+- **CRM:** https://bts-grupo.com/crm/ (вход по email и паролю из Supabase)
+- **Домен:** Squarespace (DNS: 4 записи A @ → 185.199.108–111.153, CNAME www → olenacontroller.github.io; записи Google Workspace для почты не трогать). Файл `site/CNAME` не удалять.
 - **Код:** https://github.com/olenacontroller/bts-website — публикуется из ветки `gh-pages` (= содержимое папки `site`).
 
 Обновить сайт после изменений (делает Claude, или вручную в Git Bash из папки проекта):
