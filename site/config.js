@@ -4,6 +4,6 @@
 //   supabaseKey — the PUBLIC "anon" / "publishable" key (never the service_role / secret key)
 // Leave both empty to run the site without a backend (forms then go to WhatsApp).
 window.BTS_CONFIG = {
-  supabaseUrl: "",
-  supabaseKey: ""
+  supabaseUrl: "https://xtwluygtasaxcykikyvg.supabase.co",
+  supabaseKey: "sb_publishable_HOtRIkK6YtJoRwZrjxX6cA_VQf_A4Oa"
 };
