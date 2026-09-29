@@ -195,6 +195,7 @@ body {
 .btn-ghost:hover { color: var(--text); }
 .btn-danger { color: var(--red); border-color: var(--red); }
 .btn-danger:hover { background: var(--red); color: white; }
+.btn-danger.armed { background: var(--red); color: white; border-color: var(--red); box-shadow: 0 0 0 3px rgba(192,57,43,0.2); }
 
 .search-box {
   display: flex; align-items: center; gap: 8px;
@@ -1362,7 +1363,7 @@ function openDetail(leadId) {
   const lead = leads.find(l => l.id === leadId);
   if (!lead) return;
   detailMode = 'lead';
-  document.getElementById('detailDelete').textContent = 'Delete Lead';
+  disarmDelete(document.getElementById('detailDelete'));
 
   document.getElementById('detailName').textContent = lead.name;
   const body = document.getElementById('detailBody');
@@ -1452,17 +1453,55 @@ async function saveDetail() {
   closeDetail();
 }
 
+// ──── DELETE: two-step confirmation, and the record's files go with it ────
+function armDelete(btn, label) {
+  btn.dataset.armed = '1';
+  btn.textContent = label;
+  btn.classList.add('armed');
+  clearTimeout(btn._disarmTimer);
+  btn._disarmTimer = setTimeout(() => disarmDelete(btn), 5000);
+}
+function disarmDelete(btn) {
+  clearTimeout(btn._disarmTimer);
+  btn.dataset.armed = '';
+  btn.classList.remove('armed');
+  btn.textContent = detailMode === 'candidate' ? 'Delete Candidate' : 'Delete Lead';
+}
+function filesLabel(n) { return n ? ' + ' + n + ' file' + (n > 1 ? 's' : '') : ''; }
+// Removes the files listed on the record plus anything else stored in its folder.
+// Returns the number of files removed, or -1 if the storage refused.
+async function removeStoredFiles(folder, knownPaths) {
+  if (!sbClient) return 0;
+  const bucket = sbClient.storage.from('uploads');
+  const paths = new Set((knownPaths || []).filter(Boolean));
+  try {
+    const { data } = await bucket.list(folder, { limit: 100 });
+    (data || []).forEach(f => { if (f.id) paths.add(folder + '/' + f.name); });
+  } catch (err) { /* listing is best effort */ }
+  if (!paths.size) return 0;
+  const { data, error } = await bucket.remove([...paths]);
+  if (error) return -1;
+  return (data || []).length;
+}
+
 async function deleteLead() {
   if (detailMode === 'candidate') return deleteCandidate();
   if (!selectedLeadId) return;
+  const btn = document.getElementById('detailDelete');
+  const lead = leads.find(l => l.id === selectedLeadId) || {};
+  if (!btn.dataset.armed) { armDelete(btn, 'Confirm: delete lead' + filesLabel((lead.photo_paths || []).length)); return; }
+  const id = selectedLeadId;
+  disarmDelete(btn);
   if (db) {
-    await db.doc('leads/' + selectedLeadId).delete();
+    await db.doc('leads/' + id).delete();
   } else {
-    leads = leads.filter(l => l.id !== selectedLeadId);
-    activities = activities.filter(a => a.lead_id !== selectedLeadId);
+    leads = leads.filter(l => l.id !== id);
+    activities = activities.filter(a => a.lead_id !== id);
     render();
   }
-  showToast('Lead deleted');
+  const removed = await removeStoredFiles('leads/' + id, lead.photo_paths);
+  showToast(removed > 0 ? 'Lead and ' + removed + ' file' + (removed > 1 ? 's' : '') + ' deleted'
+    : removed < 0 ? 'Lead deleted, but its files could not be removed' : 'Lead deleted');
   closeDetail();
 }
 
@@ -1973,7 +2012,7 @@ function openCandidate(id) {
   selectedLeadId = id;
   detailMode = 'candidate';
   const del = document.getElementById('detailDelete');
-  del.textContent = 'Delete Candidate'; del.dataset.armed = '';
+  disarmDelete(del);
   document.getElementById('detailName').textContent = x.name;
   const wa = waLink(x.phone);
   const field = (label, value) => `<div class="detail-field"><span class="detail-field-label">${label}</span><span class="detail-field-value">${value}</span></div>`;
@@ -2037,10 +2076,15 @@ async function saveCandidate() {
 
 async function deleteCandidate() {
   const btn = document.getElementById('detailDelete');
-  if (!btn.dataset.armed) { btn.dataset.armed = '1'; btn.textContent = 'Click again to delete'; return; }
-  if (db) await db.doc('candidates/' + selectedLeadId).delete();
-  else { candidates = candidates.filter(c => c.id !== selectedLeadId); render(); }
-  showToast('Candidate deleted');
+  const cand = candidates.find(c => c.id === selectedLeadId) || {};
+  if (!btn.dataset.armed) { armDelete(btn, 'Confirm: delete candidate' + (cand.cv_path ? ' + CV' : '')); return; }
+  const id = selectedLeadId;
+  disarmDelete(btn);
+  if (db) await db.doc('candidates/' + id).delete();
+  else { candidates = candidates.filter(c => c.id !== id); render(); }
+  const removed = await removeStoredFiles('cv/' + id, cand.cv_path ? [cand.cv_path] : []);
+  showToast(removed > 0 ? 'Candidate and CV deleted'
+    : removed < 0 ? 'Candidate deleted, but the CV could not be removed' : 'Candidate deleted');
   closeDetail();
 }
 
