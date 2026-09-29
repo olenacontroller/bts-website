@@ -5,5 +5,8 @@
 // Leave both empty to run the site without a backend (forms then go to WhatsApp).
 window.BTS_CONFIG = {
   supabaseUrl: "https://xtwluygtasaxcykikyvg.supabase.co",
-  supabaseKey: "sb_publishable_HOtRIkK6YtJoRwZrjxX6cA_VQf_A4Oa"
+  supabaseKey: "sb_publishable_HOtRIkK6YtJoRwZrjxX6cA_VQf_A4Oa",
+  // AI assistant server (Cloudflare Worker), e.g. https://bts-ai.YOUR-NAME.workers.dev/api/chat
+  // Leave empty when the site itself runs on Cloudflare Pages with _worker.js.
+  aiEndpoint: ""
 };

@@ -2265,6 +2265,7 @@ window.addEventListener('resize', () => { document.getElementById('langToggleMob
 // Runs through the viewer's own Claude account when the page is opened inside claude.ai
 // (capability "sample"). Anywhere else the button stays hidden.
 let aiSample = null, aiTools = false, aiBusy = false, aiCtl = null, aiKnowledge = '';
+const AI_ENDPOINT = (window.BTS_CONFIG && window.BTS_CONFIG.aiEndpoint) || 'api/chat';
 let aiMode = null;          // 'gemini' = the site's own server (/api/chat), 'claude' = demo inside claude.ai
 const aiTurns = [];         // plain transcript (for the WhatsApp hand-off)
 const aiGem = [];           // Gemini conversation (text, function calls and results)
@@ -2279,7 +2280,7 @@ const AI_COPY = {
 (async function aiInit() {
   // 1) The site's own AI server (Cloudflare _worker.js + Gemini) — works for every visitor
   try {
-    const r = await fetch('api/chat', { method: 'GET', headers: { accept: 'application/json' } });
+    const r = await fetch(AI_ENDPOINT, { method: 'GET', headers: { accept: 'application/json' } });
     const j = r.ok ? await r.json() : null;
     if (j && j.ok) { aiMode = 'gemini'; aiTools = true; aiEnable(); return; }
   } catch (err) { /* no server here */ }
@@ -2533,7 +2534,7 @@ async function aiAskGemini(q, bubble, copy) {
   try {
     for (let round = 0; round < 4; round++) {
       aiGemTrim();
-      const res = await fetch('api/chat', {
+      const res = await fetch(AI_ENDPOINT, {
         method: 'POST', signal: aiCtl.signal,
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ lang: currentLang, contents: aiGem })
