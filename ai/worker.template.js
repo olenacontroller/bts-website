@@ -18,7 +18,7 @@ const MAX_TURNS = 40;
 const RATE_LIMIT = { requests: 40, windowMs: 10 * 60 * 1000 }; // per visitor IP, best effort
 const TOOL_NAMES = ['estimate_cost', 'open_estimate_form', 'open_job_application', 'show_section'];
 // Websites allowed to use this assistant (besides the Worker's own address).
-const ALLOWED_ORIGINS = ['https://olenacontroller.github.io'];
+const ALLOWED_ORIGINS = ['https://bts-grupo.com', 'https://www.bts-grupo.com', 'https://olenacontroller.github.io'];
 
 const KNOWLEDGE = /*__KNOWLEDGE__*/'';
 
