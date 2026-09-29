@@ -9,7 +9,7 @@
 //               Secrets). The system prompt and the company knowledge live here on the server, and only
 //               the BTS website may call it, so the key cannot be used for anything else.
 
-const MODEL = 'gemini-2.5-flash';
+const DEFAULT_MODEL = 'gemini-2.5-flash'; // can be overridden with the GEMINI_MODEL variable in Cloudflare
 const MAX_BODY_CHARS = 60000;
 const MAX_TURNS = 40;
 const RATE_LIMIT = { requests: 40, windowMs: 10 * 60 * 1000 }; // per visitor IP, best effort
@@ -129,6 +129,49 @@ function json(obj, status = 200, origin = null) {
   return new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...corsHeaders(origin) } });
 }
 
+function modelOf(env) { return (env.GEMINI_MODEL || DEFAULT_MODEL).trim(); }
+
+async function googleError(res) {
+  let status = '', reason = '', message = '';
+  try {
+    const e = (await res.json()).error || {};
+    status = e.status || '';
+    message = String(e.message || '').replace(/\d{6,}/g, '…').slice(0, 300);
+    for (const d of e.details || []) if (d.reason) { reason = d.reason; break; }
+  } catch (err) { /* not JSON */ }
+  return { http: res.status, status, reason, message };
+}
+
+// Diagnostics for the site owner: which models this key can use, and whether the chosen one answers.
+async function handleDiag(request, env) {
+  if (!env.GEMINI_API_KEY) return json({ ready: false, error: 'no GEMINI_API_KEY secret' }, 503);
+  if (rateLimited('diag:' + (request.headers.get('cf-connecting-ip') || 'unknown'))) return json({ error: 'rate_limited' }, 429);
+  const key = { 'x-goog-api-key': env.GEMINI_API_KEY };
+  const out = { model: modelOf(env) };
+  const list = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', { headers: key });
+  if (list.ok) {
+    const models = ((await list.json()).models || [])
+      .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
+      .map(m => m.name.replace('models/', ''));
+    out.flash_models = models.filter(n => n.includes('flash'));
+  } else {
+    out.list_error = await googleError(list);
+  }
+  const probe = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + out.model + ':generateContent', {
+    method: 'POST', headers: { ...key, 'content-type': 'application/json' },
+    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Reply with the single word OK.' }] }], generationConfig: generationConfig(out.model, 10) })
+  });
+  out.probe = probe.ok ? 'ok' : await googleError(probe);
+  return json(out);
+}
+
+// Gemini 2.5 models take a thinking budget; newer models use their own defaults.
+function generationConfig(model, maxTokens) {
+  const cfg = { temperature: 0.4, maxOutputTokens: maxTokens };
+  if (model.startsWith('gemini-2.5')) cfg.thinkingConfig = { thinkingBudget: 0 };
+  return cfg;
+}
+
 function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
 
 // Accept only the conversation shapes the website itself sends.
@@ -168,7 +211,7 @@ async function handleChat(request, env) {
   if (request.method === 'OPTIONS') {
     return origin ? new Response(null, { status: 204, headers: corsHeaders(origin) }) : new Response(null, { status: 403 });
   }
-  if (request.method === 'GET') return json({ ok: configured, provider: 'gemini', model: MODEL }, configured ? 200 : 503, origin);
+  if (request.method === 'GET') return json({ ok: configured, provider: 'gemini', model: modelOf(env) }, configured ? 200 : 503, origin);
   if (request.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, origin);
 
   // Browsers always send Origin with POST; requests without it (scripts, bots) or from other sites are refused.
@@ -183,16 +226,17 @@ async function handleChat(request, env) {
   const contents = sanitizeContents(body && body.contents);
   if (!contents) return json({ error: 'bad_request' }, 400, origin);
 
+  const model = modelOf(env);
   const payload = {
     systemInstruction: { parts: [{ text: systemPrompt(body.lang === 'pt' ? 'Portuguese' : 'English') }] },
     contents,
     tools: TOOLS,
-    generationConfig: { temperature: 0.4, maxOutputTokens: 1024, thinkingConfig: { thinkingBudget: 0 } }
+    generationConfig: generationConfig(model, 1024)
   };
 
   let upstream;
   try {
-    upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + MODEL + ':generateContent', {
+    upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
       body: JSON.stringify(payload)
@@ -202,8 +246,9 @@ async function handleChat(request, env) {
   }
   if (upstream.status === 429) return json({ error: 'rate_limited' }, 429, origin);
   if (!upstream.ok) {
-    console.log('Gemini error', upstream.status, (await upstream.text()).slice(0, 800));
-    return json({ error: 'upstream' }, 502, origin);
+    const detail = await googleError(upstream);
+    console.log('Gemini error', JSON.stringify(detail));
+    return json({ error: 'upstream', detail }, 502, origin);
   }
 
   const data = await upstream.json();
@@ -231,6 +276,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/api/chat') return handleChat(request, env);
+    if (url.pathname === '/api/diag') return handleDiag(request, env);
     if (env.ASSETS) return serveAsset(request, env);
     return json({ service: 'BTS AI assistant', endpoint: '/api/chat', ready: Boolean(env.GEMINI_API_KEY) });
   }
