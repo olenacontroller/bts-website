@@ -83,20 +83,25 @@ git push origin `git subtree split --prefix site main`:gh-pages --force
 
 ## Шаг 5. AI-помощник для всех посетителей (Gemini 2.5 Flash)
 
-Помощник работает через файл **`site/_worker.js`** — это маленький сервер внутри Cloudflare Pages. Он хранит ключ Gemini в секрете, держит у себя инструкции и знания о компании и принимает запросы только с вашего сайта.
+Сайт остаётся на GitHub Pages, а помощнику нужен маленький сервер — **Cloudflare Worker** `bts-ai`. Он хранит ключ Gemini в секрете, держит инструкции и знания о компании и отвечает только сайту `olenacontroller.github.io`.
 
-1. **Ключ Gemini.** Откройте **https://aistudio.google.com** → войдите через Google → **Get API key → Create API key** → выберите или создайте проект Google Cloud.
-2. **Включите оплату** для этого проекта (**Set up billing**). Для сайтов с посетителями из ЕС Google разрешает только платный тариф. Ожидаемая стоимость при 100–300 разговорах в месяц — около 1–5 €.
-3. **Ограничьте расходы:**
-   - Google Cloud Console → **Billing → Budgets & alerts** → бюджет, например 10 €/мес, с уведомлениями на email;
-   - **APIs & Services → Generative Language API → Quotas** → уменьшите «Requests per day», например до 1 000. Это жёсткий потолок.
-4. **Вставьте ключ в Cloudflare** (ключ не присылайте в чат и не вписывайте в `config.js`):
-   Cloudflare → **Workers & Pages → bts-grupo → Settings → Variables and Secrets → Add** →
-   Type: **Secret**, Variable name: **`GEMINI_API_KEY`**, Value: ваш ключ → **Save**.
-5. **Загрузите сайт заново** (Create deployment → перетащить папку `site`). Секреты применяются только к новым загрузкам.
-6. **Проверка:** откройте `https://bts-grupo.pages.dev/api/chat`. Если видно `{"ok":true,"provider":"gemini",...}`, помощник работает, и кнопка «Ask AI» появится у всех посетителей.
+**A. Ключ Gemini**
+1. **https://aistudio.google.com** → Get API key → Create API key → проект Google Cloud.
+2. Включите оплату (**Set up billing**) — для посетителей из ЕС разрешён только платный тариф.
+3. Google Cloud Console: **Billing → Budgets & alerts** (бюджет, напр. 10 €) и **APIs & Services → Generative Language API → Quotas** (напр. 1 000 запросов в день).
 
-Когда тексты на сайте меняются (услуги, планы, вакансии), знания помощника нужно обновить: выполнить `python ai/build_worker.py` (или попросить меня) и загрузить папку `site` заново.
+**B. Worker в Cloudflare**
+1. **https://dash.cloudflare.com/sign-up** → регистрация.
+2. **Workers & Pages → Create → Create Worker** (Start with Hello World) → имя **`bts-ai`** → **Deploy**.
+3. **Edit code** → выделить всё (Ctrl+A) → вставить код из файла **`site/_worker.js`** (Ctrl+V) → **Deploy**.
+4. Вернуться к Worker → **Settings → Variables and Secrets → Add** → Type **Secret**, name **`GEMINI_API_KEY`**, value — ваш ключ → **Deploy/Save**.
+5. Скопировать адрес Worker (вида `https://bts-ai.ВАШ-ИМЯ.workers.dev`) и прислать Claude. Ключ не присылать.
+
+**C. Подключение (делает Claude)** — адрес вписывается в `site/config.js` → `aiEndpoint: "https://bts-ai.….workers.dev/api/chat"`, сайт публикуется, кнопка «Ask AI» появляется у всех.
+
+Проверка: открыть `https://bts-ai.….workers.dev/` — должно быть `"ready":true`.
+
+Когда меняются тексты сайта (услуги, планы, вакансии): `python ai/build_worker.py` → снова вставить `site/_worker.js` в Worker → Deploy. Если сайт переедет на свой домен — добавить его в `ALLOWED_ORIGINS` в `ai/worker.template.js`.
 
 ## Важно знать про бесплатный тариф Supabase
 
