@@ -8,5 +8,5 @@ window.BTS_CONFIG = {
   supabaseKey: "sb_publishable_HOtRIkK6YtJoRwZrjxX6cA_VQf_A4Oa",
   // AI assistant server (Cloudflare Worker), e.g. https://bts-ai.YOUR-NAME.workers.dev/api/chat
   // Leave empty when the site itself runs on Cloudflare Pages with _worker.js.
-  aiEndpoint: ""
+  aiEndpoint: "https://bts-ai.olena-controller.workers.dev/api/chat"
 };
