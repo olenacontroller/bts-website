@@ -9,7 +9,10 @@
 //               Secrets). The system prompt and the company knowledge live here on the server, and only
 //               the BTS website may call it, so the key cannot be used for anything else.
 
-const DEFAULT_MODEL = 'gemini-2.5-flash'; // can be overridden with the GEMINI_MODEL variable in Cloudflare
+// Models tried in order. Google retires older models for new accounts, so if one is gone (404)
+// the next is used automatically. The GEMINI_MODEL variable in Cloudflare, if set, is tried first.
+const MODEL_CANDIDATES = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.8-flash'];
+let workingModel = null;
 const MAX_BODY_CHARS = 60000;
 const MAX_TURNS = 40;
 const RATE_LIMIT = { requests: 40, windowMs: 10 * 60 * 1000 }; // per visitor IP, best effort
@@ -129,7 +132,14 @@ function json(obj, status = 200, origin = null) {
   return new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...corsHeaders(origin) } });
 }
 
-function modelOf(env) { return (env.GEMINI_MODEL || DEFAULT_MODEL).trim(); }
+function modelList(env) {
+  const list = [];
+  if (env.GEMINI_MODEL) list.push(String(env.GEMINI_MODEL).trim());
+  if (workingModel) list.push(workingModel);
+  list.push(...MODEL_CANDIDATES);
+  return [...new Set(list)];
+}
+function modelOf(env) { return modelList(env)[0]; }
 
 async function googleError(res) {
   let status = '', reason = '', message = '';
@@ -147,7 +157,7 @@ async function handleDiag(request, env) {
   if (!env.GEMINI_API_KEY) return json({ ready: false, error: 'no GEMINI_API_KEY secret' }, 503);
   if (rateLimited('diag:' + (request.headers.get('cf-connecting-ip') || 'unknown'))) return json({ error: 'rate_limited' }, 429);
   const key = { 'x-goog-api-key': env.GEMINI_API_KEY };
-  const out = { model: modelOf(env) };
+  const out = { models_tried_in_order: modelList(env) };
   const list = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', { headers: key });
   if (list.ok) {
     const models = ((await list.json()).models || [])
@@ -157,11 +167,15 @@ async function handleDiag(request, env) {
   } else {
     out.list_error = await googleError(list);
   }
-  const probe = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + out.model + ':generateContent', {
-    method: 'POST', headers: { ...key, 'content-type': 'application/json' },
-    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Reply with the single word OK.' }] }], generationConfig: generationConfig(out.model, 10) })
-  });
-  out.probe = probe.ok ? 'ok' : await googleError(probe);
+  out.probe = {};
+  for (const m of out.models_tried_in_order) {
+    const probe = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + m + ':generateContent', {
+      method: 'POST', headers: { ...key, 'content-type': 'application/json' },
+      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Reply with the single word OK.' }] }], tools: TOOLS, generationConfig: generationConfig(m, 20) })
+    });
+    out.probe[m] = probe.ok ? 'ok' : await googleError(probe);
+    if (probe.ok) { out.model_in_use = m; break; }
+  }
   return json(out);
 }
 
@@ -226,23 +240,21 @@ async function handleChat(request, env) {
   const contents = sanitizeContents(body && body.contents);
   if (!contents) return json({ error: 'bad_request' }, 400, origin);
 
-  const model = modelOf(env);
-  const payload = {
-    systemInstruction: { parts: [{ text: systemPrompt(body.lang === 'pt' ? 'Portuguese' : 'English') }] },
-    contents,
-    tools: TOOLS,
-    generationConfig: generationConfig(model, 1024)
-  };
-
-  let upstream;
-  try {
-    upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-      body: JSON.stringify(payload)
-    });
-  } catch (e) {
-    return json({ error: 'upstream_unreachable' }, 502, origin);
+  const system = { parts: [{ text: systemPrompt(body.lang === 'pt' ? 'Portuguese' : 'English') }] };
+  let upstream = null;
+  for (const model of modelList(env)) {
+    try {
+      upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+        body: JSON.stringify({ systemInstruction: system, contents, tools: TOOLS, generationConfig: generationConfig(model, 1024) })
+      });
+    } catch (e) {
+      return json({ error: 'upstream_unreachable' }, 502, origin);
+    }
+    if (upstream.status === 404) { console.log('Model unavailable, trying next:', model); continue; }
+    if (upstream.ok) workingModel = model;
+    break;
   }
   if (upstream.status === 429) return json({ error: 'rate_limited' }, 429, origin);
   if (!upstream.ok) {
