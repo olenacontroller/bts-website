@@ -7,6 +7,19 @@
 - **site/config.js** — здесь указываются 2 параметра подключения к базе.
 - **supabase/schema.sql** — структура базы данных (запускается один раз).
 
+## Где всё находится сейчас
+
+- **Сайт:** https://olenacontroller.github.io/bts-website/
+- **CRM:** https://olenacontroller.github.io/bts-website/crm/ (вход по email и паролю из Supabase)
+- **Код:** https://github.com/olenacontroller/bts-website — публикуется из ветки `gh-pages` (= содержимое папки `site`).
+
+Обновить сайт после изменений (делает Claude, или вручную в Git Bash из папки проекта):
+```bash
+git add -A && git commit -m "Update site" && git push origin main
+git push origin `git subtree split --prefix site main`:gh-pages --force
+```
+Через ~1 минуту изменения видны на сайте.
+
 ## Как всё связано
 
 ```
