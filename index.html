@@ -1794,63 +1794,13 @@ body.footer-in-view .ai-buddy { display: none !important; }
     <button type="button" class="ai-buddy-text" onclick="aiToggle(true)" data-i18n="buddy_text">Hi! I'm the BTS assistant. Ask me about prices, timing or a repair.</button>
   </div>
   <button type="button" class="ai-buddy-btn" onclick="aiToggle(true)" aria-label="Ask the AI assistant">
-    <svg viewBox="0 0 100 140" aria-hidden="true">
-      <defs>
-        <radialGradient id="eyeGlow" cx="35%" cy="35%">
-          <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#0088CC;stop-opacity:1" />
-        </radialGradient>
-      </defs>
-      <!-- Antenna pole (dark blue) -->
-      <rect x="47" y="4" width="6" height="16" fill="#1a3a52" rx="3"/>
-      <!-- Antenna ball (golden) -->
-      <circle cx="50" cy="2" r="5.5" fill="#FFB84D"/>
-      <circle cx="50" cy="2" r="4.5" fill="#FFC963"/>
-      <!-- Head (dark blue rounded) -->
-      <ellipse cx="50" cy="32" rx="24" ry="28" fill="#1a3a52"/>
-      <!-- Face plate highlight (slightly lighter) -->
-      <ellipse cx="50" cy="35" rx="22" ry="26" fill="#2a5080" opacity="0.6"/>
-      <!-- Left eye (glowing cyan) -->
-      <circle class="ai-buddy-eyes" cx="38" cy="28" r="6" fill="url(#eyeGlow)"/>
-      <circle cx="38" cy="28" r="5.5" fill="#00D9FF" opacity="0.7"/>
-      <circle cx="39" cy="27" r="2.5" fill="#fff" opacity="0.8"/>
-      <!-- Right eye (glowing cyan) -->
-      <circle class="ai-buddy-eyes" cx="62" cy="28" r="6" fill="url(#eyeGlow)"/>
-      <circle cx="62" cy="28" r="5.5" fill="#00D9FF" opacity="0.7"/>
-      <circle cx="63" cy="27" r="2.5" fill="#fff" opacity="0.8"/>
-      <!-- Smile (happy curve) -->
-      <path d="M42 42 Q50 48 58 42" fill="none" stroke="#00D9FF" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-      <!-- Body (white rounded) -->
-      <rect x="26" y="60" width="48" height="50" rx="10" fill="#fff" stroke="#E8E8E8" stroke-width="1.5"/>
-      <!-- Chest plate (light blue accent) -->
-      <circle cx="50" cy="78" r="6" fill="#00D9FF" opacity="0.5"/>
-      <!-- Left ear speaker (blue) -->
-      <circle cx="22" cy="32" r="5" fill="#0072B0"/>
-      <circle cx="22" cy="32" r="3.5" fill="#00A8CC" opacity="0.7"/>
-      <!-- Right ear speaker (blue) -->
-      <circle cx="78" cy="32" r="5" fill="#0072B0"/>
-      <circle cx="78" cy="32" r="3.5" fill="#00A8CC" opacity="0.7"/>
-      <!-- Left arm (down) -->
-      <g>
-        <rect x="20" y="62" width="7" height="32" rx="3.5" fill="#fff" stroke="#E8E8E8" stroke-width="1"/>
-        <circle cx="23.5" cy="98" r="5.5" fill="#fff" stroke="#E8E8E8" stroke-width="1"/>
-        <!-- Fingers -->
-        <circle cx="18" cy="98" r="2.5" fill="#fff" opacity="0.9"/>
-        <circle cx="29" cy="98" r="2.5" fill="#fff" opacity="0.9"/>
-        <circle cx="23" cy="105" r="2.2" fill="#fff" opacity="0.8"/>
-      </g>
-      <!-- Right arm (waving up) -->
-      <g class="ai-buddy-wave">
-        <rect x="73" y="62" width="7" height="32" rx="3.5" fill="#fff" stroke="#E8E8E8" stroke-width="1"/>
-        <circle cx="76.5" cy="62" r="5.5" fill="#fff" stroke="#E8E8E8" stroke-width="1"/>
-        <!-- Fingers on waving hand -->
-        <circle cx="71" cy="62" r="2.5" fill="#fff" opacity="0.9"/>
-        <circle cx="82" cy="62" r="2.5" fill="#fff" opacity="0.9"/>
-        <circle cx="76" cy="54" r="2.2" fill="#fff" opacity="0.8"/>
-      </g>
-      <!-- Feet/Base -->
-      <ellipse cx="38" cy="115" rx="7" ry="5" fill="#E8E8E8"/>
-      <ellipse cx="62" cy="115" rx="7" ry="5" fill="#E8E8E8"/>
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <!-- Outer blue circle ring -->
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#0072B0" stroke-width="3"/>
+      <!-- White inner circle -->
+      <circle cx="32" cy="32" r="27" fill="#fff"/>
+      <!-- Dark blue center dot -->
+      <circle class="ai-buddy-eyes" cx="32" cy="32" r="6" fill="#1a3a52"/>
     </svg>
     <span class="ai-buddy-tag" data-i18n="ai_fab">Ask AI</span>
   </button>
