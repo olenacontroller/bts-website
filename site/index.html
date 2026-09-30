@@ -585,6 +585,8 @@ html { scroll-behavior: smooth; }
 @media (max-width: 860px) { .rs-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .rs-grid { grid-template-columns: 1fr; gap: 8px; } .rs-item { padding: 12px 14px; } .rs-hero { padding: 112px 20px 36px; } .rs-btns .btn { width: 100%; justify-content: center; } .rs-sec { padding-block: 40px; } }
 
+@media (min-width: 769px) { .careers-line { display: none; } }
+
 /* ── Phone diet: shorter sections, one floating button ── */
 @media (max-width: 768px) {
   .ai-fab { display: none !important; }
@@ -2578,7 +2580,20 @@ function showCalcChip() {
 }
 
 // Page navigation
+// Careers: a full section on the home page on computers, a separate page on phones
+const mqPhone = window.matchMedia('(max-width: 768px)');
+function placeCareers() {
+  const sec = document.getElementById('careers');
+  const phone = mqPhone.matches;
+  const host = document.getElementById(phone ? 'page-careers' : 'page-home');
+  if (sec.parentElement !== host) {
+    if (phone) host.appendChild(sec); else host.insertBefore(sec, host.querySelector('.careers-line'));
+  }
+  sec.classList.toggle('page-top', phone);
+  if (!phone && document.getElementById('page-careers').classList.contains('active')) showPage('home', 'careers');
+}
 function showPage(page, scrollTo) {
+  if (page === 'careers' && !mqPhone.matches) { page = 'home'; scrollTo = scrollTo || 'careers'; }
   document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + page);
   if (target) target.classList.add('active');
@@ -2598,6 +2613,8 @@ function closeMenu() { mobileMenu.classList.remove('open'); }
 const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers' };
 function routeHash() { const pg = HASH_PAGES[location.hash]; if (pg) showPage(pg); }
 window.addEventListener('hashchange', routeHash);
+placeCareers();
+mqPhone.addEventListener('change', placeCareers);
 routeHash();
 if (window.innerWidth > 768) document.getElementById('formMore').open = true;
 
