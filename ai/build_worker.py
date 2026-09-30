@@ -46,6 +46,7 @@ knowledge = "\n\n".join([
     "## Frequently asked questions\n" + faq_en(),
     "## HomeCare subscription plans (full guide)\n" + section("#page-services", 15000),
     "## Careers (open vacancies)\n" + section("#careers .cr-jobs", 4000),
+    "## BTS Resolve (small repairs service, page bts-grupo.com/#resolve)\n" + section("#page-resolve", 3000),
 ])
 
 template = (ROOT / "ai" / "worker.template.js").read_text(encoding="utf-8")

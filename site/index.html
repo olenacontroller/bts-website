@@ -521,6 +521,106 @@ html { scroll-behavior: smooth; }
 .sp-faq-a { display: none; padding-bottom: 16px; font-size: 0.86rem; color: var(--text-soft); line-height: 1.7; max-width: 700px; }
 .sp-faq-item.open .sp-faq-a { display: block; }
 @media (max-width: 600px) { .sp-plan-header { flex-direction: column; gap: 8px; } .sp-price-block { text-align: left; } .sp-price-main { justify-content: flex-start; } .sp-sla-grid { grid-template-columns: 1fr; } .sp-svc { grid-template-columns: 1fr; } .sp-tag { justify-self: start; order: -1; } .sp-plan-nav-btn { padding: 12px 16px; font-size: 0.82rem; } }
+
+/* ── Choose your need ── */
+.needs { background: var(--page-bg); padding: 44px 24px 8px; }
+.needs-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 700; text-align: center; color: var(--text); margin-bottom: 20px; }
+.needs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.need-card { display: flex; align-items: center; gap: 14px; padding: 20px 18px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--text); text-decoration: none; box-shadow: 0 4px 18px rgba(0,40,80,0.06); transition: transform 0.2s, border-color 0.2s; }
+.need-card:hover { transform: translateY(-2px); border-color: var(--blue-mid); }
+.need-ico { width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; background: var(--blue-pale); color: #00457C; }
+.need-ico svg { width: 24px; height: 24px; }
+.need-txt { flex: 1; min-width: 0; }
+.need-txt b { display: block; font-size: 1.04rem; font-weight: 600; line-height: 1.25; }
+.need-txt small { display: block; font-size: 0.82rem; color: var(--text-soft); line-height: 1.4; margin-top: 2px; }
+.need-arrow { width: 20px; height: 20px; flex-shrink: 0; color: var(--blue-mid); }
+.need-hot { background: var(--band); border-color: var(--band); color: #fff; }
+.need-hot .need-txt small { color: rgba(255,255,255,0.78); }
+.need-hot .need-ico { background: #33C6E6; color: #00395E; }
+.need-hot .need-arrow { color: #fff; }
+.need-ai { display: block; margin: 16px auto 0; font-family: inherit; font-size: 0.84rem; font-weight: 500; color: var(--blue-mid); background: none; border: none; text-decoration: underline; cursor: pointer; padding: 6px; }
+@media (max-width: 860px) { .needs-grid { grid-template-columns: 1fr; gap: 10px; } .needs { padding: 30px 20px 4px; } }
+
+/* ── Service bullets ── */
+.svc-list { list-style: none; display: grid; gap: 8px; margin-bottom: 24px; max-width: 440px; }
+.svc-list li { position: relative; padding-left: 22px; font-size: 0.95rem; color: var(--text-soft); line-height: 1.45; }
+.svc-list li::before { content: ''; position: absolute; left: 2px; top: 0.55em; width: 8px; height: 8px; border-radius: 2px; background: var(--blue-light); }
+
+/* ── Careers line + extra pages ── */
+.careers-line { text-align: center; padding: 22px 24px; font-size: 0.9rem; color: var(--text-soft); border-top: 1px solid var(--border); background: var(--page-bg); }
+.careers-line a { color: var(--blue-mid); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.careers-line a:hover { text-decoration: underline; }
+.page-top { padding-top: 120px; }
+.faq-more { font-family: inherit; font-size: 0.88rem; font-weight: 600; color: var(--blue-mid); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 12px; cursor: pointer; }
+.faq-more:hover { border-color: var(--blue-mid); }
+.form-more { margin-bottom: 16px; }
+.form-more summary { font-size: 0.84rem; font-weight: 600; color: var(--blue-mid); cursor: pointer; padding: 4px 0 12px; }
+
+/* ── BTS Resolve ── */
+.rs-hero { background: var(--band); color: #fff; text-align: center; padding: 128px 24px 48px; }
+.rs-eyebrow { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8FE6F7; margin-bottom: 12px; }
+.rs-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; text-wrap: balance; max-width: 720px; margin: 0 auto 14px; }
+.rs-hero h1 span { color: #8FE6F7; }
+.rs-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.9); max-width: 520px; margin: 0 auto 26px; }
+.rs-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.rs-btns .cr-wa-btn { align-self: auto; font-size: 1rem; padding: 16px 28px; }
+.rs-call { border-color: rgba(255,255,255,0.55); color: #fff; }
+.rs-trust { margin-top: 24px; font-size: 0.8rem; color: rgba(255,255,255,0.72); }
+.rs-sec { padding-block: 56px; text-align: center; }
+.rs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; text-align: left; }
+.rs-item { display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.rs-item svg { grid-row: span 2; width: 30px; height: 30px; color: var(--blue-mid); }
+.rs-item b { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.rs-item small { font-size: 0.82rem; color: var(--text-soft); line-height: 1.4; }
+.rs-dark { background: var(--band); color: #fff; }
+.rs-dark .section-title { color: #fff; }
+.rs-steps { max-width: 520px; margin: 24px auto 0; text-align: left; }
+.rs-steps span { display: block; }
+.rs-price { max-width: 520px; margin: 30px auto 0; text-align: left; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 20px 22px; }
+.rs-price b { display: block; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; }
+.rs-price p { font-size: 0.92rem; color: rgba(255,255,255,0.86); }
+.rs-price .rs-area { margin-top: 10px; font-size: 0.82rem; color: rgba(255,255,255,0.68); }
+.rs-form-wrap { max-width: 640px; text-align: left; }
+.rs-form-wrap .section-title { text-align: center; margin-bottom: 22px; }
+@media (max-width: 860px) { .rs-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .rs-grid { grid-template-columns: 1fr; gap: 8px; } .rs-item { padding: 12px 14px; } .rs-hero { padding: 112px 20px 36px; } .rs-btns .btn { width: 100%; justify-content: center; } .rs-sec { padding-block: 40px; } }
+
+/* ── Phone diet: shorter sections, one floating button ── */
+@media (max-width: 768px) {
+  .ai-fab { display: none !important; }
+  .section { padding: 48px 20px; }
+  .hero { min-height: clamp(520px, 80vh, 640px); }
+  .hero-sub { font-size: 1rem; }
+  .hero-btns .hero-alt { background: none; border: none; backdrop-filter: none; padding: 6px 10px; font-weight: 500; font-size: 0.9rem; color: #fff; text-decoration: underline; text-underline-offset: 3px; text-shadow: 0 1px 10px rgba(8,28,48,0.7); }
+  .service-img { min-height: 0; height: 190px; }
+  .service-text { padding: 26px 20px 32px; }
+  .service-text h2 { margin-bottom: 12px; }
+  .svc-list { margin-bottom: 18px; }
+  .values-grid { grid-template-columns: 1fr; gap: 0; }
+  .value-card { display: grid; grid-template-columns: 34px 1fr; column-gap: 14px; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .value-icon { grid-row: span 2; width: 30px; height: 30px; margin: 2px 0 0; }
+  .value-card h3 { font-size: 1.08rem; margin-bottom: 2px; }
+  .value-card p { font-size: 0.82rem; line-height: 1.45; }
+  .cta-band { padding: 44px 20px; }
+  .cta-card { padding: 16px 18px; }
+  .cta-card h3 { font-size: 1.2rem; margin-bottom: 4px; }
+  .cta-card h3::before { display: none; }
+  .cta-card p { margin-bottom: 12px; font-size: 0.84rem; }
+  .cta-card:nth-child(3) { display: none; }
+  .gallery-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 10px; margin-top: 24px; }
+  .gallery-card { flex: 0 0 68%; scroll-snap-align: start; }
+  .gallery-overlay { opacity: 1; }
+  .testimonials-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; max-width: none; padding-bottom: 10px; margin-top: 24px; }
+  .testimonial-card { flex: 0 0 84%; scroll-snap-align: start; padding: 20px; }
+  .page-top { padding-top: 104px; }
+}
+@media (max-width: 480px) { .trust-inner { grid-template-columns: 1fr 1fr; gap: 10px 14px; padding-block: 14px; } .trust-item { font-size: 0.76rem; gap: 8px; } .trust-item svg { width: 18px; height: 18px; } }
+@media (max-width: 600px) {
+  .ai-panel { inset: 0; width: 100%; height: 100%; height: 100dvh; border: none; border-radius: 0; }
+  .ai-input textarea { font-size: 16px; }
+  .ai-chips { gap: 8px; }
+  .ai-chip { font-size: 0.9rem; padding: 10px 14px; border-radius: 18px; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -563,7 +663,7 @@ html { scroll-behavior: smooth; }
       <a data-i18n="nav_about" onclick="showPage('home','about')">About</a>
       <a data-i18n="nav_projects" onclick="showPage('home','projects')">Projects</a>
       <a data-i18n="nav_testimonials" onclick="showPage('home','testimonials')">Testimonials</a>
-      <a data-i18n="nav_careers" onclick="showPage('home','careers')">Careers</a>
+      <a data-i18n="nav_careers" onclick="showPage('careers')">Careers</a>
       <a data-i18n="nav_cta" onclick="showPage('home','contact')" class="nav-cta">Free Estimate</a>
       <button class="lang-toggle" id="langToggle" onclick="toggleLang()">PT</button>
     </div>
@@ -578,11 +678,13 @@ html { scroll-behavior: smooth; }
 <div class="mobile-menu" id="mobileMenu">
   <a data-i18n="nav_services" onclick="closeMenu();showPage('home','services')">Services</a>
   <a data-i18n="nav_care" onclick="closeMenu();showPage('services')">Care Plans</a>
+  <a data-i18n="nav_resolve" onclick="closeMenu();showPage('resolve')">Small repairs — BTS Resolve</a>
   <a data-i18n="nav_about" onclick="closeMenu();showPage('home','about')">About</a>
   <a data-i18n="nav_projects" onclick="closeMenu();showPage('home','projects')">Projects</a>
   <a data-i18n="nav_testimonials" onclick="closeMenu();showPage('home','testimonials')">Testimonials</a>
-  <a data-i18n="nav_careers" onclick="closeMenu();showPage('home','careers')">Careers</a>
+  <a data-i18n="nav_careers" onclick="closeMenu();showPage('careers')">Careers</a>
   <a data-i18n="nav_contact" onclick="closeMenu();showPage('home','contact')">Contact</a>
+  <a class="ai-entry" hidden data-i18n="nav_ai" onclick="closeMenu();aiToggle(true)">Ask our AI assistant</a>
 </div>
 
 <!-- HOMEPAGE -->
@@ -591,23 +693,48 @@ html { scroll-behavior: smooth; }
 <section class="hero" id="home">
   <div class="hero-photo" aria-hidden="true"></div>
   <div class="hero-content">
-    <h1 data-i18n="hero_title">Renovate Your Home in Portugal — <span>Even From Abroad</span></h1>
-    <p class="hero-sub" data-i18n="hero_sub">One fixed, written quote. A bilingual project manager. Weekly photo and video updates until handover — in Aveiro, Porto and the Douro Valley.</p>
+    <h1 data-i18n="hero_title">Renovating a Property in Portugal? <span>We Manage It for You</span></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Fixed written quote and weekly photo updates — even if you live abroad.</p>
   </div>
   <div class="hero-btns">
-    <a href="#calculator" class="btn btn-primary" data-i18n="hero_btn1">Calculate My Renovation Cost</a>
-    <a href="#contact" class="btn btn-outline" data-i18n="hero_btn2">Book a Free Site Visit</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1">Get a Free Project Assessment</a>
+    <a href="#calculator" class="btn btn-outline hero-alt" data-i18n="hero_btn2">Calculate the cost in 30 seconds</a>
   </div>
 </section>
 
 <div class="trust-strip">
   <div class="trust-inner">
+    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span data-i18n="trust4">IMPIC licence 115511 &amp; insured</span></div>
     <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 012-2z"/></svg><span data-i18n="trust1">Fixed written quote — no hidden extras</span></div>
     <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg><span data-i18n="trust2">English &amp; Portuguese project manager</span></div>
     <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span data-i18n="trust3">Weekly photo &amp; video updates</span></div>
-    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span data-i18n="trust4">IMPIC-licensed &amp; insured</span></div>
   </div>
 </div>
+
+<!-- CHOOSE YOUR NEED -->
+<section class="needs" id="needs">
+  <div class="wrap">
+    <h2 class="needs-title" data-i18n="need_title">What do you need?</h2>
+    <div class="needs-grid">
+      <a class="need-card need-hot" href="#resolve" onclick="showPage('resolve');return false;">
+        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 005.2-5.4l-2.6 2.6-2.1-.6-.6-2.1 2.3-2.9z"/></svg></span>
+        <span class="need-txt"><b data-i18n="need1_t">Fix something now</b><small data-i18n="need1_d">Small repairs and urgent property problems.</small></span>
+        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <a class="need-card" href="#services" onclick="showPage('home','services');return false;">
+        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></span>
+        <span class="need-txt"><b data-i18n="need2_t">Renovate my property</b><small data-i18n="need2_d">Renovations, restoration and larger works.</small></span>
+        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <a class="need-card" href="#" onclick="showPage('services');return false;">
+        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
+        <span class="need-txt"><b data-i18n="need3_t">Maintain my property</b><small data-i18n="need3_d">Regular maintenance and prevention.</small></span>
+        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <button type="button" class="need-ai ai-entry" onclick="aiToggle(true)" hidden data-i18n="need_ai">Not sure? Ask our assistant</button>
+  </div>
+</section>
 
 <!-- COST CALCULATOR -->
 <section class="section calc-section" id="calculator">
@@ -627,7 +754,7 @@ html { scroll-behavior: smooth; }
   <div class="service-text">
     <div class="section-label" data-i18n="svc1_label">Renovation & New Build</div>
     <h2 data-i18n="svc1_title">Your Property, Transformed From Foundation to Finish</h2>
-    <p data-i18n="svc1_desc">Whether you're restoring a rural quinta or building a contemporary townhouse, we manage the entire process — structural work, plumbing, electrics, kitchens, bathrooms, and finishing. Every step documented, every decision yours.</p>
+    <ul class="svc-list" data-i18n="svc1_desc"><li>Full renovations and new builds</li><li>Structure, plumbing and electrics</li><li>Kitchens, bathrooms and finishing</li><li>Every step documented — every decision yours</li></ul>
     <a href="#contact" class="btn btn-primary" data-i18n="svc1_btn">Request a Site Visit</a>
   </div>
 </div>
@@ -636,7 +763,7 @@ html { scroll-behavior: smooth; }
   <div class="service-text">
     <div class="section-label" data-i18n="svc2_label">Pools & Outdoor Living</div>
     <h2 data-i18n="svc2_title">Pools Built to Last Under the Portuguese Sun</h2>
-    <p data-i18n="svc2_desc">From infinity edges overlooking the Douro Valley to mosaic-tiled family pools in Aveiro, we handle design, excavation, tiling, decking, and all technical installations. Turnkey delivery, no subcontractor surprises.</p>
+    <ul class="svc-list" data-i18n="svc2_desc"><li>Design, excavation, tiling and decking</li><li>All technical installations included</li><li>Infinity edges and mosaic finishes</li><li>Turnkey — no subcontractor surprises</li></ul>
     <a href="#contact" class="btn btn-primary" data-i18n="svc2_btn">Get a Pool Estimate</a>
   </div>
 </div>
@@ -645,7 +772,7 @@ html { scroll-behavior: smooth; }
   <div class="service-text">
     <div class="section-label" data-i18n="svc3_label">Roofing & Infrastructure</div>
     <h2 data-i18n="svc3_title">Protecting Your Investment From the Top Down</h2>
-    <p data-i18n="svc3_desc">Roof repairs and replacements with traditional terracotta or modern materials. Plus foundations, retaining walls, drainage systems, septic installations, and waterproofing — the unseen work that keeps everything standing.</p>
+    <ul class="svc-list" data-i18n="svc3_desc"><li>Roof repairs and replacements</li><li>Traditional terracotta or modern materials</li><li>Foundations, retaining walls and drainage</li><li>Septic systems and waterproofing</li></ul>
     <a href="#contact" class="btn btn-primary" data-i18n="svc3_btn">Schedule an Inspection</a>
   </div>
 </div>
@@ -805,14 +932,15 @@ html { scroll-behavior: smooth; }
           <div class="form-group"><label class="form-label" for="c_name" data-i18n="f_name">Full Name *</label><input class="form-input" type="text" id="c_name" required></div>
           <div class="form-group"><label class="form-label" for="c_email">Email *</label><input class="form-input" type="email" id="c_email" required></div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="c_phone" data-i18n="f_phone">Phone / WhatsApp</label><input class="form-input" type="tel" id="c_phone"></div>
+        <div class="form-group"><label class="form-label" for="c_phone" data-i18n="f_phone">Phone / WhatsApp</label><input class="form-input" type="tel" id="c_phone"></div>
+        <details class="form-more" id="formMore">
+          <summary data-i18n="f_more">Add details (optional)</summary>
           <div class="form-group"><label class="form-label" for="c_location" data-i18n="f_location">Property Location</label><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Select area</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="c_service" data-i18n="f_type">Project Type</label><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
-          <div class="form-group"><label class="form-label" for="c_timing" data-i18n="f_timing">Desired Start</label><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></div>
-        </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="c_service" data-i18n="f_type">Project Type</label><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
+            <div class="form-group"><label class="form-label" for="c_timing" data-i18n="f_timing">Desired Start</label><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></div>
+          </div>
+        </details>
         <div class="form-group"><label class="form-label" for="c_desc" data-i18n="f_desc">Tell Us About Your Project</label><textarea class="form-input" id="c_desc" rows="4"></textarea></div>
         <div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" id="c_photos" accept="image/*,application/pdf" multiple><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div>
         <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="c_website" tabindex="-1" autocomplete="off"></label></div>
@@ -847,7 +975,82 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<section class="section cr-section" id="careers">
+<div class="careers-line"><span data-i18n="crl_text">Looking to work with us?</span> <a href="#careers" onclick="showPage('careers');return false;" data-i18n="crl_link">View open positions →</a></div>
+
+</div>
+
+<!-- BTS RESOLVE — small repairs -->
+<div class="page-view" id="page-resolve">
+<header class="rs-hero">
+  <div class="rs-eyebrow">BTS Resolve</div>
+  <h1 data-i18n="rs_h1">Something broken at home? <span>BTS resolves it.</span></h1>
+  <p data-i18n="rs_sub">Send us a photo. We tell you what needs doing and what it costs — before anyone comes.</p>
+  <div class="rs-btns">
+    <a class="btn cr-wa-btn" href="https://wa.me/351913965533?text=BTS%20Resolve%20%E2%80%94%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="rs_wa">Send a photo on WhatsApp</span></a>
+    <a class="btn btn-outline rs-call" href="tel:+351933255248" data-i18n="rs_call">Call +351 933 255 248</a>
+  </div>
+  <div class="rs-trust" data-i18n="rs_trust">Own team · IMPIC licence 115511 · Invoice for every job</div>
+</header>
+
+<section class="section rs-sec">
+  <div class="wrap">
+    <h2 class="section-title" data-i18n="rs_fix_t">What we fix</h2>
+    <div class="rs-grid">
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3s6 6.3 6 11a6 6 0 01-12 0c0-4.700 6-11 6-11z"/></svg><b data-i18n="rs_f1">Plumbing</b><small data-i18n="rs_f1d">Leaks, taps, drains, toilets</small></div>
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg><b data-i18n="rs_f2">Electrical</b><small data-i18n="rs_f2d">Sockets, lights, fuse boards</small></div>
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 12l10-8 10 8M6 10v9h12v-9M2 20h20"/></svg><b data-i18n="rs_f3">Roofs</b><small data-i18n="rs_f3d">Leaks, broken tiles, gutters</small></div>
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h13v6H4zM17 6h3v6h-8v3M10 15h4v6h-4z"/></svg><b data-i18n="rs_f4">Painting</b><small data-i18n="rs_f4d">Walls, ceilings, damp stains</small></div>
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l7-7"/></svg><b data-i18n="rs_f5">Garden &amp; outdoor</b><small data-i18n="rs_f5d">Paths, walls, small landscape works</small></div>
+      <div class="rs-item"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 20l7-7M13.5 5.5l5 5M11 8l5-5 5 5-5 5zM4 8l4-4 3 3-4 4z"/></svg><b data-i18n="rs_f6">Home maintenance</b><small data-i18n="rs_f6d">Doors, windows, tiles and everything else</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section rs-sec rs-dark">
+  <div class="wrap">
+    <h2 class="section-title" data-i18n="rs_how_t">How it works</h2>
+    <ol class="cr-steps rs-steps">
+      <li><div><strong data-i18n="rs_s1">Send a photo</strong><span data-i18n="rs_s1d">On WhatsApp or with the form below. Add a few words about the problem.</span></div></li>
+      <li><div><strong data-i18n="rs_s2">We tell you the price</strong><span data-i18n="rs_s2d">You know what needs doing and what it costs before anyone comes.</span></div></li>
+      <li><div><strong data-i18n="rs_s3">Our builder fixes it</strong><span data-i18n="rs_s3d">Our own team does the work. You get an invoice.</span></div></li>
+    </ol>
+    <div class="rs-price">
+      <b data-i18n="rs_price_t">What does it cost?</b>
+      <p data-i18n="rs_price_d">It depends on the problem. We confirm the price after seeing your photos, before any work starts. We take jobs from €50.</p>
+      <p class="rs-area" data-i18n="rs_area">Douro Valley and Northern Portugal — tell us where the property is and we confirm.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section rs-sec" id="resolve-form">
+  <div class="wrap rs-form-wrap">
+    <h2 class="section-title" data-i18n="rs_form_t">Or tell us here</h2>
+    <form id="rsForm" onsubmit="submitResolve(event)">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" for="r_name" data-i18n="f_name">Full Name *</label><input class="form-input" type="text" id="r_name" autocomplete="name" required></div>
+        <div class="form-group"><label class="form-label" for="r_phone" data-i18n="cr_f_phone">Phone / WhatsApp *</label><input class="form-input" type="tel" id="r_phone" autocomplete="tel" required></div>
+      </div>
+      <div class="form-group"><label class="form-label" for="r_place" data-i18n="rs_f_place">Where is the property?</label><input class="form-input" type="text" id="r_place" placeholder="Peso da Régua"></div>
+      <div class="form-group"><label class="form-label" for="r_desc" data-i18n="rs_f_desc">What is the problem? *</label><textarea class="form-input" id="r_desc" rows="3" required data-i18n-ph="rs_f_desc_ph" placeholder="e.g. Water is dripping from the kitchen ceiling"></textarea></div>
+      <div class="form-group backend-only" hidden><label class="form-label" for="r_photos" data-i18n="rs_f_photos">Photos of the problem (optional)</label><div class="upload-box"><input type="file" id="r_photos" accept="image/*" multiple></div></div>
+      <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="r_website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="form-consent"><input type="checkbox" id="r_consent" required><span data-i18n="f_consent">I agree that Blame The Stars, Lda. may use my details to answer this request, as described in the <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</span></label>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="rs_submit">Send</button>
+    </form>
+    <div class="cr-done est-done" id="rsDone" hidden>
+      <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h3 data-i18n="est_done_t">Almost done — send your enquiry</h3>
+      <p data-i18n="est_done_d">Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.</p>
+      <a id="rsWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
+      <button type="button" class="cr-back" onclick="document.getElementById('rsForm').hidden=false;document.getElementById('rsDone').hidden=true;" data-i18n="rs_edit">← Edit my request</button>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CAREERS PAGE -->
+<div class="page-view" id="page-careers">
+<section class="section cr-section page-top" id="careers">
   <div class="wrap">
     <div class="cr-head">
       <div>
@@ -960,7 +1163,6 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 </section>
-
 </div>
 
 <!-- SERVICES PAGE -->
@@ -1457,7 +1659,7 @@ html { scroll-behavior: smooth; }
       <a href="#" onclick="showPage('home','about');return false;" data-i18n="nav_about">About</a>
       <a href="#" onclick="showPage('home','projects');return false;" data-i18n="nav_projects">Projects</a>
       <a href="#" onclick="showPage('home','testimonials');return false;" data-i18n="nav_testimonials">Testimonials</a>
-      <a href="#" onclick="showPage('home','careers');return false;" data-i18n="nav_careers">Careers</a>
+      <a href="#" onclick="showPage('careers');return false;" data-i18n="nav_careers">Careers</a>
       <a href="#" onclick="showPage('home','contact');return false;" data-i18n="nav_contact">Contact</a>
     </div>
     <div>
@@ -1528,6 +1730,57 @@ html { scroll-behavior: smooth; }
 let currentLang = 'en';
 
 const T = {
+  need_title: { en: "What do you need?", pt: "De que precisa?" },
+  need1_t: { en: "Fix something now", pt: "Resolver um problema já" },
+  need1_d: { en: "Small repairs and urgent property problems.", pt: "Pequenas reparações e problemas urgentes." },
+  need2_t: { en: "Renovate my property", pt: "Remodelar a minha casa" },
+  need2_d: { en: "Renovations, restoration and larger works.", pt: "Remodelações, restauro e obras maiores." },
+  need3_t: { en: "Maintain my property", pt: "Manter a minha casa" },
+  need3_d: { en: "Regular maintenance and prevention.", pt: "Manutenção regular e prevenção." },
+  need_ai: { en: "Not sure? Ask our assistant", pt: "Tem dúvidas? Pergunte ao assistente" },
+  f_more: { en: "Add details (optional)", pt: "Adicionar detalhes (opcional)" },
+  crl_text: { en: "Looking to work with us?", pt: "Quer trabalhar connosco?" },
+  crl_link: { en: "View open positions →", pt: "Ver vagas abertas →" },
+  rs_h1: { en: "Something broken at home? <span>BTS resolves it.</span>", pt: "Problema em casa? <span>A BTS resolve.</span>" },
+  rs_sub: { en: "Send us a photo. We tell you what needs doing and what it costs — before anyone comes.", pt: "Envie-nos uma foto. Dizemos-lhe o que é preciso fazer e quanto custa — antes de alguém ir ao local." },
+  rs_wa: { en: "Send a photo on WhatsApp", pt: "Enviar foto por WhatsApp" },
+  rs_call: { en: "Call +351 933 255 248", pt: "Ligar +351 933 255 248" },
+  rs_fix_t: { en: "What we fix", pt: "O que resolvemos" },
+  rs_f1: { en: "Plumbing", pt: "Canalização" },
+  rs_f1d: { en: "Leaks, taps, drains, toilets", pt: "Fugas, torneiras, esgotos, sanitas" },
+  rs_f2: { en: "Electrical", pt: "Eletricidade" },
+  rs_f2d: { en: "Sockets, lights, fuse boards", pt: "Tomadas, luzes, quadros elétricos" },
+  rs_f3: { en: "Roofs", pt: "Telhados" },
+  rs_f3d: { en: "Leaks, broken tiles, gutters", pt: "Infiltrações, telhas partidas, caleiras" },
+  rs_f4: { en: "Painting", pt: "Pintura" },
+  rs_f4d: { en: "Walls, ceilings, damp stains", pt: "Paredes, tetos, manchas de humidade" },
+  rs_f5: { en: "Garden &amp; outdoor", pt: "Jardim e exterior" },
+  rs_f5d: { en: "Paths, walls, small landscape works", pt: "Caminhos, muros, pequenos arranjos exteriores" },
+  rs_f6: { en: "Home maintenance", pt: "Manutenção da casa" },
+  rs_f6d: { en: "Doors, windows, tiles and everything else", pt: "Portas, janelas, azulejos e tudo o resto" },
+  rs_how_t: { en: "How it works", pt: "Como funciona" },
+  rs_s1: { en: "Send a photo", pt: "Envie uma foto" },
+  rs_s1d: { en: "On WhatsApp or with the form below. Add a few words about the problem.", pt: "Por WhatsApp ou pelo formulário abaixo. Junte umas palavras sobre o problema." },
+  rs_s2: { en: "We tell you the price", pt: "Dizemos-lhe o preço" },
+  rs_s2d: { en: "You know what needs doing and what it costs before anyone comes.", pt: "Fica a saber o que é preciso fazer e quanto custa antes de alguém ir ao local." },
+  rs_s3: { en: "Our builder fixes it", pt: "O nosso técnico resolve" },
+  rs_s3d: { en: "Our own team does the work. You get an invoice.", pt: "A nossa própria equipa faz o trabalho. Recebe fatura." },
+  rs_price_t: { en: "What does it cost?", pt: "Quanto custa?" },
+  rs_price_d: { en: "It depends on the problem. We confirm the price after seeing your photos, before any work starts. We take jobs from €50.", pt: "Depende do problema. Confirmamos o preço depois de ver as fotos, antes de começar qualquer trabalho. Aceitamos trabalhos a partir de 50 €." },
+  rs_area: { en: "Douro Valley and Northern Portugal — tell us where the property is and we confirm.", pt: "Douro e Norte de Portugal — diga-nos onde fica o imóvel e confirmamos." },
+  rs_trust: { en: "Own team · IMPIC licence 115511 · Invoice for every job", pt: "Equipa própria · Alvará IMPIC 115511 · Fatura em todos os trabalhos" },
+  rs_form_t: { en: "Or tell us here", pt: "Ou escreva-nos aqui" },
+  rs_f_place: { en: "Where is the property?", pt: "Onde fica o imóvel?" },
+  rs_f_desc: { en: "What is the problem? *", pt: "Qual é o problema? *" },
+  rs_f_desc_ph: { en: "e.g. Water is dripping from the kitchen ceiling", pt: "ex.: Está a pingar água do teto da cozinha" },
+  rs_f_photos: { en: "Photos of the problem (optional)", pt: "Fotos do problema (opcional)" },
+  rs_submit: { en: "Send", pt: "Enviar" },
+  rs_sent_t: { en: "Thank you — we have your request!", pt: "Obrigado — recebemos o seu pedido!" },
+  rs_sent_d: { en: "We will contact you with the solution and the price. For a faster answer, send the photos on WhatsApp too.", pt: "Entramos em contacto com a solução e o preço. Para uma resposta mais rápida, envie também as fotos por WhatsApp." },
+  rs_edit: { en: "← Edit my request", pt: "← Editar o meu pedido" },
+  nav_resolve: { en: "Small repairs — BTS Resolve", pt: "Pequenas reparações — BTS Resolve" },
+  nav_ai: { en: "Ask our AI assistant", pt: "Perguntar ao assistente de IA" },
+  faq_more: { en: "Show all questions", pt: "Ver todas as perguntas" },
   // NAV
   nav_services: { en: 'Services', pt: 'Serviços' },
   nav_care: { en: 'Care Plans', pt: 'Planos de Manutenção' },
@@ -1538,14 +1791,14 @@ const T = {
   nav_contact: { en: 'Contact', pt: 'Contacto' },
 
   // HERO
-  hero_title: { en: 'Renovate Your Home in Portugal — <span>Even From Abroad</span>', pt: 'Renove a Sua Casa em Portugal — <span>Mesmo à Distância</span>' },
-  hero_sub: { en: 'One fixed, written quote. A bilingual project manager. Weekly photo and video updates until handover — in Aveiro, Porto and the Douro Valley.', pt: 'Um orçamento escrito e fechado. Um gestor de projeto bilingue. Fotos e vídeos todas as semanas até à entrega — em Aveiro, Porto e Vale do Douro.' },
-  hero_btn1: { en: 'Calculate My Renovation Cost', pt: 'Calcular o Custo da Minha Obra' },
-  hero_btn2: { en: 'Book a Free Site Visit', pt: 'Marcar Visita Gratuita' },
+  hero_title: { en: "Renovating a Property in Portugal? <span>We Manage It for You</span>", pt: "Obras na sua casa em Portugal? <span>Nós tratamos de tudo</span>" },
+  hero_sub: { en: "Fixed written quote and weekly photo updates — even if you live abroad.", pt: "Orçamento escrito e fechado, fotos todas as semanas — mesmo que viva no estrangeiro." },
+  hero_btn1: { en: "Get a Free Project Assessment", pt: "Pedir Avaliação Gratuita" },
+  hero_btn2: { en: "Calculate the cost in 30 seconds", pt: "Calcular o custo em 30 segundos" },
   trust1: { en: 'Fixed written quote — no hidden extras', pt: 'Orçamento escrito e fechado — sem extras' },
   trust2: { en: 'English &amp; Portuguese project manager', pt: 'Gestor de projeto em PT e EN' },
   trust3: { en: 'Weekly photo &amp; video updates', pt: 'Fotos e vídeos todas as semanas' },
-  trust4: { en: 'IMPIC-licensed &amp; insured', pt: 'Licenciados IMPIC e segurados' },
+  trust4: { en: "IMPIC licence 115511 &amp; insured", pt: "Alvará IMPIC 115511 e seguro" },
   calc_label: { en: 'Cost Calculator', pt: 'Calculadora de Custos' },
   calc_title: { en: 'What Will Your Project Cost? Find Out in 30 Seconds', pt: 'Quanto Vai Custar a Sua Obra? Descubra em 30 Segundos' },
   calc_sub: { en: 'Three quick questions — no email needed. You get an indicative price range and timeline for Northern Portugal.', pt: 'Três perguntas rápidas — sem pedir email. Recebe um intervalo de preço indicativo e o prazo para o Norte de Portugal.' },
@@ -1553,15 +1806,15 @@ const T = {
   // SERVICES
   svc1_label: { en: 'Renovation & New Build', pt: 'Renovação & Construção Nova' },
   svc1_title: { en: 'Your Property, Transformed From Foundation to Finish', pt: 'A Sua Propriedade, Transformada da Fundação ao Acabamento' },
-  svc1_desc: { en: 'Whether you\'re restoring a rural quinta or building a contemporary townhouse, we manage the entire process — structural work, plumbing, electrics, kitchens, bathrooms, and finishing. Every step documented, every decision yours.', pt: 'Quer esteja a restaurar uma quinta rural ou a construir uma moradia contemporânea, gerimos todo o processo — obra estrutural, canalização, eletricidade, cozinhas, casas de banho e acabamentos. Cada etapa documentada, cada decisão sua.' },
+  svc1_desc: { en: "<li>Full renovations and new builds</li><li>Structure, plumbing and electrics</li><li>Kitchens, bathrooms and finishing</li><li>Every step documented — every decision yours</li>", pt: "<li>Remodelações completas e construção nova</li><li>Estrutura, canalização e eletricidade</li><li>Cozinhas, casas de banho e acabamentos</li><li>Cada etapa documentada — cada decisão é sua</li>" },
   svc1_btn: { en: 'Request a Site Visit', pt: 'Solicitar Visita ao Local' },
   svc2_label: { en: 'Pools & Outdoor Living', pt: 'Piscinas & Espaços Exteriores' },
   svc2_title: { en: 'Pools Built to Last Under the Portuguese Sun', pt: 'Piscinas Construídas Para Durar Sob o Sol Português' },
-  svc2_desc: { en: 'From infinity edges overlooking the Douro Valley to mosaic-tiled family pools in Aveiro, we handle design, excavation, tiling, decking, and all technical installations. Turnkey delivery, no subcontractor surprises.', pt: 'De bordas infinitas com vista para o Vale do Douro a piscinas familiares com mosaico em Aveiro, tratamos do design, escavação, revestimento, deck e todas as instalações técnicas. Entrega chave-na-mão, sem surpresas.' },
+  svc2_desc: { en: "<li>Design, excavation, tiling and decking</li><li>All technical installations included</li><li>Infinity edges and mosaic finishes</li><li>Turnkey — no subcontractor surprises</li>", pt: "<li>Projeto, escavação, revestimento e deck</li><li>Todas as instalações técnicas incluídas</li><li>Bordas infinitas e acabamentos em mosaico</li><li>Chave na mão — sem surpresas de subempreiteiros</li>" },
   svc2_btn: { en: 'Get a Pool Estimate', pt: 'Pedir Orçamento de Piscina' },
   svc3_label: { en: 'Roofing & Infrastructure', pt: 'Coberturas & Infraestruturas' },
   svc3_title: { en: 'Protecting Your Investment From the Top Down', pt: 'Proteger o Seu Investimento De Cima Para Baixo' },
-  svc3_desc: { en: 'Roof repairs and replacements with traditional terracotta or modern materials. Plus foundations, retaining walls, drainage systems, septic installations, and waterproofing — the unseen work that keeps everything standing.', pt: 'Reparação e substituição de telhados com telha tradicional ou materiais modernos. Além de fundações, muros de contenção, sistemas de drenagem, fossas sépticas e impermeabilização — o trabalho invisível que mantém tudo de pé.' },
+  svc3_desc: { en: "<li>Roof repairs and replacements</li><li>Traditional terracotta or modern materials</li><li>Foundations, retaining walls and drainage</li><li>Septic systems and waterproofing</li>", pt: "<li>Reparação e substituição de telhados</li><li>Telha tradicional ou materiais modernos</li><li>Fundações, muros de suporte e drenagem</li><li>Fossas sépticas e impermeabilização</li>" },
   svc3_btn: { en: 'Schedule an Inspection', pt: 'Agendar Inspeção' },
 
   // CARE PLANS TEASER
@@ -1922,8 +2175,7 @@ function toggleLang() { setLang(currentLang === 'en' ? 'pt' : 'en'); }
 function applyFor(position) {
   document.getElementById('a_position').value = position;
   editApplication();
-  const el = document.getElementById('apply');
-  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+  showPage('careers', 'apply');
   setTimeout(() => document.getElementById('a_name').focus({ preventScroll: true }), 500);
 }
 function crOpt(id) {
@@ -2034,6 +2286,43 @@ async function submitEstimate(e) {
   form.hidden = true;
   document.getElementById('estDone').hidden = false;
 }
+// BTS Resolve — small repair request (same CRM list, marked "BTS Resolve")
+async function submitResolve(e) {
+  e.preventDefault();
+  if (document.getElementById('r_website').value) return;
+  const pt = currentLang === 'pt';
+  const val = id => document.getElementById(id).value.trim();
+  const rows = [
+    [pt ? 'Nome' : 'Name', val('r_name')],
+    [pt ? 'Telefone' : 'Phone', val('r_phone')],
+    [pt ? 'Local' : 'Location', val('r_place')],
+    [pt ? 'Problema' : 'Problem', val('r_desc')]
+  ].filter(r => r[1]);
+  const text = ['BTS Resolve', '', ...rows.map(r => r[0] + ': ' + r[1])].join('\n');
+  document.getElementById('rsWa').href = 'https://wa.me/351913965533?text=' + encodeURIComponent(text);
+
+  const form = document.getElementById('rsForm');
+  let saved = false;
+  if (sb) {
+    form.classList.add('sending');
+    try {
+      const id = uuid();
+      const photos = await uploadFiles('leads/' + id, document.getElementById('r_photos').files, 5);
+      const now = Date.now();
+      const { error } = await sb.from('leads').insert({
+        id, name: val('r_name'), phone: val('r_phone'), location: val('r_place'),
+        service: 'BTS Resolve', description: val('r_desc'), photo_paths: photos,
+        source: 'Website', stage: 'new', lang: currentLang, consent: true, created_at: now, updated_at: now
+      });
+      if (error) throw error;
+      saved = true;
+    } catch (err) { console.error('Resolve request save failed', err); }
+    form.classList.remove('sending');
+  }
+  setDone('rsDone', saved ? 'rs_sent_t' : 'est_done_t', saved ? 'rs_sent_d' : 'est_done_d');
+  form.hidden = true;
+  document.getElementById('rsDone').hidden = false;
+}
 function editEstimate() {
   document.getElementById('contactForm').hidden = false;
   document.getElementById('estDone').hidden = true;
@@ -2091,7 +2380,7 @@ function selectByKey(selectId, key) {
 function goEstimate(serviceKey) {
   showPage('home', 'contact');
   editEstimate();
-  if (serviceKey) selectByKey('c_service', serviceKey);
+  if (serviceKey) { selectByKey('c_service', serviceKey); document.getElementById('formMore').open = true; }
 }
 
 // ── Cost calculator ──
@@ -2256,6 +2545,11 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 function closeMenu() { mobileMenu.classList.remove('open'); }
+const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers' };
+function routeHash() { const pg = HASH_PAGES[location.hash]; if (pg) showPage(pg); }
+window.addEventListener('hashchange', routeHash);
+routeHash();
+if (window.innerWidth > 768) document.getElementById('formMore').open = true;
 
 // Show mobile lang toggle
 if (window.innerWidth <= 1024) document.getElementById('langToggleMobile').style.display = 'block';
@@ -2270,8 +2564,8 @@ let aiMode = null;          // 'gemini' = the site's own server (/api/chat), 'cl
 const aiTurns = [];         // plain transcript (for the WhatsApp hand-off)
 const aiGem = [];           // Gemini conversation (text, function calls and results)
 const AI_CHIPS = {
-  en: ['How much does a kitchen renovation cost?', 'I live abroad — how does it work?', 'Which care plan suits a holiday home?', 'Are you hiring?'],
-  pt: ['Quanto custa remodelar uma cozinha?', 'Vivo no estrangeiro — como funciona?', 'Que plano serve para uma casa de férias?', 'Estão a recrutar?']
+  en: [['Renovation', 'I want to renovate a property. What are the first steps and what does it cost?'], ['Small repair', { page: 'resolve' }], ['Maintenance plan', 'Which care plan suits my property?'], ['I live abroad', 'I live abroad — how does it work?'], ['Jobs', 'Are you hiring?']],
+  pt: [['Remodelação', 'Quero remodelar um imóvel. Quais são os primeiros passos e quanto custa?'], ['Pequena reparação', { page: 'resolve' }], ['Plano de manutenção', 'Que plano de manutenção serve para o meu imóvel?'], ['Vivo no estrangeiro', 'Vivo no estrangeiro — como funciona?'], ['Emprego', 'Estão a recrutar?']]
 };
 const AI_COPY = {
   en: { thinking: 'Thinking…', off: 'The AI assistant is not available here. Please use the form or WhatsApp.', busy: 'Too many questions right now — please try again in a minute.', refused: 'I can\'t help with that one. Please contact our team on WhatsApp.', error: 'Something went wrong. Please try again, or message us on WhatsApp.', formDone: 'Form opened and pre-filled', jobDone: 'Job application opened', shown: 'Showing: ' },
@@ -2295,6 +2589,7 @@ const AI_COPY = {
 function aiEnable() {
   document.getElementById('aiFab').hidden = false;
   document.getElementById('footerAi').hidden = false;
+  document.querySelectorAll('.ai-entry').forEach(el => { el.hidden = false; });
   aiRenderChips();
 }
 function aiToggle(open) {
@@ -2302,17 +2597,20 @@ function aiToggle(open) {
   const show = open === undefined ? panel.hidden : open;
   panel.hidden = !show;
   document.getElementById('aiFab').hidden = show || !aiMode;
-  if (show) setTimeout(() => document.getElementById('aiText').focus(), 50);
+  if (show && window.innerWidth > 768) setTimeout(() => document.getElementById('aiText').focus(), 50);
 }
 function aiRenderChips() {
   const box = document.getElementById('aiChips');
   if (!box) return;
   box.hidden = aiTurns.length > 0;
   box.innerHTML = '';
-  (AI_CHIPS[currentLang] || AI_CHIPS.en).forEach(q => {
+  (AI_CHIPS[currentLang] || AI_CHIPS.en).forEach(([label, act]) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'ai-chip'; b.textContent = q;
-    b.onclick = () => { if (!aiBusy) aiAsk(q); };
+    b.type = 'button'; b.className = 'ai-chip'; b.textContent = label;
+    b.onclick = () => {
+      if (typeof act === 'string') { if (!aiBusy) aiAsk(act); }
+      else { aiToggle(false); showPage(act.page); }
+    };
     box.appendChild(b);
   });
 }
@@ -2428,7 +2726,7 @@ function aiOpenJob(i) {
   return 'The job application form is open and pre-filled with what the visitor gave. They complete it, tick consent and send it.';
 }
 function aiShow(i) {
-  const map = { calculator: ['home', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['home', 'careers'], contact: ['home', 'contact'], faq: ['home', 'faq'] };
+  const map = { calculator: ['home', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['careers'], contact: ['home', 'contact'], faq: ['home', 'faq'] };
   const target = map[i.section];
   if (!target) throw new Error('Unknown section');
   showPage(target[0], target[1]);
@@ -2629,6 +2927,14 @@ function buildFAQ() {
     el.innerHTML = `<button onclick="this.parentElement.classList.toggle('faq-open');this.querySelector('svg').style.transform=this.parentElement.classList.contains('faq-open')?'rotate(45deg)':'';const c=this.nextElementSibling;c.style.maxHeight=this.parentElement.classList.contains('faq-open')?c.scrollHeight+'px':'0'" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--surface);border:none;cursor:pointer;font-family:var(--font-body);font-size:0.9rem;font-weight:600;color:var(--text);text-align:left;gap:12px;"><span>${f.q}</span><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><path d="M12 5v14m-7-7h14"/></svg></button><div style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;"><div style="padding:0 20px 16px;font-size:0.88rem;color:var(--text-soft);line-height:1.7;">${f.a}</div></div>`;
     list.appendChild(el);
   });
+  const items = Array.from(list.children);
+  if (items.length > 5 && !window.faqAll) {
+    items.slice(5).forEach(x => { x.hidden = true; });
+    const more = document.createElement('button');
+    more.type = 'button'; more.className = 'faq-more'; more.textContent = T.faq_more[currentLang];
+    more.onclick = () => { window.faqAll = true; buildFAQ(); };
+    list.appendChild(more);
+  }
 }
 
 // SP FAQ
