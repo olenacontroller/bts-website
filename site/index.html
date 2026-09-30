@@ -673,6 +673,23 @@ html { scroll-behavior: smooth; }
 .rs-price p, .rs-price .rs-area { color: var(--text-soft); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .footer-logo { filter: brightness(0) invert(1); } }
 :root[data-theme="dark"] .footer-logo { filter: brightness(0) invert(1); }
+
+/* ── AI greeter ── */
+.ai-fab { display: none !important; }
+.ai-buddy { position: fixed; left: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 90; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+body.footer-in-view .ai-buddy { display: none !important; }
+.ai-buddy-btn { position: relative; width: 62px; height: 62px; border-radius: 50%; border: 2px solid var(--blue-light); background: #fff; cursor: pointer; padding: 5px; box-shadow: 0 8px 26px rgba(0,40,80,0.22); animation: buddyBob 3.2s ease-in-out infinite; }
+.ai-buddy-btn svg { width: 100%; height: 100%; display: block; }
+.ai-buddy-tag { position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); white-space: nowrap; font-family: var(--font-body); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; background: #0072B0; border-radius: 9px; padding: 2px 8px; }
+.ai-buddy-eyes { transform-origin: 32px 44px; animation: buddyBlink 4.5s infinite; }
+.ai-buddy-bubble { position: relative; max-width: 230px; background: #fff; border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; box-shadow: 0 10px 30px rgba(0,40,80,0.2); padding: 12px 30px 12px 14px; animation: buddyPop 0.35s ease-out; }
+.ai-buddy-text { font-family: var(--font-body); font-size: 0.86rem; line-height: 1.4; color: #333; text-align: left; background: none; border: none; padding: 0; cursor: pointer; }
+.ai-buddy-x { position: absolute; top: 4px; right: 6px; width: 24px; height: 24px; font-size: 1.15rem; line-height: 1; color: #6B7280; background: none; border: none; cursor: pointer; }
+@keyframes buddyBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes buddyBlink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+@keyframes buddyPop { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ai-buddy-btn, .ai-buddy-eyes, .ai-buddy-bubble { animation: none; } }
+@media (max-width: 768px) { .ai-buddy { left: 14px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); } .ai-buddy-btn { width: 56px; height: 56px; } .ai-buddy-bubble { max-width: 210px; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1768,6 +1785,26 @@ html { scroll-behavior: smooth; }
   <a class="ai-human" id="aiHuman" href="https://wa.me/351913965533" target="_blank" rel="noopener" data-i18n="ai_human">Talk to a person on WhatsApp →</a>
 </section>
 
+<!-- AI greeter: a small helper that says hello on the first screen -->
+<div class="ai-buddy" id="aiBuddy" hidden>
+  <div class="ai-buddy-bubble" id="aiBuddyBubble" hidden>
+    <button type="button" class="ai-buddy-x" onclick="buddyDismiss()" aria-label="Close">&times;</button>
+    <button type="button" class="ai-buddy-text" onclick="aiToggle(true)" data-i18n="buddy_text">Hi! I'm the BTS assistant. Ask me about prices, timing or a repair.</button>
+  </div>
+  <button type="button" class="ai-buddy-btn" onclick="aiToggle(true)" aria-label="Ask the AI assistant">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="11" cy="45" r="4" fill="#00A8CC"/><circle cx="53" cy="45" r="4" fill="#00A8CC"/>
+      <rect x="13" y="30" width="38" height="27" rx="12" fill="#fff" stroke="#0072B0" stroke-width="2.5"/>
+      <path d="M12 31a20 20 0 0140 0z" fill="#F5B800"/>
+      <rect x="29" y="9" width="6" height="13" rx="3" fill="#DDA300"/>
+      <rect x="7" y="29" width="50" height="5.5" rx="2.75" fill="#DDA300"/>
+      <g class="ai-buddy-eyes" fill="#00457C"><circle cx="25" cy="44" r="3"/><circle cx="39" cy="44" r="3"/></g>
+      <path d="M26 50q6 4.5 12 0" fill="none" stroke="#00457C" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="ai-buddy-tag" data-i18n="ai_fab">Ask AI</span>
+  </button>
+</div>
+
 <div class="fab-stack">
 <button type="button" class="ai-fab" id="aiFab" onclick="aiToggle()" hidden>
   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.9 9.9 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
@@ -1782,6 +1819,7 @@ html { scroll-behavior: smooth; }
 let currentLang = 'en';
 
 const T = {
+  buddy_text: { en: "Hi! I'm the BTS assistant. Ask me about prices, timing or a repair.", pt: "Olá! Sou o assistente da BTS. Pergunte-me sobre preços, prazos ou uma reparação." },
   need_title: { en: "What do you need?", pt: "De que precisa?" },
   need1_t: { en: "Fix something now", pt: "Resolver um problema já" },
   need1_d: { en: "Small repairs and urgent property problems.", pt: "Pequenas reparações e problemas urgentes." },
@@ -2657,13 +2695,27 @@ function aiEnable() {
   document.getElementById('aiFab').hidden = false;
   document.getElementById('footerAi').hidden = false;
   document.querySelectorAll('.ai-entry').forEach(el => { el.hidden = false; });
+  document.getElementById('aiBuddy').hidden = false;
+  let seen = false;
+  try { seen = localStorage.getItem('btsBuddy') === '1'; } catch (err) { /* storage blocked */ }
+  if (!seen) setTimeout(() => {
+    if (!document.getElementById('aiPanel').hidden) return;
+    document.getElementById('aiBuddyBubble').hidden = false;
+    if (window.innerWidth <= 768) setTimeout(() => { document.getElementById('aiBuddyBubble').hidden = true; }, 12000);
+  }, 2500);
   aiRenderChips();
+}
+function buddyDismiss() {
+  document.getElementById('aiBuddyBubble').hidden = true;
+  try { localStorage.setItem('btsBuddy', '1'); } catch (err) { /* storage blocked */ }
 }
 function aiToggle(open) {
   const panel = document.getElementById('aiPanel');
   const show = open === undefined ? panel.hidden : open;
   panel.hidden = !show;
   document.getElementById('aiFab').hidden = show || !aiMode;
+  document.getElementById('aiBuddy').hidden = show || !aiMode;
+  if (show) buddyDismiss();
   if (show && window.innerWidth > 768) setTimeout(() => document.getElementById('aiText').focus(), 50);
 }
 function aiRenderChips() {
