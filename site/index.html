@@ -621,6 +621,56 @@ html { scroll-behavior: smooth; }
   .ai-chips { gap: 8px; }
   .ai-chip { font-size: 0.9rem; padding: 10px 14px; border-radius: 18px; }
 }
+
+/* ── Light, clean surfaces (no dark-blue bands) ── */
+.nav-cta { background: var(--blue-mid) !important; }
+.ai-fab, .ai-head { background: #0072B0; }
+.cta-band { background: var(--page-bg); color: var(--text); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.cta-band h2 { color: var(--text); }
+.cta-band p { color: var(--text-soft); }
+.cta-card { background: var(--surface); border-color: var(--border); box-shadow: 0 4px 18px rgba(0,40,80,0.06); }
+.cta-card h3 { color: var(--text); }
+.cta-card h3::before { background: var(--blue-light); }
+.cta-card p { color: var(--text-soft); }
+.cta-card .btn-outline, .rs-call { color: var(--blue-deep); border-color: var(--border); }
+.cta-card .btn-outline:hover, .rs-call:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
+.footer { background: var(--surface-alt); color: var(--text-soft); border-top: 1px solid var(--border); }
+.footer-logo { filter: none; }
+.footer-contacts { color: var(--text-soft); }
+.footer-contacts svg { color: var(--blue-mid); }
+.footer-ai { border-color: var(--border); background: var(--surface); color: var(--blue-deep); }
+.footer-ai:hover { background: var(--surface); border-color: var(--blue-mid); }
+.footer h4 { color: var(--text); }
+.footer a { color: var(--text-soft); }
+.footer a:hover { color: var(--blue-mid); }
+.footer-bottom { border-top-color: var(--border); color: var(--text-soft); }
+.legal-cta { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
+.legal-cta p { color: var(--text-soft) !important; }
+.legal-cta strong { color: var(--text); }
+.legal-cta .btn { background: var(--blue-light); color: #00395E; }
+.legal-cta .btn:hover { background: var(--blue-light); }
+.cr-apply-side { background: var(--surface-alt); color: var(--text); }
+.cr-apply-side h3 { color: var(--text); }
+.cr-apply-side > p { color: var(--text-soft); }
+.cr-steps li { color: var(--text-soft); }
+.cr-steps li::before { border-color: var(--blue-mid); color: var(--blue-mid); }
+.cr-steps strong { color: var(--text); }
+.cr-side-contact { border-top-color: var(--border); color: var(--text-soft); }
+.cr-side-contact b { color: var(--text); }
+.need-hot { background: var(--highlight-bg); border-color: var(--blue-light); color: var(--text); }
+.need-hot .need-txt small { color: var(--text-soft); }
+.need-hot .need-ico { background: var(--blue-light); color: #00395E; }
+.need-hot .need-arrow { color: var(--blue-mid); }
+.rs-hero { background: var(--surface-alt); color: var(--text); border-bottom: 1px solid var(--border); }
+.rs-eyebrow, .rs-hero h1 span { color: var(--blue-mid); }
+.rs-hero p, .rs-trust { color: var(--text-soft); }
+.rs-dark { background: var(--surface-alt); color: var(--text); }
+.rs-dark .section-title { color: var(--text); }
+.rs-price { background: var(--surface); border-color: var(--border); }
+.rs-price b { color: var(--text); }
+.rs-price p, .rs-price .rs-area { color: var(--text-soft); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .footer-logo { filter: brightness(0) invert(1); } }
+:root[data-theme="dark"] .footer-logo { filter: brightness(0) invert(1); }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -778,11 +828,11 @@ html { scroll-behavior: smooth; }
 </div>
 </section>
 
-<section class="section" style="background:var(--band);color:#fff;text-align:center;">
+<section class="section" style="background:var(--surface-alt);text-align:center;">
   <div class="wrap" style="max-width:700px;">
     <div class="section-label" data-i18n="care_label">Property Care</div>
-    <h2 class="section-title" style="color:#fff;" data-i18n="care_title">HomeCare Subscription Plans</h2>
-    <p style="color:rgba(255,255,255,0.7);margin:0 auto 28px;font-size:0.95rem;" data-i18n="care_sub">Regular inspections, preventive maintenance, and emergency response for real estate owners who aren't always on the ground. Three tiers from €99/month.</p>
+    <h2 class="section-title" data-i18n="care_title">HomeCare Subscription Plans</h2>
+    <p style="color:var(--text-soft);margin:0 auto 28px;font-size:0.95rem;" data-i18n="care_sub">Regular inspections, preventive maintenance, and emergency response for real estate owners who aren't always on the ground. Three tiers from €99/month.</p>
     <a onclick="showPage('services')" class="btn btn-primary" style="cursor:pointer;" data-i18n="care_btn">View Care Plans & Pricing</a>
   </div>
 </section>
@@ -842,23 +892,23 @@ html { scroll-behavior: smooth; }
       <div class="cta-card">
         <h3 data-i18n="cta2_title">Video Site Assessment</h3>
         <p data-i18n="cta2_desc">Abroad? Walk us through your property on a video call and get a written scope and price range — without flying in.</p>
-        <a href="#contact" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;border-color:rgba(255,255,255,0.2);" data-i18n="cta2_btn">Book a Call</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;" data-i18n="cta2_btn">Book a Call</a>
       </div>
       <div class="cta-card">
         <h3 data-i18n="cta3_title">IMPIC Licensed</h3>
         <p data-i18n="cta3_desc">Fully registered under Portuguese construction law. Your project is protected by proper licensing and insurance.</p>
-        <a href="#about" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;border-color:rgba(255,255,255,0.2);" data-i18n="cta3_btn">Learn More</a>
+        <a href="#about" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;" data-i18n="cta3_btn">Learn More</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="projects" style="background:var(--band);color:#fff;">
+<section class="section" id="projects" style="background:var(--surface-alt);">
   <div class="wrap">
     <div style="text-align:center;">
       <div class="section-label" data-i18n="proj_label">Our Work</div>
-      <h2 class="section-title" style="color:#fff;" data-i18n="proj_title">Real Projects, Real Transformations</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.65);margin:0 auto 8px;" data-i18n="proj_sub">Drag the slider to see the transformation. Every project shown was completed by our team.</p>
+      <h2 class="section-title" data-i18n="proj_title">Real Projects, Real Transformations</h2>
+      <p class="section-sub" style="margin:0 auto 8px;" data-i18n="proj_sub">Drag the slider to see the transformation. Every project shown was completed by our team.</p>
     </div>
     <div class="ba-container">
       <div class="ba-slider">
@@ -1318,10 +1368,10 @@ html { scroll-behavior: smooth; }
 </section>
 
 <!-- SP CTA -->
-<section class="section" style="background:var(--band);color:#fff;text-align:center;">
+<section class="section" style="background:var(--surface-alt);text-align:center;">
   <div class="wrap" style="max-width:600px;">
-    <h2 class="section-title" style="color:#fff;" data-i18n="sp_cta_title">Ready to Protect Your Investment?</h2>
-    <p style="color:rgba(255,255,255,0.7);margin-bottom:28px;font-size:0.95rem;" data-i18n="sp_cta_sub">Tell us about your property and we'll recommend the right plan. No obligation.</p>
+    <h2 class="section-title" data-i18n="sp_cta_title">Ready to Protect Your Investment?</h2>
+    <p style="color:var(--text-soft);margin-bottom:28px;font-size:0.95rem;" data-i18n="sp_cta_sub">Tell us about your property and we'll recommend the right plan. No obligation.</p>
     <a onclick="goEstimate('f_opt_care')" class="btn btn-primary" style="cursor:pointer;" data-i18n="sp_cta_btn">Get My Plan Recommendation</a>
   </div>
 </section>
