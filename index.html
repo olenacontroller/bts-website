@@ -676,9 +676,9 @@ html { scroll-behavior: smooth; }
 
 /* ── AI greeter ── */
 .ai-fab { display: none !important; }
-.ai-buddy { position: fixed; left: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 90; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.ai-buddy { position: fixed; left: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 90; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 body.footer-in-view .ai-buddy { display: none !important; }
-.ai-buddy-btn { display: block; width: 92px; height: auto; border: none; background: none; padding: 0; cursor: pointer; filter: drop-shadow(0 6px 16px rgba(0,80,160,0.28)); animation: buddyBob 3.2s ease-in-out infinite; }
+.ai-buddy-btn { display: block; width: 57px; height: auto; border: none; background: none; padding: 0; cursor: pointer; filter: drop-shadow(0 6px 16px rgba(0,80,160,0.28)); animation: buddyBob 3.2s ease-in-out infinite; }
 .ai-buddy-btn img { display: block; width: 100%; height: auto; }
 .ai-buddy-eyes { transform-origin: 32px 44px; animation: buddyBlink 4.5s infinite; }
 .ai-buddy-bubble { position: relative; max-width: 230px; background: #fff; border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; box-shadow: 0 10px 30px rgba(0,40,80,0.2); padding: 12px 30px 12px 14px; animation: buddyPop 0.35s ease-out; }
@@ -690,7 +690,7 @@ body.footer-in-view .ai-buddy { display: none !important; }
 .ai-buddy-wave { animation: buddyWave 0.8s ease-in-out infinite; transform-origin: 0 0; }
 @keyframes buddyPop { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ai-buddy-btn, .ai-buddy-eyes, .ai-buddy-bubble { animation: none; } }
-@media (max-width: 768px) { .ai-buddy { left: 14px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); } .ai-buddy-btn { width: 78px; } .ai-buddy-bubble { max-width: 210px; } }
+@media (max-width: 768px) { .ai-buddy { left: 16px; } .ai-buddy-bubble { max-width: 210px; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
