@@ -2779,12 +2779,13 @@ function aiKnowledgeBuild() {
     '## Why clients choose us\n' + txt('#about', 2500),
     '## Frequently asked questions\n' + faq,
     '## HomeCare subscription plans (full guide)\n' + txt('#page-services', 15000),
-    '## Careers (open vacancies)\n' + txt('#careers .cr-jobs', 4000)
+    '## Careers (open vacancies)\n' + txt('#careers .cr-jobs', 4000),
+    '## BTS Resolve (small repairs service)\n' + txt('#page-resolve', 3000)
   ].join('\n\n');
 }
 function aiRules() {
   const toolRules = aiTools
-    ? '- For any price question call estimate_cost (ask one short question first if the project type or size is unclear) and give the range it returns.\n- When the visitor wants a quote, a site visit or to be contacted: ask for their name and phone or email (and property location if unknown), then call open_estimate_form with what they told you. Then tell them to check the form, tick the consent box and press Send.\n- For job questions, explain the vacancy; if they want to apply, call open_job_application.\n- Use show_section when it helps the visitor to see something on the page.\n'
+    ? '- Small repairs and fixes are the BTS Resolve service: a leak (bathroom, kitchen, pipe, roof), a dripping tap, a blocked drain, a broken toilet, a socket or light that does not work, a fuse problem, broken roof tiles or gutters, a damp stain, painting a wall or ceiling, a door or window that sticks, broken tiles, small garden work, or any other maintenance job. For these NEVER call estimate_cost and NEVER give any euro amount or price range. Say the price depends on the problem and BTS confirms it after seeing photos, before any work starts. Ask the visitor to send a photo on WhatsApp +351 91 396 55 33 or to use the form on the BTS Resolve page (call show_section with section resolve). Resolve areas: Douro Valley, Aveiro, Porto.\n- Call estimate_cost only for whole projects: a full renovation, a completely new kitchen or bathroom, a new roof, a pool, a new house or a facade. Give the range it returns. If it is unclear whether the visitor needs a repair or a whole project, ask one short question first (for example: is it a repair, or a complete renovation?).\n- When the visitor wants a quote, a site visit or to be contacted: ask for their name and phone or email (and property location if unknown), then call open_estimate_form with what they told you. Then tell them to check the form, tick the consent box and press Send.\n- For job questions, explain the vacancy; if they want to apply, call open_job_application.\n- Use show_section when it helps the visitor to see something on the page.\n'
     : '- For prices, point the visitor to the cost calculator on the page and to a free site visit; do not invent numbers.\n';
   return 'You are the assistant on the website of BTS (Blame The Stars, Lda.), a construction and renovation company in Northern Portugal. You chat with website visitors.\n' +
     'Rules:\n' +
@@ -2837,7 +2838,7 @@ function aiOpenJob(i) {
   return 'The job application form is open and pre-filled with what the visitor gave. They complete it, tick consent and send it.';
 }
 function aiShow(i) {
-  const map = { calculator: ['home', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['careers'], contact: ['home', 'contact'], faq: ['home', 'faq'] };
+  const map = { calculator: ['home', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['careers'], contact: ['home', 'contact'], faq: ['home', 'faq'], resolve: ['resolve'] };
   const target = map[i.section];
   if (!target) throw new Error('Unknown section');
   showPage(target[0], target[1]);
@@ -2847,7 +2848,7 @@ function aiShow(i) {
 function aiToolList() {
   return [
     { name: 'estimate_cost',
-      description: 'Indicative price range in EUR (VAT excluded) and typical duration for a project in Northern Portugal, from the same table as the website cost calculator. Returns {low_eur, high_eur, weeks_min, weeks_max}.',
+      description: 'Indicative price range in EUR (VAT excluded) and typical duration for a project in Northern Portugal, from the same table as the website cost calculator. ONLY for whole projects, never for repairs or small jobs (those are BTS Resolve, no price before photos). Returns {low_eur, high_eur, weeks_min, weeks_max}.',
       inputSchema: { type: 'object', properties: {
         type: { type: 'string', enum: Object.keys(CALC_TYPES), description: 'renovation = full interior renovation of a house or flat; newbuild = new house; facade = facade and exterior' },
         area_m2: { type: 'number', description: 'Area in m² — for renovation, newbuild, roof, facade' },
@@ -2868,7 +2869,7 @@ function aiToolList() {
       execute: i => aiOpenJob(i) },
     { name: 'show_section',
       description: 'Scrolls the website to a section so the visitor can see it.',
-      inputSchema: { type: 'object', properties: { section: { type: 'string', enum: ['calculator', 'care_plans', 'projects', 'careers', 'contact', 'faq'] } }, required: ['section'] },
+      inputSchema: { type: 'object', properties: { section: { type: 'string', enum: ['calculator', 'care_plans', 'projects', 'careers', 'contact', 'faq', 'resolve'] } }, required: ['section'] },
       execute: i => aiShow(i) }
   ];
 }
