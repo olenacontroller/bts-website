@@ -721,6 +721,24 @@ body.footer-in-view .ai-buddy { display: none !important; }
 .works-cta .section-title { margin-bottom: 24px; }
 @media (max-width: 900px) { .dirs-grid { grid-template-columns: 1fr; max-width: 520px; } .why-grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; } }
 @media (max-width: 600px) { .dirs, .why { padding: 56px 16px; } .dir-card img { height: 170px; } }
+
+/* ── Muted palette: white, warm light grey, graphite ── */
+:root {
+  --blue-deep: #2F3840; --blue-mid: #4E5A64; --blue-light: #3F4A54; --blue-pale: #F2F1EE;
+  --band: #3F4A54; --midnight: #2F3840; --midnight-soft: #262D33;
+  --brass: #8C8379; --brass-light: #A39B91; --brass-dim: #5F5850;
+  --page-bg: #FFFFFF; --surface: #FFFFFF; --surface-alt: #F6F5F2; --drift: #F6F5F2;
+  --text: #2B2B2B; --text-soft: #6E6A64; --mist: #6E6A64;
+  --border: #E4E1DB; --section-border: #E4E1DB;
+  --shadow: rgba(40,36,30,0.05); --shadow-md: rgba(40,36,30,0.09);
+  --highlight-bg: rgba(63,74,84,0.05);
+}
+.btn-primary { background: var(--blue-light); color: #fff; }
+.btn-primary:hover { background: var(--blue-deep); }
+.hero-content h1 span { color: #F4EFE6; }
+.cta-card h3::before { background: var(--brass); }
+.need-hot .need-ico, .legal-cta .btn { color: #fff; }
+.ai-fab, .ai-head { background: var(--band); }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
