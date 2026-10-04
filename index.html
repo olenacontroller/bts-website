@@ -749,6 +749,27 @@ body.footer-in-view .ai-buddy { display: none !important; }
   .hero-photo::after { display: none; }
   .hero-content h1, .hero-content h1 span { color: var(--text); text-shadow: none; }
 }
+
+/* ── First screen: calm background, photo floats in ── */
+.hero { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr); grid-template-areas: "text pic" "btns pic"; grid-template-rows: auto 1fr; column-gap: 56px; align-items: start; min-height: 0 !important; max-width: 1240px; margin: 0 auto; padding: 150px 32px 40px; background: var(--page-bg); overflow: visible; }
+.hero-photo { display: none; }
+.hero-content { grid-area: text; text-align: left; margin: 0; max-width: none; align-self: end; }
+.hero-content h1, .hero-content h1 span { color: var(--text); text-shadow: none; }
+.hero-content h1 { margin-bottom: 28px; }
+.hero-btns { grid-area: btns; position: static; justify-content: flex-start; padding: 0; }
+.hero-btns .btn-primary { box-shadow: none; }
+.hero-pic { grid-area: pic; align-self: center; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(40,36,30,0.14); animation: heroRise 1.3s cubic-bezier(.2,.7,.2,1) both; }
+.hero-pic img { display: block; width: 100%; height: auto; filter: saturate(0.5) brightness(1.04) contrast(0.94); animation: heroDrift 9s ease-out both; }
+@keyframes heroRise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+@keyframes heroDrift { from { transform: scale(1.08); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .hero-pic, .hero-pic img { animation: none; } }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; grid-template-areas: "text" "pic" "btns"; grid-template-rows: auto; row-gap: 28px; padding: 112px 16px 24px; }
+  .hero-content { text-align: center; }
+  .hero-content h1 { margin-bottom: 0; }
+  .hero-btns { justify-content: center; flex-direction: column; align-items: stretch; }
+  .hero-btns .btn { justify-content: center; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -824,6 +845,7 @@ body.footer-in-view .ai-buddy { display: none !important; }
   <div class="hero-btns">
     <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1">Get a Free Project Assessment</a>
   </div>
+  <div class="hero-pic"><img src="img/hero-house.jpg" alt="White house with a garden above the Douro valley" width="1672" height="941" fetchpriority="high"></div>
 </section>
 
 
