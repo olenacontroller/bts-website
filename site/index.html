@@ -739,6 +739,16 @@ body.footer-in-view .ai-buddy { display: none !important; }
 .cta-card h3::before { background: var(--brass); }
 .need-hot .need-ico, .legal-cta .btn { color: #fff; }
 .ai-fab, .ai-head { background: var(--band); }
+
+/* ── Muted photos: same calm tone on every page ── */
+.hero-photo { filter: saturate(0.5) brightness(1.04) contrast(0.94); }
+.hero-photo::after { background: linear-gradient(180deg, rgba(34,31,28,0.34) 0%, rgba(34,31,28,0.16) 30%, rgba(34,31,28,0.06) 55%, rgba(34,31,28,0.30) 100%); }
+.dir-card img, .gallery-card img, .service-img img, .ba-slider { filter: saturate(0.7); }
+@media (max-width: 600px) {
+  .hero-photo { background: url('img/hero-house.jpg') center calc(100% - 132px)/100% auto no-repeat, var(--surface-alt); }
+  .hero-photo::after { display: none; }
+  .hero-content h1, .hero-content h1 span { color: var(--text); text-shadow: none; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
