@@ -699,6 +699,28 @@ body.footer-in-view .ai-buddy { display: none !important; }
 @media (max-width: 600px) {
   .hero-photo { background: linear-gradient(180deg, transparent calc(100% - 132px - 56.28vw - 1px), #3385E0 calc(100% - 132px - 56.28vw), rgba(51,133,224,0) calc(100% - 132px - 56.28vw + 44px)), url('img/hero-house.jpg') center calc(100% - 132px)/100% auto no-repeat, linear-gradient(180deg, #2A7FDC 0%, #3385E0 calc(100% - 140px), #777C19 calc(100% - 134px), #5E6A14 100%); }
 }
+
+/* ── Simplified home: what we do · why BTS ── */
+.dirs { padding: 88px 24px; background: var(--page-bg); }
+.dirs-title, .why-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 600; color: var(--text); text-align: center; margin: 0 0 40px; text-wrap: balance; }
+.dirs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+.dir-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.2s, transform 0.2s; }
+.dir-card:hover { box-shadow: 0 10px 28px rgba(0,40,80,0.10); transform: translateY(-2px); }
+.dir-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+.dir-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.dir-body h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin: 0; color: var(--text); }
+.dir-body p { margin: 0; color: var(--text-soft); font-size: 0.95rem; line-height: 1.5; }
+.dir-more { margin-top: auto; padding-top: 6px; color: var(--blue-mid); font-weight: 600; font-size: 0.9rem; }
+.why { padding: 88px 24px; background: var(--page-bg); border-top: 1px solid var(--border); }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+.why-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; font-size: 1rem; font-weight: 500; color: var(--text); line-height: 1.4; }
+.why-item svg { width: 40px; height: 40px; color: var(--blue-mid); }
+.works-head { text-align: center; padding-bottom: 24px; }
+.works-head .section-sub { margin: 0 auto; }
+.works-cta { text-align: center; background: var(--surface-alt); }
+.works-cta .section-title { margin-bottom: 24px; }
+@media (max-width: 900px) { .dirs-grid { grid-template-columns: 1fr; max-width: 520px; } .why-grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; } }
+@media (max-width: 600px) { .dirs, .why { padding: 56px 16px; } .dir-card img { height: 170px; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -736,12 +758,11 @@ body.footer-in-view .ai-buddy { display: none !important; }
   <div class="nav-inner">
     <img class="nav-logo" src="img/dffc548ad6a36e5c5fbf3ecf5fd4a26a.png" alt="BTS — Building The Solution" onclick="showPage('home')">
     <div class="nav-links">
-      <a data-i18n="nav_services" onclick="showPage('home','services')">Services</a>
-      <a data-i18n="nav_care" onclick="showPage('services')">Care Plans</a>
-      <a data-i18n="nav_about" onclick="showPage('home','about')">About</a>
+      <a data-i18n="nav_about" onclick="showPage('works','about')">About</a>
+      <a data-i18n="nav_services" onclick="showPage('works')">Services</a>
       <a data-i18n="nav_projects" onclick="showPage('home','projects')">Projects</a>
-      <a data-i18n="nav_testimonials" onclick="showPage('home','testimonials')">Testimonials</a>
       <a data-i18n="nav_careers" onclick="showPage('careers')">Careers</a>
+      <a data-i18n="nav_contact" onclick="showPage('home','contact')">Contact</a>
       <a data-i18n="nav_cta" onclick="showPage('home','contact')" class="nav-cta">Free Estimate</a>
       <button class="lang-toggle" id="langToggle" onclick="toggleLang()">PT</button>
     </div>
@@ -754,12 +775,11 @@ body.footer-in-view .ai-buddy { display: none !important; }
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a data-i18n="nav_services" onclick="closeMenu();showPage('home','services')">Services</a>
+  <a data-i18n="nav_services" onclick="closeMenu();showPage('works')">Services</a>
   <a data-i18n="nav_care" onclick="closeMenu();showPage('services')">Care Plans</a>
   <a data-i18n="nav_resolve" onclick="closeMenu();showPage('resolve')">Small repairs — BTS Resolve</a>
-  <a data-i18n="nav_about" onclick="closeMenu();showPage('home','about')">About</a>
+  <a data-i18n="nav_about" onclick="closeMenu();showPage('works','about')">About</a>
   <a data-i18n="nav_projects" onclick="closeMenu();showPage('home','projects')">Projects</a>
-  <a data-i18n="nav_testimonials" onclick="closeMenu();showPage('home','testimonials')">Testimonials</a>
   <a data-i18n="nav_careers" onclick="closeMenu();showPage('careers')">Careers</a>
   <a data-i18n="nav_contact" onclick="closeMenu();showPage('home','contact')">Contact</a>
   <a class="ai-entry" hidden data-i18n="nav_ai" onclick="closeMenu();aiToggle(true)">Ask our AI assistant</a>
@@ -772,57 +792,150 @@ body.footer-in-view .ai-buddy { display: none !important; }
   <div class="hero-photo" aria-hidden="true"></div>
   <div class="hero-content">
     <h1 data-i18n="hero_title">Renovating a Property in Portugal? <span>We Manage It for You</span></h1>
-    <p class="hero-sub" data-i18n="hero_sub">Fixed written quote and weekly photo updates — even if you live abroad.</p>
   </div>
   <div class="hero-btns">
     <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1">Get a Free Project Assessment</a>
-    <a href="#calculator" class="btn btn-outline hero-alt" data-i18n="hero_btn2">Calculate the cost in 30 seconds</a>
   </div>
 </section>
 
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span data-i18n="trust4">IMPIC licence 115511 &amp; insured</span></div>
-    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 012-2z"/></svg><span data-i18n="trust1">Fixed written quote — no hidden extras</span></div>
-    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg><span data-i18n="trust2">English &amp; Portuguese project manager</span></div>
-    <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span data-i18n="trust3">Weekly photo &amp; video updates</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="dirs" id="what-we-do">
+  <div class="wrap">
+    <h2 class="dirs-title" data-i18n="dirs_title">What we do</h2>
+    <div class="dirs-grid">
+      <a class="dir-card" href="#" onclick="showPage('works','services');return false;">
+        <img src="img/490774e7f0cc6bae3c5bdc250af8e915.jpg" alt="" loading="lazy">
+        <div class="dir-body"><h3 data-i18n="dir1_t">Renovation &amp; restoration</h3><p data-i18n="dir1_d">Houses and flats renovated from structure to finish.</p><span class="dir-more" data-i18n="dir_more">Learn more →</span></div>
+      </a>
+      <a class="dir-card" href="#" onclick="showPage('works','services');return false;">
+        <img src="img/de3a0025ed01545308c379a11ef428b4.jpg" alt="" loading="lazy">
+        <div class="dir-body"><h3 data-i18n="dir2_t">New construction</h3><p data-i18n="dir2_d">New houses built to a fixed written quote.</p><span class="dir-more" data-i18n="dir_more">Learn more →</span></div>
+      </a>
+      <a class="dir-card" href="#resolve" onclick="showPage('resolve');return false;">
+        <img src="img/faf95b0433b1cd4b80253742a564f68b.jpg" alt="" loading="lazy">
+        <div class="dir-body"><h3 data-i18n="dir3_t">BTS Resolve — small repairs</h3><p data-i18n="dir3_d">Send a photo of the problem. We tell you the price first.</p><span class="dir-more" data-i18n="dir_more">Learn more →</span></div>
+      </a>
+    </div>
   </div>
+</section>
+
+<section class="section" id="projects" style="background:var(--surface-alt);">
+  <div class="wrap">
+    <div style="text-align:center;">
+      <div class="section-label" data-i18n="proj_label">Our Work</div>
+      <h2 class="section-title" data-i18n="proj_title">Real Projects, Real Transformations</h2>
+      <p class="section-sub" style="margin:0 auto 8px;" data-i18n="proj_sub">Drag the slider to see the transformation. Every project shown was completed by our team.</p>
+    </div>
+    <div class="ba-container">
+      <div class="ba-slider">
+        <div class="ba-after"><span class="ba-label ba-label-after" data-i18n="ba_after">After</span></div>
+        <div class="ba-before" id="baBefore"><span class="ba-label ba-label-before" data-i18n="ba_before">Before</span></div>
+        <div class="ba-handle" id="baHandle"></div>
+        <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" aria-label="Before/after comparison slider">
+      </div>
+    </div>
+    <div class="gallery-grid" style="margin-top:40px;">
+      <div class="gallery-card"><img src="img/e9fbc5502a2739563f449c7898064ee8.jpg" alt="Pool mosaic tiling" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Pools</div><div class="gallery-label">Pool Mosaic Tiling</div></div></div></div>
+      <div class="gallery-card"><img src="img/05935c8bc6e70cc4feac60fb8255b045.jpg" alt="Hillside infrastructure" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Earthworks</div><div class="gallery-label">Hillside Infrastructure</div></div></div></div>
+      <div class="gallery-card"><img src="img/67d9136f7a7e514f897e2f5fed2db075.jpg" alt="Waterproofing" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Infrastructure</div><div class="gallery-label">Waterproofing &amp; Drainage</div></div></div></div>
+      <div class="gallery-card"><img src="img/de3a0025ed01545308c379a11ef428b4.jpg" alt="Townhouse facade" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">New Build</div><div class="gallery-label">Townhouse Facade</div></div></div></div>
+      <div class="gallery-card"><img src="img/fa5ae813712ecc02d3bd17e7440f7441.jpg" alt="Concrete cutting" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Structural</div><div class="gallery-label">Precision Concrete Work</div></div></div></div>
+      <div class="gallery-card"><img src="img/0038c9b416ea9a85704170b7293f0863.jpg" alt="Mosaic retaining wall" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Landscaping</div><div class="gallery-label">Mosaic Retaining Wall</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="why" id="why">
+  <div class="wrap">
+    <h2 class="why-title" data-i18n="why_title">Why BTS</h2>
+    <div class="why-grid">
+      <div class="why-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span data-i18n="trust4">IMPIC licence 115511 &amp; insured</span></div>
+      <div class="why-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 012-2z"/></svg><span data-i18n="trust1">Fixed written quote — no hidden extras</span></div>
+      <div class="why-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg><span data-i18n="trust2">English &amp; Portuguese project manager</span></div>
+      <div class="why-item"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span data-i18n="trust3">Weekly photo &amp; video updates</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:8px;">
+      <div class="section-label" data-i18n="ct_label">Get in Touch</div>
+      <h2 class="section-title" data-i18n="ct_title">Request Your Free Estimate</h2>
+      <p class="section-sub" style="margin:0 auto;" data-i18n="ct_sub">Tell us about your property and project. We'll respond within 48 hours with initial guidance.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+      <form id="contactForm" onsubmit="submitEstimate(event)">
+        <div class="calc-chip" id="calcChip" hidden></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="c_name" data-i18n="f_name">Full Name *</label><input class="form-input" type="text" id="c_name" required></div>
+          <div class="form-group"><label class="form-label" for="c_phone" data-i18n="f_phone_req">Phone / WhatsApp *</label><input class="form-input" type="tel" id="c_phone" required></div>
+        </div>
+        <div hidden><input class="form-input" type="email" id="c_email">
+        <details class="form-more" id="formMore">
+          <summary data-i18n="f_more">Add details (optional)</summary>
+          <div class="form-group"><label class="form-label" for="c_location" data-i18n="f_location">Property Location</label><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Select area</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="c_service" data-i18n="f_type">Project Type</label><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
+            <div class="form-group"><label class="form-label" for="c_timing" data-i18n="f_timing">Desired Start</label><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></div>
+          </div>
+        </details>
+        </div>
+        <div class="form-group"><label class="form-label" for="c_desc" data-i18n="f_need">What do you need?</label><textarea class="form-input" id="c_desc" rows="4"></textarea></div>
+        <div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" id="c_photos" accept="image/*,application/pdf" multiple><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div>
+        <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="c_website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="form-consent"><input type="checkbox" id="c_consent" required><span data-i18n="f_consent">I agree that Blame The Stars, Lda. may use my details to answer this request, as described in the <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</span></label>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="f_submit">Send Enquiry</button>
+      </form>
+      <div class="cr-done est-done" id="estDone" hidden>
+        <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+        <h3 data-i18n="est_done_t">Almost done — send your enquiry</h3>
+        <p data-i18n="est_done_d">Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.</p>
+        <a id="estWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
+        <p style="font-size:0.84rem;" data-i18n="est_or_email">Prefer email? Send your details to:</p>
+        <div class="cr-email-row"><b id="estEmail">geral@bts-grupo.com</b><button type="button" class="cr-copy" onclick="copyText('estEmail', this)" data-i18n="cr_copy">Copy</button></div>
+        <button type="button" class="cr-back" onclick="editEstimate()" data-i18n="est_edit">← Edit my enquiry</button>
+      </div>
+      </div>
+      <div class="contact-info">
+        <h3 data-i18n="ci_title">Speak With Us Directly</h3>
+        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><div><strong data-i18n="ci_phone">Phone</strong><span>+351 933 255 248</span></div></div>
+        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor" stroke="none"/></svg><div><strong>WhatsApp</strong><span>+351 91 396 55 33</span></div></div>
+        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div><strong>Email</strong><span>geral@bts-grupo.com</span></div></div>
+        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div><strong data-i18n="ci_areas">Service Areas</strong><span>Aveiro · Porto · Douro Valley · Braga · Viseu</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 </div>
 
-<!-- CHOOSE YOUR NEED -->
-<section class="needs" id="needs">
+<!-- SERVICES PAGE -->
+<div class="page-view" id="page-works">
+<section class="section page-top works-head">
   <div class="wrap">
-    <h2 class="needs-title" data-i18n="need_title">What do you need?</h2>
-    <div class="needs-grid">
-      <a class="need-card need-hot" href="#resolve" onclick="showPage('resolve');return false;">
-        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 005.2-5.4l-2.6 2.6-2.1-.6-.6-2.1 2.3-2.9z"/></svg></span>
-        <span class="need-txt"><b data-i18n="need1_t">Fix something now</b><small data-i18n="need1_d">Small repairs and urgent property problems.</small></span>
-        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </a>
-      <a class="need-card" href="#services" onclick="showPage('home','services');return false;">
-        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></span>
-        <span class="need-txt"><b data-i18n="need2_t">Renovate my property</b><small data-i18n="need2_d">Renovations, restoration and larger works.</small></span>
-        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </a>
-      <a class="need-card" href="#" onclick="showPage('services');return false;">
-        <span class="need-ico"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
-        <span class="need-txt"><b data-i18n="need3_t">Maintain my property</b><small data-i18n="need3_d">Regular maintenance and prevention.</small></span>
-        <svg class="need-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-    <button type="button" class="need-ai ai-entry" onclick="aiToggle(true)" hidden data-i18n="need_ai">Not sure? Ask our assistant</button>
-  </div>
-</section>
-
-<!-- COST CALCULATOR -->
-<section class="section calc-section" id="calculator">
-  <div class="wrap">
-    <div class="calc-head">
-      <div class="section-label" data-i18n="calc_label">Cost Calculator</div>
-      <h2 class="section-title" data-i18n="calc_title">What Will Your Project Cost? Find Out in 30 Seconds</h2>
-      <p class="section-sub" data-i18n="calc_sub">Three quick questions — no email needed. You get an indicative price range and timeline for Northern Portugal.</p>
-    </div>
-    <div class="calc-card" id="calcCard"></div>
+    <h1 class="section-title" data-i18n="works_title">Our services</h1>
+    <p class="section-sub" data-i18n="works_sub">Renovation, new builds, pools and roofs in Northern Portugal — always with a fixed written quote.</p>
   </div>
 </section>
 
@@ -854,6 +967,18 @@ body.footer-in-view .ai-buddy { display: none !important; }
     <a href="#contact" class="btn btn-primary" data-i18n="svc3_btn">Schedule an Inspection</a>
   </div>
 </div>
+</section>
+
+<!-- COST CALCULATOR -->
+<section class="section calc-section" id="calculator">
+  <div class="wrap">
+    <div class="calc-head">
+      <div class="section-label" data-i18n="calc_label">Cost Calculator</div>
+      <h2 class="section-title" data-i18n="calc_title">What Will Your Project Cost? Find Out in 30 Seconds</h2>
+      <p class="section-sub" data-i18n="calc_sub">Three quick questions — no email needed. You get an indicative price range and timeline for Northern Portugal.</p>
+    </div>
+    <div class="calc-card" id="calcCard"></div>
+  </div>
 </section>
 
 <section class="section" style="background:var(--surface-alt);text-align:center;">
@@ -907,84 +1032,6 @@ body.footer-in-view .ai-buddy { display: none !important; }
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="wrap">
-    <h2 data-i18n="cta_title">Get a Free No-Pressure Estimate</h2>
-    <p data-i18n="cta_sub">We'll visit your property, discuss your vision, and provide a detailed written quote — no obligation, no hard sell.</p>
-    <div class="cta-cards">
-      <div class="cta-card">
-        <h3 data-i18n="cta1_title">Free Site Visit</h3>
-        <p data-i18n="cta1_desc">We come to your property, assess the scope, and walk you through options before you commit to anything.</p>
-        <a href="#contact" class="btn btn-primary" style="font-size:0.8rem;padding:10px 20px;" data-i18n="cta1_btn">Schedule a Visit</a>
-      </div>
-      <div class="cta-card">
-        <h3 data-i18n="cta2_title">Video Site Assessment</h3>
-        <p data-i18n="cta2_desc">Abroad? Walk us through your property on a video call and get a written scope and price range — without flying in.</p>
-        <a href="#contact" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;" data-i18n="cta2_btn">Book a Call</a>
-      </div>
-      <div class="cta-card">
-        <h3 data-i18n="cta3_title">IMPIC Licensed</h3>
-        <p data-i18n="cta3_desc">Fully registered under Portuguese construction law. Your project is protected by proper licensing and insurance.</p>
-        <a href="#about" class="btn btn-outline" style="font-size:0.8rem;padding:10px 20px;" data-i18n="cta3_btn">Learn More</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="projects" style="background:var(--surface-alt);">
-  <div class="wrap">
-    <div style="text-align:center;">
-      <div class="section-label" data-i18n="proj_label">Our Work</div>
-      <h2 class="section-title" data-i18n="proj_title">Real Projects, Real Transformations</h2>
-      <p class="section-sub" style="margin:0 auto 8px;" data-i18n="proj_sub">Drag the slider to see the transformation. Every project shown was completed by our team.</p>
-    </div>
-    <div class="ba-container">
-      <div class="ba-slider">
-        <div class="ba-after"><span class="ba-label ba-label-after" data-i18n="ba_after">After</span></div>
-        <div class="ba-before" id="baBefore"><span class="ba-label ba-label-before" data-i18n="ba_before">Before</span></div>
-        <div class="ba-handle" id="baHandle"></div>
-        <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" aria-label="Before/after comparison slider">
-      </div>
-    </div>
-    <div class="gallery-grid" style="margin-top:40px;">
-      <div class="gallery-card"><img src="img/e9fbc5502a2739563f449c7898064ee8.jpg" alt="Pool mosaic tiling" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Pools</div><div class="gallery-label">Pool Mosaic Tiling</div></div></div></div>
-      <div class="gallery-card"><img src="img/05935c8bc6e70cc4feac60fb8255b045.jpg" alt="Hillside infrastructure" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Earthworks</div><div class="gallery-label">Hillside Infrastructure</div></div></div></div>
-      <div class="gallery-card"><img src="img/67d9136f7a7e514f897e2f5fed2db075.jpg" alt="Waterproofing" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Infrastructure</div><div class="gallery-label">Waterproofing &amp; Drainage</div></div></div></div>
-      <div class="gallery-card"><img src="img/de3a0025ed01545308c379a11ef428b4.jpg" alt="Townhouse facade" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">New Build</div><div class="gallery-label">Townhouse Facade</div></div></div></div>
-      <div class="gallery-card"><img src="img/fa5ae813712ecc02d3bd17e7440f7441.jpg" alt="Concrete cutting" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Structural</div><div class="gallery-label">Precision Concrete Work</div></div></div></div>
-      <div class="gallery-card"><img src="img/0038c9b416ea9a85704170b7293f0863.jpg" alt="Mosaic retaining wall" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Landscaping</div><div class="gallery-label">Mosaic Retaining Wall</div></div></div></div>
-      <div class="gallery-card"><img src="img/05322ecbd9a4bb9336be860c1c474e6b.jpg" alt="Foundation work" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Foundations</div><div class="gallery-label">Rural Foundation Work</div></div></div></div>
-      <div class="gallery-card"><img src="img/7da8045c9ec20342cc426b216126ca7d.jpg" alt="Pool deck" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Finishing</div><div class="gallery-label">Pool Deck &amp; Surrounds</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section testimonials-section" id="testimonials">
-  <div class="wrap">
-    <div style="text-align:center;">
-      <div class="section-label" data-i18n="test_label">What Our Clients Say</div>
-      <h2 class="section-title" data-i18n="test_title">Built on Trust, Backed by Results</h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-quote" data-i18n="t1_quote">They managed everything while we were in the UK — weekly photo updates, video calls when decisions were needed, and the finished result exceeded what we imagined.</div>
-        <div class="testimonial-author">— James &amp; Sarah M.</div>
-        <div class="testimonial-location" data-i18n="t1_loc">Aveiro, Villa Renovation</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote" data-i18n="t2_quote">As an architect I'm particular about execution. Their crew understood the drawings, communicated clearly, and delivered the contemporary finish I designed.</div>
-        <div class="testimonial-author">— Hans W.</div>
-        <div class="testimonial-location" data-i18n="t2_loc">Porto, New Build</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote" data-i18n="t3_quote">The pool is exactly what I wanted — the mosaic work is beautiful, and they handled every permit and inspection. I just had to choose the tiles.</div>
-        <div class="testimonial-author">— Marie D.</div>
-        <div class="testimonial-location" data-i18n="t3_loc">Douro Valley, Pool Construction</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="faq">
   <div class="wrap" style="max-width:760px;">
     <div style="text-align:center;margin-bottom:40px;">
@@ -995,66 +1042,12 @@ body.footer-in-view .ai-buddy { display: none !important; }
   </div>
 </section>
 
-<section class="section contact-section" id="contact">
+<section class="section works-cta">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:8px;">
-      <div class="section-label" data-i18n="ct_label">Get in Touch</div>
-      <h2 class="section-title" data-i18n="ct_title">Request Your Free Estimate</h2>
-      <p class="section-sub" style="margin:0 auto;" data-i18n="ct_sub">Tell us about your property and project. We'll respond within 48 hours with initial guidance.</p>
-    </div>
-    <div class="contact-grid">
-      <div>
-      <form id="contactForm" onsubmit="submitEstimate(event)">
-        <div class="calc-chip" id="calcChip" hidden></div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="c_name" data-i18n="f_name">Full Name *</label><input class="form-input" type="text" id="c_name" required></div>
-          <div class="form-group"><label class="form-label" for="c_email">Email *</label><input class="form-input" type="email" id="c_email" required></div>
-        </div>
-        <div class="form-group"><label class="form-label" for="c_phone" data-i18n="f_phone">Phone / WhatsApp</label><input class="form-input" type="tel" id="c_phone"></div>
-        <details class="form-more" id="formMore">
-          <summary data-i18n="f_more">Add details (optional)</summary>
-          <div class="form-group"><label class="form-label" for="c_location" data-i18n="f_location">Property Location</label><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Select area</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select></div>
-          <div class="form-row">
-            <div class="form-group"><label class="form-label" for="c_service" data-i18n="f_type">Project Type</label><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
-            <div class="form-group"><label class="form-label" for="c_timing" data-i18n="f_timing">Desired Start</label><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></div>
-          </div>
-        </details>
-        <div class="form-group"><label class="form-label" for="c_desc" data-i18n="f_desc">Tell Us About Your Project</label><textarea class="form-input" id="c_desc" rows="4"></textarea></div>
-        <div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" id="c_photos" accept="image/*,application/pdf" multiple><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div>
-        <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="c_website" tabindex="-1" autocomplete="off"></label></div>
-        <label class="form-consent"><input type="checkbox" id="c_consent" required><span data-i18n="f_consent">I agree that Blame The Stars, Lda. may use my details to answer this request, as described in the <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</span></label>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="f_submit">Send Enquiry</button>
-      </form>
-      <div class="cr-done est-done" id="estDone" hidden>
-        <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-        <h3 data-i18n="est_done_t">Almost done — send your enquiry</h3>
-        <p data-i18n="est_done_d">Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.</p>
-        <a id="estWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
-        <p style="font-size:0.84rem;" data-i18n="est_or_email">Prefer email? Send your details to:</p>
-        <div class="cr-email-row"><b id="estEmail">geral@bts-grupo.com</b><button type="button" class="cr-copy" onclick="copyText('estEmail', this)" data-i18n="cr_copy">Copy</button></div>
-        <button type="button" class="cr-back" onclick="editEstimate()" data-i18n="est_edit">← Edit my enquiry</button>
-      </div>
-      </div>
-      <div class="contact-info">
-        <h3 data-i18n="ci_title">Speak With Us Directly</h3>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><div><strong data-i18n="ci_phone">Phone</strong><span>+351 933 255 248</span></div></div>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor" stroke="none"/></svg><div><strong>WhatsApp</strong><span>+351 91 396 55 33</span></div></div>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div><strong>Email</strong><span>geral@bts-grupo.com</span></div></div>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div><strong data-i18n="ci_areas">Service Areas</strong><span>Aveiro · Porto · Douro Valley · Braga · Viseu</span></div></div>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg><div><strong data-i18n="ci_office">Office</strong><span>Rua Professor José Lacerda, n.º 19, 5050-081 Godim, Peso da Régua</span></div></div>
-        <div class="contact-detail"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><div><strong data-i18n="ci_response">Response Time</strong><span data-i18n="ci_response_val">Within 48 hours, Monday–Saturday</span></div></div>
-        <div style="margin-top:24px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-mid);font-weight:600;margin-bottom:4px;" data-i18n="ci_licensed">Licensed Contractor</div>
-          <div style="font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--text);" data-i18n="ci_impic">IMPIC Certified</div>
-          <div style="font-size:0.78rem;color:var(--text-soft);margin-top:2px;" data-i18n="ci_impic_desc">Registered under Portuguese construction law. Insured and compliant.</div>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-title" data-i18n="works_cta_t">Tell us about your property</h2>
+    <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1">Get a Free Project Assessment</a>
   </div>
 </section>
-
-<div class="careers-line"><span data-i18n="crl_text">Looking to work with us?</span> <a href="#careers" onclick="showPage('careers');return false;" data-i18n="crl_link">View open positions →</a></div>
-
 </div>
 
 <!-- BTS RESOLVE — small repairs -->
@@ -1734,18 +1727,18 @@ body.footer-in-view .ai-buddy { display: none !important; }
     </div>
     <div>
       <h4 data-i18n="foot_company">Company</h4>
-      <a href="#" onclick="showPage('home','about');return false;" data-i18n="nav_about">About</a>
+      <a href="#" onclick="showPage('works','about');return false;" data-i18n="nav_about">About</a>
       <a href="#" onclick="showPage('home','projects');return false;" data-i18n="nav_projects">Projects</a>
-      <a href="#" onclick="showPage('home','testimonials');return false;" data-i18n="nav_testimonials">Testimonials</a>
+      <a href="#" onclick="showPage('home','projects');return false;" data-i18n="nav_testimonials">Testimonials</a>
       <a href="#" onclick="showPage('careers');return false;" data-i18n="nav_careers">Careers</a>
       <a href="#" onclick="showPage('home','contact');return false;" data-i18n="nav_contact">Contact</a>
     </div>
     <div>
       <h4 data-i18n="foot_services">Services</h4>
-      <a href="#" onclick="showPage('home','services');return false;" data-i18n="foot_construction">Construction</a>
+      <a href="#" onclick="showPage('works','services');return false;" data-i18n="foot_construction">Construction</a>
       <a href="#" onclick="showPage('services');return false;" data-i18n="nav_care">Care Plans</a>
-      <a href="#" onclick="showPage('home','services');return false;" data-i18n="foot_pools">Pool Construction</a>
-      <a href="#" onclick="showPage('home','services');return false;" data-i18n="foot_roofing">Roofing</a>
+      <a href="#" onclick="showPage('works','services');return false;" data-i18n="foot_pools">Pool Construction</a>
+      <a href="#" onclick="showPage('works','services');return false;" data-i18n="foot_roofing">Roofing</a>
       <button type="button" class="footer-ai" id="footerAi" onclick="aiToggle(true)" hidden><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.9 9.9 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-i18n="ai_fab">Ask AI</span></button>
     </div>
     <div>
@@ -1819,6 +1812,20 @@ body.footer-in-view .ai-buddy { display: none !important; }
 let currentLang = 'en';
 
 const T = {
+  dirs_title: { en: 'What we do', pt: 'O que fazemos' },
+  dir1_t: { en: 'Renovation &amp; restoration', pt: 'Remodelação e reabilitação' },
+  dir1_d: { en: 'Houses and flats renovated from structure to finish.', pt: 'Casas e apartamentos remodelados da estrutura aos acabamentos.' },
+  dir2_t: { en: 'New construction', pt: 'Construção nova' },
+  dir2_d: { en: 'New houses built to a fixed written quote.', pt: 'Moradias novas com orçamento fixo por escrito.' },
+  dir3_t: { en: 'BTS Resolve — small repairs', pt: 'BTS Resolve — pequenas reparações' },
+  dir3_d: { en: 'Send a photo of the problem. We tell you the price first.', pt: 'Envie uma foto do problema. Dizemos o preço primeiro.' },
+  dir_more: { en: 'Learn more →', pt: 'Saber mais →' },
+  why_title: { en: 'Why BTS', pt: 'Porquê a BTS' },
+  works_title: { en: 'Our services', pt: 'Os nossos serviços' },
+  works_sub: { en: 'Renovation, new builds, pools and roofs in Northern Portugal — always with a fixed written quote.', pt: 'Remodelações, construção nova, piscinas e telhados no Norte de Portugal — sempre com orçamento fixo por escrito.' },
+  works_cta_t: { en: 'Tell us about your property', pt: 'Fale-nos do seu imóvel' },
+  f_phone_req: { en: 'Phone / WhatsApp *', pt: 'Telefone / WhatsApp *' },
+  f_need: { en: 'What do you need?', pt: 'De que precisa?' },
   buddy_text: { en: "Hi! I'm the BTS assistant. Ask me about prices, timing or a repair.", pt: "Olá! Sou o assistente da BTS. Pergunte-me sobre preços, prazos ou uma reparação." },
   need_title: { en: "What do you need?", pt: "De que precisa?" },
   need1_t: { en: "Fix something now", pt: "Resolver um problema já" },
@@ -2620,18 +2627,7 @@ function showCalcChip() {
 // Page navigation
 // Careers: a full section on the home page on computers, a separate page on phones
 const mqPhone = window.matchMedia('(max-width: 768px)');
-function placeCareers() {
-  const sec = document.getElementById('careers');
-  const phone = mqPhone.matches;
-  const host = document.getElementById(phone ? 'page-careers' : 'page-home');
-  if (sec.parentElement !== host) {
-    if (phone) host.appendChild(sec); else host.insertBefore(sec, host.querySelector('.careers-line'));
-  }
-  sec.classList.toggle('page-top', phone);
-  if (!phone && document.getElementById('page-careers').classList.contains('active')) showPage('home', 'careers');
-}
 function showPage(page, scrollTo) {
-  if (page === 'careers' && !mqPhone.matches) { page = 'home'; scrollTo = scrollTo || 'careers'; }
   document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + page);
   if (target) target.classList.add('active');
@@ -2648,13 +2644,22 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 function closeMenu() { mobileMenu.classList.remove('open'); }
-const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers' };
+const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers', '#services': 'works' };
 function routeHash() { const pg = HASH_PAGES[location.hash]; if (pg) showPage(pg); }
 window.addEventListener('hashchange', routeHash);
-placeCareers();
-mqPhone.addEventListener('change', placeCareers);
+// In-page links (#contact, #calculator…) open the page that holds that section
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.hasAttribute('onclick')) return;
+  const id = a.getAttribute('href').slice(1);
+  if (!id || HASH_PAGES['#' + id]) return;
+  const el = document.getElementById(id);
+  const pv = el && el.closest('.page-view');
+  if (!pv) return;
+  e.preventDefault();
+  showPage(pv.id.slice(5), id);
+});
 routeHash();
-if (window.innerWidth > 768) document.getElementById('formMore').open = true;
 
 // Show mobile lang toggle
 if (window.innerWidth <= 1024) document.getElementById('langToggleMobile').style.display = 'block';
@@ -2846,7 +2851,7 @@ function aiOpenJob(i) {
   return 'The job application form is open and pre-filled with what the visitor gave. They complete it, tick consent and send it.';
 }
 function aiShow(i) {
-  const map = { calculator: ['home', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['careers'], contact: ['home', 'contact'], faq: ['home', 'faq'], resolve: ['resolve'] };
+  const map = { calculator: ['works', 'calculator'], care_plans: ['services'], projects: ['home', 'projects'], careers: ['careers'], contact: ['home', 'contact'], faq: ['works', 'faq'], resolve: ['resolve'] };
   const target = map[i.section];
   if (!target) throw new Error('Unknown section');
   showPage(target[0], target[1]);
