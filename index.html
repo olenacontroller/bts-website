@@ -955,6 +955,22 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
   .nav-inner { height: 80px; } .nav-logo { height: 50px; } .mobile-menu { top: 80px; }
   .page-top { padding-top: 112px; }
 }
+
+/* ── Gallery: buildings of Northern Portugal ── */
+.pg-section { background: var(--surface-alt); }
+.pg-head { max-width: 640px; margin: 0 auto 40px; text-align: center; }
+.pg-head .section-sub { margin: 0 auto; }
+.pg-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 18px; }
+.pg-card { position: relative; border-radius: 10px; overflow: hidden; background: #DFE5EC; }
+.pg-card:first-child { grid-column: span 2; grid-row: span 2; }
+.pg-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.pg-card:hover img { transform: scale(1.04); }
+.pg-cap { position: absolute; inset: auto 0 0 0; padding: 18px 18px 16px; background: linear-gradient(transparent, rgba(10,20,35,.82)); color: #fff; }
+.pg-cap span { display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pri, #C99A2E); margin-bottom: 4px; }
+.pg-cap b { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-height: 1.3; }
+.pg-credit { margin: 14px 0 0; font-size: 12px; color: var(--text-soft); text-align: right; }
+@media (max-width: 900px) { .pg-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; } }
+@media (max-width: 600px) { .pg-grid { grid-template-columns: 1fr; grid-auto-rows: 230px; } .pg-card:first-child { grid-column: auto; grid-row: auto; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1339,29 +1355,22 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
   </div>
 </section>
 
-<section class="section" id="projects" style="background:var(--surface-alt);">
+<section class="section pg-section" id="projects">
   <div class="wrap">
-    <div style="text-align:center;">
-      <div class="section-label" data-i18n="proj_label">Our Work</div>
-      <h2 class="section-title" data-i18n="proj_title">Real Projects, Real Transformations</h2>
-      <p class="section-sub" style="margin:0 auto 8px;" data-i18n="proj_sub">Drag the slider to see the transformation. Every project shown was completed by our team.</p>
+    <div class="pg-head">
+      <div class="section-label" data-i18n="pg_label">Where we work</div>
+      <h2 class="section-title" data-i18n="pg_title">The buildings of Northern Portugal</h2>
+      <p class="section-sub" data-i18n="pg_sub">From Porto townhouses to Douro quintas and granite village houses — these are the kinds of buildings we renovate, restore and look after. Photos of our own finished projects are available on request.</p>
     </div>
-    <div class="ba-container">
-      <div class="ba-slider">
-        <div class="ba-after"><span class="ba-label ba-label-after" data-i18n="ba_after">After</span></div>
-        <div class="ba-before" id="baBefore"><span class="ba-label ba-label-before" data-i18n="ba_before">Before</span></div>
-        <div class="ba-handle" id="baHandle"></div>
-        <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" aria-label="Before/after comparison slider">
-      </div>
+    <div class="pg-grid">
+      <div class="pg-card"><img src="img/un-porto-facades.jpg" alt="Tiled façades with iron balconies, Porto" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Façades</span><b data-i18n="pg1">Tiled façades with iron balconies, Porto</b></div></div>
+      <div class="pg-card"><img src="img/un-porto-kitchen.jpg" alt="A renovated city-flat kitchen, Porto" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Interiors</span><b data-i18n="pg2">A renovated city-flat kitchen, Porto</b></div></div>
+      <div class="pg-card"><img src="img/un-douro-quinta.jpg" alt="Quinta house among the vineyard terraces" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Douro Valley</span><b data-i18n="pg3">Quinta house among the vineyard terraces</b></div></div>
+      <div class="pg-card"><img src="img/un-douro-stone.jpg" alt="Schist stone house in the vineyards" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">Stone houses</span><b data-i18n="pg4">Schist stone house in the vineyards</b></div></div>
+      <div class="pg-card"><img src="img/un-costa-nova.jpg" alt="Striped seaside houses, Costa Nova" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Aveiro</span><b data-i18n="pg5">Striped seaside houses, Costa Nova</b></div></div>
+      <div class="pg-card"><img src="img/un-braganca-house.jpg" alt="Granite village house, Bragança" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Rural houses</span><b data-i18n="pg6">Granite village house, Bragança</b></div></div>
     </div>
-    <div class="gallery-grid" style="margin-top:40px;">
-      <div class="gallery-card"><img src="img/e9fbc5502a2739563f449c7898064ee8.jpg" alt="Pool mosaic tiling" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Pools</div><div class="gallery-label">Pool Mosaic Tiling</div></div></div></div>
-      <div class="gallery-card"><img src="img/05935c8bc6e70cc4feac60fb8255b045.jpg" alt="Hillside infrastructure" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Earthworks</div><div class="gallery-label">Hillside Infrastructure</div></div></div></div>
-      <div class="gallery-card"><img src="img/67d9136f7a7e514f897e2f5fed2db075.jpg" alt="Waterproofing" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Infrastructure</div><div class="gallery-label">Waterproofing &amp; Drainage</div></div></div></div>
-      <div class="gallery-card"><img src="img/de3a0025ed01545308c379a11ef428b4.jpg" alt="Townhouse facade" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">New Build</div><div class="gallery-label">Townhouse Facade</div></div></div></div>
-      <div class="gallery-card"><img src="img/fa5ae813712ecc02d3bd17e7440f7441.jpg" alt="Concrete cutting" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Structural</div><div class="gallery-label">Precision Concrete Work</div></div></div></div>
-      <div class="gallery-card"><img src="img/0038c9b416ea9a85704170b7293f0863.jpg" alt="Mosaic retaining wall" loading="lazy"><div class="gallery-overlay"><div><div class="gallery-tag">Landscaping</div><div class="gallery-label">Mosaic Retaining Wall</div></div></div></div>
-    </div>
+    <p class="pg-credit">Photos: Unsplash</p>
   </div>
 </section>
 
@@ -2134,6 +2143,21 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 let currentLang = 'en';
 
 const T = {
+  pg_label: { en: 'Where we work', pt: 'Onde trabalhamos' },
+  pg_title: { en: 'The buildings of Northern Portugal', pt: 'Os edifícios do Norte de Portugal' },
+  pg_sub: { en: 'From Porto townhouses to Douro quintas and granite village houses — these are the kinds of buildings we renovate, restore and look after. Photos of our own finished projects are available on request.', pt: 'De casas do Porto a quintas do Douro e casas de granito — são estes os edifícios que remodelamos, recuperamos e mantemos. Fotos das nossas obras concluídas disponíveis a pedido.' },
+  pg1: { en: 'Tiled façades with iron balconies, Porto', pt: 'Fachadas com azulejo e varandas de ferro, Porto' },
+  pg1_tag: { en: 'Façades', pt: 'Fachadas' },
+  pg2: { en: 'A renovated city-flat kitchen, Porto', pt: 'Cozinha remodelada num apartamento, Porto' },
+  pg2_tag: { en: 'Interiors', pt: 'Interiores' },
+  pg3: { en: 'Quinta house among the vineyard terraces', pt: 'Casa de quinta entre os socalcos' },
+  pg3_tag: { en: 'Douro Valley', pt: 'Vale do Douro' },
+  pg4: { en: 'Schist stone house in the vineyards', pt: 'Casa de xisto entre as vinhas' },
+  pg4_tag: { en: 'Stone houses', pt: 'Casas de pedra' },
+  pg5: { en: 'Striped seaside houses, Costa Nova', pt: 'Casas às riscas, Costa Nova' },
+  pg5_tag: { en: 'Aveiro', pt: 'Aveiro' },
+  pg6: { en: 'Granite village house, Bragança', pt: 'Casa de granito, Bragança' },
+  pg6_tag: { en: 'Rural houses', pt: 'Casas rurais' },
   ft_hero_eyebrow: { en: 'Northern Portugal · IMPIC licence 115511', pt: 'Norte de Portugal · Alvará IMPIC 115511' },
   ft_s1: { en: 'Licensed &amp; insured', pt: 'Licenciados e com seguro' },
   ft_s2: { en: 'Fixed written quote', pt: 'Orçamento fixo por escrito' },
@@ -3419,7 +3443,7 @@ async function aiAskGemini(q, bubble, copy) {
 const baRange = document.getElementById('baRange');
 const baBefore = document.getElementById('baBefore');
 const baHandle = document.getElementById('baHandle');
-baRange.addEventListener('input', () => { baBefore.style.clipPath = `inset(0 ${100 - baRange.value}% 0 0)`; baHandle.style.left = baRange.value + '%'; });
+if (baRange) baRange.addEventListener('input', () => { baBefore.style.clipPath = `inset(0 ${100 - baRange.value}% 0 0)`; baHandle.style.left = baRange.value + '%'; });
 
 // Homepage FAQ
 const faqData = {
