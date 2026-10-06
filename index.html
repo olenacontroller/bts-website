@@ -928,7 +928,8 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 .pg-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 18px; }
 .pg-card { position: relative; border-radius: 10px; overflow: hidden; background: #DFE5EC; }
 .pg-card:first-child { grid-column: span 2; grid-row: span 2; }
-.pg-card.pg-wide { grid-column: 1 / -1; }
+.pg-card.pg-wide { grid-column: span 2; }
+@media (max-width: 600px) { .pg-card.pg-wide { grid-column: auto; } }
 .pg-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
 .pg-card:hover img { transform: scale(1.04); }
 .pg-cap { position: absolute; inset: auto 0 0 0; padding: 18px 18px 16px; background: linear-gradient(transparent, rgba(10,20,35,.82)); color: #fff; }
@@ -1185,6 +1186,7 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
       <div class="pg-card"><img src="img/bts-steel-window.jpg" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
       <div class="pg-card"><img src="img/bts-painting.jpg" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
       <div class="pg-card"><img src="img/bts-room-finished.jpg" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
+      <div class="pg-card"><img src="img/bts-room-sofa.jpg" style="object-position:50% 55%" alt="Room finished and handed back clean" loading="lazy"><div class="pg-cap"><span data-i18n="pg10_tag">Interiors</span><b data-i18n="pg10">Room finished and handed back clean</b></div></div>
       <div class="pg-card pg-wide"><img src="img/bts-schist-wall.jpg" style="object-position:50% 40%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
     </div>
   </div>
@@ -2167,6 +2169,8 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 let currentLang = 'en';
 
 const T = {
+  pg10: { en: 'Room finished and handed back clean', pt: 'Divisão concluída e entregue limpa' },
+  pg10_tag: { en: 'Interiors', pt: 'Interiores' },
   hx_ai: { en: 'Ask our AI assistant', pt: 'Pergunte ao assistente' },
   pg_label: { en: 'Our work', pt: 'O nosso trabalho' },
   pg_title: { en: 'Recent work by our team', pt: 'Trabalhos recentes da nossa equipa' },
