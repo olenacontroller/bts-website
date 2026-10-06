@@ -3127,11 +3127,14 @@ function aiEnable() {
   document.getElementById('aiBuddy').hidden = false;
   let seen = false;
   try { seen = localStorage.getItem('btsBuddy') === '1'; } catch (err) { /* storage blocked */ }
-  if (!seen) setTimeout(() => {
+  const showBubble = () => {
     if (!document.getElementById('aiPanel').hidden) return;
     document.getElementById('aiBuddyBubble').hidden = false;
     if (window.innerWidth <= 768) setTimeout(() => { document.getElementById('aiBuddyBubble').hidden = true; }, 12000);
-  }, 2500);
+  };
+  // Greet only after the visitor scrolls past the first screen, so the bubble never covers its buttons
+  const onScroll = () => { if (window.scrollY > window.innerHeight * 0.8) { window.removeEventListener('scroll', onScroll); setTimeout(showBubble, 600); } };
+  if (!seen) window.addEventListener('scroll', onScroll, { passive: true });
   aiRenderChips();
 }
 function buddyDismiss() {
