@@ -1011,7 +1011,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
       <a data-i18n="nav_home" onclick="showPage('home')">Home</a>
       <a data-i18n="nav_about" onclick="showPage('home','why')">About</a>
       <a data-i18n="nav_services" onclick="showPage('home','what-we-do')">Services</a>
-      <a data-i18n="nav_projects" onclick="showPage('works','projects')">Projects</a>
+      <a data-i18n="nav_projects" onclick="showPage('home','projects')">Projects</a>
       <a data-i18n="nav_careers" onclick="showPage('careers')">Careers</a>
       <a data-i18n="nav_contact" onclick="showPage('home','contact')">Contact</a>
       <a class="ft-topo-tel" href="tel:+351933255248"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span><b>933 255 248</b><small data-i18n="ft_callus">Call us</small></span></a>
@@ -1031,7 +1031,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
   <a data-i18n="nav_care" onclick="closeMenu();showPage('services')">Care Plans</a>
   <a data-i18n="nav_resolve" onclick="closeMenu();showPage('resolve')">Small repairs — BTS Resolve</a>
   <a data-i18n="nav_about" onclick="closeMenu();showPage('works','about')">About</a>
-  <a data-i18n="nav_projects" onclick="closeMenu();showPage('works','projects')">Projects</a>
+  <a data-i18n="nav_projects" onclick="closeMenu();showPage('home','projects')">Projects</a>
   <a data-i18n="nav_careers" onclick="closeMenu();showPage('careers')">Careers</a>
   <a data-i18n="nav_contact" onclick="closeMenu();showPage('home','contact')">Contact</a>
   <a class="ai-entry" hidden data-i18n="nav_ai" onclick="closeMenu();aiToggle(true)">Ask our AI assistant</a>
@@ -1143,6 +1143,27 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
       <div class="ft-vant"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8M8 3v2M5.5 13c2-1.5 3.5-4 4-8M6 9c1 2 3 3.5 5 4.5"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg></i><div><h4><span data-i18n="ft_v2_t">Bilingual manager</span></h4><p><span data-i18n="ft_v2_d">English and Portuguese from day one.</span></p></div></div>
       <div class="ft-vant"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></i><div><h4><span data-i18n="ft_v3_t">Weekly photo updates</span></h4><p><span data-i18n="ft_v3_d">Follow the work from anywhere.</span></p></div></div>
       <div class="ft-vant"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></i><div><h4><span data-i18n="ft_v4_t">Licensed &amp; insured</span></h4><p><span data-i18n="ft_v4_d">IMPIC licence 115511.</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pg-section" id="projects">
+  <div class="wrap">
+    <div class="pg-head">
+      <div class="section-label" data-i18n="pg_label">Our work</div>
+      <h2 class="section-title" data-i18n="pg_title">Recent work by our team</h2>
+      <p class="section-sub" data-i18n="pg_sub">Photos from our own projects in Northern Portugal — new builds, stonework, pools and interiors.</p>
+    </div>
+    <div class="pg-grid">
+      <div class="pg-card"><img src="img/bts-douro-pool.jpg" style="object-position:50% 60%" alt="Infinity pool over the Douro valley" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Pools</span><b data-i18n="pg1">Infinity pool over the Douro valley</b></div></div>
+      <div class="pg-card"><img src="img/bts-schist-wall.jpg" style="object-position:50% 50%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
+      <div class="pg-card"><img src="img/bts-schist-window.jpg" style="object-position:50% 45%" alt="New window opening in an old schist wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Rehabilitation</span><b data-i18n="pg3">New window opening in an old schist wall</b></div></div>
+      <div class="pg-card"><img src="img/bts-stone-clad-houses.jpg" style="object-position:50% 45%" alt="Terraced houses with stone-clad pillars" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">New construction</span><b data-i18n="pg4">Terraced houses with stone-clad pillars</b></div></div>
+      <div class="pg-card"><img src="img/bts-steel-window.jpg" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
+      <div class="pg-card"><img src="img/bts-painting.jpg" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
+      <div class="pg-card"><img src="img/bts-room-finished.jpg" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
+      <div class="pg-card"><img src="img/bts-olive-house.jpg" style="object-position:50% 52%" alt="Country house among olive trees" loading="lazy"><div class="pg-cap"><span data-i18n="pg8_tag">Country houses</span><b data-i18n="pg8">Country house among olive trees</b></div></div>
+      <div class="pg-card"><img src="img/bts-manor-house.jpg" style="object-position:50% 62%" alt="Manor house in the hills" loading="lazy"><div class="pg-cap"><span data-i18n="pg9_tag">Manor houses</span><b data-i18n="pg9">Manor house in the hills</b></div></div>
     </div>
   </div>
 </section>
@@ -1352,27 +1373,6 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
       <h2 class="section-title" data-i18n="faq_title">What You Need to Know</h2>
     </div>
     <div id="faqList" style="display:flex;flex-direction:column;gap:8px;"></div>
-  </div>
-</section>
-
-<section class="section pg-section" id="projects">
-  <div class="wrap">
-    <div class="pg-head">
-      <div class="section-label" data-i18n="pg_label">Our work</div>
-      <h2 class="section-title" data-i18n="pg_title">Recent work by our team</h2>
-      <p class="section-sub" data-i18n="pg_sub">Photos from our own projects in Northern Portugal — new builds, stonework, pools and interiors.</p>
-    </div>
-    <div class="pg-grid">
-      <div class="pg-card"><img src="img/bts-douro-pool.jpg" style="object-position:50% 60%" alt="Infinity pool over the Douro valley" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Pools</span><b data-i18n="pg1">Infinity pool over the Douro valley</b></div></div>
-      <div class="pg-card"><img src="img/bts-schist-wall.jpg" style="object-position:50% 50%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
-      <div class="pg-card"><img src="img/bts-schist-window.jpg" style="object-position:50% 45%" alt="New window opening in an old schist wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Rehabilitation</span><b data-i18n="pg3">New window opening in an old schist wall</b></div></div>
-      <div class="pg-card"><img src="img/bts-stone-clad-houses.jpg" style="object-position:50% 45%" alt="Terraced houses with stone-clad pillars" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">New construction</span><b data-i18n="pg4">Terraced houses with stone-clad pillars</b></div></div>
-      <div class="pg-card"><img src="img/bts-steel-window.jpg" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
-      <div class="pg-card"><img src="img/bts-painting.jpg" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
-      <div class="pg-card"><img src="img/bts-room-finished.jpg" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
-      <div class="pg-card"><img src="img/bts-olive-house.jpg" style="object-position:50% 52%" alt="Country house among olive trees" loading="lazy"><div class="pg-cap"><span data-i18n="pg8_tag">Country houses</span><b data-i18n="pg8">Country house among olive trees</b></div></div>
-      <div class="pg-card"><img src="img/bts-manor-house.jpg" style="object-position:50% 62%" alt="Manor house in the hills" loading="lazy"><div class="pg-cap"><span data-i18n="pg9_tag">Manor houses</span><b data-i18n="pg9">Manor house in the hills</b></div></div>
-    </div>
   </div>
 </section>
 
@@ -2062,7 +2062,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
     <div>
       <h4 data-i18n="foot_company">Company</h4>
       <a href="#" onclick="showPage('works','about');return false;" data-i18n="nav_about">About</a>
-      <a href="#" onclick="showPage('works','projects');return false;" data-i18n="nav_projects">Projects</a>
+      <a href="#" onclick="showPage('home','projects');return false;" data-i18n="nav_projects">Projects</a>
       <a href="#" onclick="showPage('careers');return false;" data-i18n="nav_careers">Careers</a>
       <a href="#" onclick="showPage('home','contact');return false;" data-i18n="nav_contact">Contact</a>
     </div>
@@ -3076,9 +3076,10 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 function closeMenu() { mobileMenu.classList.remove('open'); }
-const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers', '#services': 'works' };
-function routeHash() { const pg = HASH_PAGES[location.hash]; if (pg) showPage(pg); }
+const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers', '#services': 'works', '#projects': 'home' };
+function routeHash() { const pg = HASH_PAGES[location.hash]; const id = location.hash.slice(1); if (pg) showPage(pg, document.getElementById(id) ? id : undefined); }
 window.addEventListener('hashchange', routeHash);
+window.addEventListener('load', () => { const id = location.hash.slice(1); const el = id && HASH_PAGES[location.hash] && document.getElementById(id); if (el) setTimeout(() => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'instant' }), 150); });
 // In-page links (#contact, #calculator…) open the page that holds that section
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]');
