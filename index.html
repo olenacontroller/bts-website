@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<meta name="color-scheme" content="only light">
+<style>:root{color-scheme:only light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>BTS — Building The Solution</title>
 <meta name="description" content="Construction and Renovation for Real Estate Owners in Northern Portugal — Aveiro, Porto, Douro Valley">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap">
@@ -46,41 +47,7 @@
   --tag-not: #C53030; --tag-not-bg: rgba(197,48,48,0.06);
   --section-border: #D1D9E0;
   --highlight-bg: rgba(0,114,176,0.05);
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --page-bg: #0F1923; --text: #E2E8F0; --text-soft: #8B99AC; --text-inverse: #E2E8F0;
-    --surface: #162231; --surface-alt: #1C2B3D; --border: #2A3B50;
-    --shadow: rgba(0,0,0,0.2); --shadow-md: rgba(0,0,0,0.3);
-    --blue-deep: #3B9EDB; --blue-mid: #5BB8E8; --blue-light: #6DCAE0; --band: #0D3354;
-    --brass: #5BB8E8; --brass-light: #6DCAE0;
-    --midnight: #0F1923; --midnight-soft: #162231;
-    --green: #4ADE80; --green-bg: rgba(74,222,128,0.1);
-    --red: #F87171; --red-bg: rgba(248,113,113,0.08);
-    --amber: #FBBF24; --amber-bg: rgba(251,191,36,0.08);
-    --tag-included: #4ADE80; --tag-included-bg: rgba(74,222,128,0.1);
-    --tag-extra: #FBBF24; --tag-extra-bg: rgba(251,191,36,0.08);
-    --tag-not: #F87171; --tag-not-bg: rgba(248,113,113,0.08);
-    --section-border: #2A3B50; --highlight-bg: rgba(91,184,232,0.08);
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --page-bg: #0F1923; --text: #E2E8F0; --text-soft: #8B99AC; --text-inverse: #E2E8F0;
-  --surface: #162231; --surface-alt: #1C2B3D; --border: #2A3B50;
-  --shadow: rgba(0,0,0,0.2); --shadow-md: rgba(0,0,0,0.3);
-  --blue-deep: #3B9EDB; --blue-mid: #5BB8E8; --blue-light: #6DCAE0; --band: #0D3354;
-  --brass: #5BB8E8; --brass-light: #6DCAE0;
-  --midnight: #0F1923; --midnight-soft: #162231;
-  --green: #4ADE80; --green-bg: rgba(74,222,128,0.1);
-  --red: #F87171; --red-bg: rgba(248,113,113,0.08);
-  --amber: #FBBF24; --amber-bg: rgba(251,191,36,0.08);
-  --tag-included: #4ADE80; --tag-included-bg: rgba(74,222,128,0.1);
-  --tag-extra: #FBBF24; --tag-extra-bg: rgba(251,191,36,0.08);
-  --tag-not: #F87171; --tag-not-bg: rgba(248,113,113,0.08);
-  --section-border: #2A3B50; --highlight-bg: rgba(91,184,232,0.08);
+  color-scheme: only light;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -671,8 +638,6 @@ html { scroll-behavior: smooth; }
 .rs-price { background: var(--surface); border-color: var(--border); }
 .rs-price b { color: var(--text); }
 .rs-price p, .rs-price .rs-area { color: var(--text-soft); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .footer-logo { filter: brightness(0) invert(1); } }
-:root[data-theme="dark"] .footer-logo { filter: brightness(0) invert(1); }
 
 /* ── AI greeter ── */
 .ai-fab { display: none !important; }
