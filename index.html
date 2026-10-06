@@ -936,6 +936,41 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 .pg-credit { margin: 14px 0 0; font-size: 12px; color: var(--text-soft); text-align: right; }
 @media (max-width: 900px) { .pg-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; } }
 @media (max-width: 600px) { .pg-grid { grid-template-columns: 1fr; grid-auto-rows: 230px; } .pg-card:first-child { grid-column: auto; grid-row: auto; } }
+
+/* ── Whole site light: first screen, "why" block and footer ── */
+.ft-hero { background: #F6F8FB; color: var(--texto); }
+.ft-hero::before { background: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.90) 36%, rgba(255,255,255,0.45) 62%, rgba(255,255,255,0) 85%); }
+.ft-hero h1 { color: var(--navy); }
+.ft-hero h1 span, .ft-hero h1 em { color: var(--pri-esc); }
+.ft-hero .ft-eyebrow { color: var(--pri-esc); }
+.ft-sub { color: #3B4654; }
+.ft-selo { color: var(--texto); }
+.ft-selo i { border-color: var(--pri-esc); color: var(--pri-esc); background: rgba(255,255,255,0.7); }
+.ft-hero .ft-link-seta { color: var(--navy); }
+.ft-hero .ft-mao, .ft-mao-seta { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.45); }
+.ft-porque { background: #F6F8FB; color: var(--texto); }
+.ft-porque::before { background: linear-gradient(90deg, #F6F8FB 45%, rgba(246,248,251,0.6) 64%, rgba(246,248,251,0) 85%); }
+.ft-porque .ft-h2 { color: var(--navy); }
+.ft-porque .ft-lead { color: var(--cinza); }
+.ft-porque .ft-eyebrow { color: var(--pri-esc); }
+.ft-vant h4 { color: var(--navy); }
+.ft-vant p { color: var(--cinza); }
+.ft-vant i { border-color: var(--pri-esc); color: var(--pri-esc); background: #fff; }
+.ft-porque .ft-mao { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.45); }
+.footer { background: #F6F8FB !important; color: var(--cinza) !important; border-top: 1px solid var(--linha) !important; }
+.footer h4 { color: var(--navy) !important; }
+.footer a, .footer-contacts, .footer p { color: #3B4654 !important; }
+.footer a:hover { color: var(--pri-esc) !important; }
+.footer-contacts svg { color: var(--pri-esc) !important; }
+.footer-bottom { border-top-color: var(--linha) !important; color: var(--cinza) !important; }
+.footer-bottom a { color: var(--cinza) !important; }
+.footer-logo { background: none; padding: 0; }
+.footer-ai { border-color: var(--linha) !important; color: var(--navy) !important; background: #fff !important; }
+@media (max-width: 900px) {
+  .ft-hero::before { background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.95) 70%, #fff 100%); }
+  .ft-porque-foto { opacity: 0.18; }
+  .ft-porque::before { background: none; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
