@@ -971,6 +971,35 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
   .ft-porque-foto { opacity: 0.18; }
   .ft-porque::before { background: none; }
 }
+
+/* ── First screen: photo on top half (moving), white lower half with the actions ── */
+.hx-hero { padding-top: 92px; background: #fff; }
+.hx-photo { position: relative; height: calc(50vh - 46px); min-height: 280px; max-height: 560px; overflow: hidden; background: #DCE8F3; }
+.hx-photo-img { position: absolute; inset: -4%; background: url('img/bts-hero-modern.jpg') center 38%/cover no-repeat; animation: hxMove 22s ease-in-out infinite alternate; }
+@keyframes hxMove { 0% { transform: scale(1.04) translate(-1.5%, 0); } 100% { transform: scale(1.12) translate(1.5%, -1%); } }
+@media (prefers-reduced-motion: reduce) { .hx-photo-img { animation: none; } }
+body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; pointer-events: none; transition: opacity .3s; }
+.ai-buddy, .fab-stack { transition: opacity .3s; }
+.hx-body { max-width: 900px; margin: 0 auto; padding: 40px 24px 56px; text-align: center; }
+.hx-body .ft-eyebrow { color: var(--pri-esc); }
+.hx-body h1 { font-size: clamp(30px, 4.2vw, 50px); font-weight: 700; line-height: 1.15; color: var(--navy); margin: 0 auto 14px; max-width: 780px; text-wrap: balance; }
+.hx-body h1 span { color: var(--pri-esc); }
+.hx-sub { color: var(--cinza); font-size: 16px; line-height: 1.6; margin: 0 auto 28px; max-width: 560px; }
+.hx-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.hx-btn { padding: 14px 24px; font-size: 15px; }
+.hx-wa { background: #25D366; } .hx-wa:hover { background: #1EB955; }
+.hx-ai { background: #fff; color: var(--navy); border: 1.5px solid var(--linha); }
+.hx-ai:hover { background: #F6F8FB; border-color: var(--pri); }
+.hx-ai svg { color: var(--pri-esc); }
+.hx-small { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--navy); text-decoration: none; }
+.hx-small:hover { color: var(--pri-esc); }
+@media (max-width: 900px) {
+  .hx-hero { padding-top: 80px; }
+  .hx-photo { height: 38vh; min-height: 220px; }
+  .hx-body { padding: 28px 20px 40px; }
+  .hx-btns { flex-direction: column; align-items: stretch; }
+  .hx-btn { justify-content: center; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1040,24 +1069,18 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 <!-- HOMEPAGE -->
 <div class="page-view active" id="page-home">
 
-<section class="ft-hero" id="home">
-  <div class="ft-hero-foto" style="background-image:url('img/ft-hero.jpg')"></div>
-  <div class="ft-wrap">
+<section class="hx-hero" id="home">
+  <div class="hx-photo"><div class="hx-photo-img" role="img" aria-label="Modern house built above the Douro vineyards"></div></div>
+  <div class="hx-body">
     <div class="ft-eyebrow"><span data-i18n="ft_hero_eyebrow">Northern Portugal · IMPIC licence 115511</span></div>
     <h1 data-i18n="hero_title">Renovating a Property in Portugal? <span>We Manage It for You</span></h1>
-    <p class="ft-sub" data-i18n="hero_sub">Fixed written quote and weekly photo updates — even if you live abroad.</p>
-    <div class="ft-selos">
-      <div class="ft-selo"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></i><span data-i18n="ft_s1">Licensed &amp; insured</span></div>
-      <div class="ft-selo"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></i><span data-i18n="ft_s2">Fixed written quote</span></div>
-      <div class="ft-selo"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8M8 3v2M5.5 13c2-1.5 3.5-4 4-8M6 9c1 2 3 3.5 5 4.5"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg></i><span data-i18n="ft_s3">English-speaking manager</span></div>
-      <div class="ft-selo"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></i><span data-i18n="ft_s4">Weekly photo updates</span></div>
+    <p class="hx-sub" data-i18n="hero_sub">Fixed written quote and weekly photo updates — even if you live abroad.</p>
+    <div class="hx-btns">
+      <a class="ft-btn hx-btn" href="#contact"><span data-i18n="ft_quote">Get a free quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a class="ft-btn hx-btn hx-wa" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>
+      <button type="button" class="ft-btn hx-btn hx-ai ai-entry" hidden onclick="aiToggle(true)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg> <span data-i18n="hx_ai">Ask our AI assistant</span></button>
     </div>
-    <div class="ft-acoes">
-      <a class="ft-btn" href="#contact"><span data-i18n="ft_quote">Get a free quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a class="ft-link-seta" href="#resolve" onclick="showPage('resolve');return false;"><span data-i18n="ft_small">Small repair? BTS Resolve</span> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg></a>
-    </div>
-    <div class="ft-mao"><span data-i18n="ft_note1">We build solutions</span></div>
-    <svg class="ft-mao-seta" width="40" height="46" viewBox="0 0 40 46" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2c14 6 22 18 20 38"/><path d="m18 34 8 8 6-10"/></svg>
+    <a class="hx-small" href="#resolve" onclick="showPage('resolve');return false;"><span data-i18n="ft_small">Small repair? BTS Resolve</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
 </section>
 
@@ -2145,6 +2168,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 let currentLang = 'en';
 
 const T = {
+  hx_ai: { en: 'Ask our AI assistant', pt: 'Pergunte ao assistente' },
   pg_label: { en: 'Our work', pt: 'O nosso trabalho' },
   pg_title: { en: 'Recent work by our team', pt: 'Trabalhos recentes da nossa equipa' },
   pg_sub: { en: 'Photos from our own projects in Northern Portugal — new builds, stonework, pools and interiors.', pt: 'Fotos das nossas próprias obras no Norte de Portugal — construção nova, alvenaria de pedra, piscinas e interiores.' },
@@ -3079,6 +3103,8 @@ function closeMenu() { mobileMenu.classList.remove('open'); }
 const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers', '#services': 'works', '#projects': 'home' };
 function routeHash() { const pg = HASH_PAGES[location.hash]; const id = location.hash.slice(1); if (pg) showPage(pg, document.getElementById(id) ? id : undefined); }
 window.addEventListener('hashchange', routeHash);
+// The first screen has its own WhatsApp and AI buttons: hide the floating ones while those are visible
+if ('IntersectionObserver' in window) { const hb = document.querySelector('.hx-btns'); if (hb) new IntersectionObserver(es => { const home = document.getElementById('page-home').classList.contains('active'); document.body.classList.toggle('hero-cta-visible', home && es[0].isIntersecting); }).observe(hb); }
 window.addEventListener('load', () => { const id = location.hash.slice(1); const el = id && HASH_PAGES[location.hash] && document.getElementById(id); if (el) setTimeout(() => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'instant' }), 150); });
 // In-page links (#contact, #calculator…) open the page that holds that section
 document.addEventListener('click', e => {
