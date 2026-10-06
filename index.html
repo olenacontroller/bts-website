@@ -928,6 +928,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-display); font-weight: 
 .pg-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 18px; }
 .pg-card { position: relative; border-radius: 10px; overflow: hidden; background: #DFE5EC; }
 .pg-card:first-child { grid-column: span 2; grid-row: span 2; }
+.pg-card.pg-wide { grid-column: 1 / -1; }
 .pg-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
 .pg-card:hover img { transform: scale(1.04); }
 .pg-cap { position: absolute; inset: auto 0 0 0; padding: 18px 18px 16px; background: linear-gradient(transparent, rgba(10,20,35,.82)); color: #fff; }
@@ -1179,14 +1180,12 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
     </div>
     <div class="pg-grid">
       <div class="pg-card"><img src="img/bts-douro-pool.jpg" style="object-position:50% 60%" alt="Infinity pool over the Douro valley" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Pools</span><b data-i18n="pg1">Infinity pool over the Douro valley</b></div></div>
-      <div class="pg-card"><img src="img/bts-schist-wall.jpg" style="object-position:50% 50%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
       <div class="pg-card"><img src="img/bts-schist-window.jpg" style="object-position:50% 45%" alt="New window opening in an old schist wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Rehabilitation</span><b data-i18n="pg3">New window opening in an old schist wall</b></div></div>
       <div class="pg-card"><img src="img/bts-stone-clad-houses.jpg" style="object-position:50% 45%" alt="Terraced houses with stone-clad pillars" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">New construction</span><b data-i18n="pg4">Terraced houses with stone-clad pillars</b></div></div>
       <div class="pg-card"><img src="img/bts-steel-window.jpg" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
       <div class="pg-card"><img src="img/bts-painting.jpg" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
       <div class="pg-card"><img src="img/bts-room-finished.jpg" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
-      <div class="pg-card"><img src="img/bts-olive-house.jpg" style="object-position:50% 52%" alt="Country house among olive trees" loading="lazy"><div class="pg-cap"><span data-i18n="pg8_tag">Country houses</span><b data-i18n="pg8">Country house among olive trees</b></div></div>
-      <div class="pg-card"><img src="img/bts-manor-house.jpg" style="object-position:50% 62%" alt="Manor house in the hills" loading="lazy"><div class="pg-cap"><span data-i18n="pg9_tag">Manor houses</span><b data-i18n="pg9">Manor house in the hills</b></div></div>
+      <div class="pg-card pg-wide"><img src="img/bts-schist-wall.jpg" style="object-position:50% 40%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
     </div>
   </div>
 </section>
@@ -2186,10 +2185,6 @@ const T = {
   pg6_tag: { en: 'Interiors', pt: 'Interiores' },
   pg7: { en: 'Room ready after repainting', pt: 'Quarto pronto depois da pintura' },
   pg7_tag: { en: 'Interiors', pt: 'Interiores' },
-  pg8: { en: 'Country house among olive trees', pt: 'Casa de campo entre oliveiras' },
-  pg8_tag: { en: 'Country houses', pt: 'Casas de campo' },
-  pg9: { en: 'Manor house in the hills', pt: 'Solar entre as colinas' },
-  pg9_tag: { en: 'Manor houses', pt: 'Solares' },
   ft_hero_eyebrow: { en: 'Northern Portugal · IMPIC licence 115511', pt: 'Norte de Portugal · Alvará IMPIC 115511' },
   ft_s1: { en: 'Licensed &amp; insured', pt: 'Licenciados e com seguro' },
   ft_s2: { en: 'Fixed written quote', pt: 'Orçamento fixo por escrito' },
