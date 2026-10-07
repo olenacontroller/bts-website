@@ -1053,13 +1053,23 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 .vx-hero { margin-top: 0; height: 100vh; max-height: 920px; }
 @media (max-width: 900px) { .vx-hero { margin-top: 0; height: 100svh; } }
 
-/* ── Bigger header logo ── */
-.nav-inner { height: 104px; }
-.nav-logo { height: 80px; }
-.mobile-menu { top: 104px; }
-@media (max-width: 900px) { .nav-inner { height: 86px; } .nav-logo { height: 62px; } .mobile-menu { top: 86px; } }
-@media (max-width: 480px) { .nav { padding: 0 16px; } .nav-logo { height: 56px; } .nav-right { gap: 10px; } }
-@media (max-width: 360px) { .nav-logo { height: 46px; } }
+
+/* ── Menu always visible in one line ── */
+@media (max-width: 1024px) and (min-width: 761px) {
+  .nav-links { display: flex !important; gap: 22px; }
+  .nav-links a { font-size: 12px; letter-spacing: .08em; }
+  .hamburger { display: none !important; }
+}
+@media (max-width: 760px) {
+  .nav-inner { flex-wrap: wrap; height: auto; padding-top: 10px; row-gap: 4px; }
+  .nav-logo { height: 46px; }
+  .nav-links { display: flex !important; order: 3; width: 100%; gap: 10px; justify-content: space-between; overflow-x: auto; scrollbar-width: none; padding: 2px 0 10px; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { font-size: 10px; letter-spacing: .03em; white-space: nowrap; flex-shrink: 0; }
+  .nav-links .lang-dd { display: none; }
+  .mobile-menu { top: 96px; }
+  .page-top { padding-top: 130px; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -3201,8 +3211,8 @@ routeHash();
 
 // Show mobile lang toggle
 const langMob = document.getElementById('langToggleMobile').parentElement;
-langMob.style.display = window.innerWidth <= 1024 ? 'block' : 'none';
-window.addEventListener('resize', () => { langMob.style.display = window.innerWidth <= 1024 ? 'block' : 'none'; });
+langMob.style.display = window.innerWidth <= 760 ? 'block' : 'none';
+window.addEventListener('resize', () => { langMob.style.display = window.innerWidth <= 760 ? 'block' : 'none'; });
 
 // ── AI assistant (demo) ──
 // Runs through the viewer's own Claude account when the page is opened inside claude.ai
