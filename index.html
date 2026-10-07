@@ -1070,6 +1070,12 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   .mobile-menu { top: 96px; }
   .page-top { padding-top: 130px; }
 }
+
+/* ── Resolve link under the CAREERS menu item, same line as before ── */
+@media (min-width: 761px) {
+  .vx-content { padding-bottom: 40px; }
+  .vx-content .hx-small { position: absolute; bottom: 0; margin: 0; white-space: nowrap; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1145,7 +1151,6 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   </video>
   <div class="vx-shade" aria-hidden="true"></div>
   <div class="vx-content">
-    <div class="vx-eyebrow"><span data-i18n="ft_hero_eyebrow">Northern Portugal · IMPIC licence 115511</span></div>
     <h1 data-i18n="hero_title">Renovating a Property in Portugal? <span>We Manage It for You</span></h1>
     <p class="vx-sub" data-i18n="hero_sub">Fixed written quote and weekly photo updates — even if you live abroad.</p>
     <div class="hx-btns">
@@ -2802,7 +2807,7 @@ function toggleLangMenu(e) {
   document.querySelectorAll('.lang-menu').forEach(m => { m.hidden = true; });
   menu.hidden = !open;
 }
-function pickLang(lang) { document.querySelectorAll('.lang-menu').forEach(m => { m.hidden = true; }); if (lang !== currentLang) setLang(lang); }
+function pickLang(lang) { setTimeout(placeResolveLink, 50); document.querySelectorAll('.lang-menu').forEach(m => { m.hidden = true; }); if (lang !== currentLang) setLang(lang); }
 document.addEventListener('click', () => document.querySelectorAll('.lang-menu').forEach(m => { m.hidden = true; }));
 
 // Careers — application
@@ -3184,6 +3189,17 @@ hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 function closeMenu() { mobileMenu.classList.remove('open'); }
 const HASH_PAGES = { '#resolve': 'resolve', '#careers': 'careers', '#services': 'works', '#projects': 'home' };
 function routeHash() { const pg = HASH_PAGES[location.hash]; const id = location.hash.slice(1); if (pg) showPage(pg, document.getElementById(id) ? id : undefined); }
+function placeResolveLink() {
+  const link = document.querySelector('.vx-content .hx-small');
+  const careers = document.querySelector('.nav-links a[data-i18n="nav_careers"]');
+  if (!link || !careers) return;
+  if (window.innerWidth <= 760) { link.style.left = ''; return; }
+  const box = link.parentElement.getBoundingClientRect();
+  link.style.left = Math.round(careers.getBoundingClientRect().left - box.left) + 'px';
+}
+window.addEventListener('resize', placeResolveLink);
+window.addEventListener('load', placeResolveLink);
+document.fonts && document.fonts.ready.then(placeResolveLink);
 function navHeroState() {
   const hero = document.querySelector('.vx-hero');
   const home = document.getElementById('page-home').classList.contains('active');
