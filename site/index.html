@@ -1052,6 +1052,14 @@ body.nav-hero:has(.mobile-menu.open) .nav-logo { filter: none; }
 body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.open) .lang-toggle { color: var(--navy); }
 .vx-hero { margin-top: 0; height: 100vh; max-height: 920px; }
 @media (max-width: 900px) { .vx-hero { margin-top: 0; height: 100svh; } }
+
+/* ── Bigger header logo ── */
+.nav-inner { height: 104px; }
+.nav-logo { height: 80px; }
+.mobile-menu { top: 104px; }
+@media (max-width: 900px) { .nav-inner { height: 86px; } .nav-logo { height: 62px; } .mobile-menu { top: 86px; } }
+@media (max-width: 480px) { .nav { padding: 0 16px; } .nav-logo { height: 56px; } .nav-right { gap: 10px; } }
+@media (max-width: 360px) { .nav-logo { height: 46px; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
