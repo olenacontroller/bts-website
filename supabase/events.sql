@@ -2,7 +2,7 @@
 -- Run once in Supabase → SQL Editor. Safe to run again.
 create table if not exists public.events (
   id bigint generated always as identity primary key,
-  name text not null check (name in ('call','whatsapp','quote_open','quote_sent','calc_open','calc_done','resolve_open','homecare_open','careers_open','job_apply','gallery_swipe','ai_open')),
+  name text not null check (name in ('visit','call','whatsapp','quote_open','quote_sent','calc_open','calc_done','resolve_open','homecare_open','careers_open','job_apply','gallery_swipe','ai_open')),
   page text check (page is null or char_length(page) <= 40),
   device text check (device in ('phone','computer')),
   lang text check (lang in ('en','pt')),
