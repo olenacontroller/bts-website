@@ -1382,6 +1382,7 @@ function openDetail(leadId) {
       <div class="detail-field"><span class="detail-field-label">Email</span><span class="detail-field-value">${esc(lead.email || '—')}</span></div>
       <div class="detail-field"><span class="detail-field-label">Phone</span><span class="detail-field-value">${esc(lead.phone || '—')}</span></div>
       <div class="detail-field"><span class="detail-field-label">Source</span><span class="detail-field-value">${esc(lead.source || '—')}</span></div>
+      ${lead.came_from ? `<div class="detail-field"><span class="detail-field-label">Came from</span><span class="detail-field-value">${esc(lead.came_from)}</span></div>` : ''}
     </div>
     <div class="detail-section">
       <div class="detail-section-title">Property</div>
@@ -1622,12 +1623,26 @@ const CLICK_LABELS = [
   ['calc_done', 'Finished cost calculator'], ['resolve_open', 'Opened BTS Resolve'], ['homecare_open', 'Opened HomeCare plans'],
   ['gallery_swipe', 'Swiped project photos'], ['ai_open', 'Opened AI assistant'], ['careers_open', 'Opened Careers'], ['job_apply', 'Pressed “Apply for this job”']
 ];
+function sourcesHtml(events) {
+  const since = Date.now() - 30 * 86400000;
+  const count = rows => rows.reduce((m, r) => { if (r.came_from) m[r.came_from] = (m[r.came_from] || 0) + 1; return m; }, {});
+  const table = (title, m) => {
+    const rows = Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, 8);
+    return rows.length ? `<div style="margin-top:14px"><div style="font-weight:600;color:var(--text-primary,#222);margin-bottom:4px">${title}</div>` +
+      rows.map(([k, v]) => `<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06)"><span>${esc(k)}</span><b>${v}</b></div>`).join('') + '</div>' : '';
+  };
+  const reqs = count(leads.filter(l => l.created_at >= since));
+  const visits = {};
+  events.forEach(r => { if (r.came_from) visits[r.came_from] = (visits[r.came_from] || 0) + 1; });
+  return table('Requests by where visitors came from', reqs) + table('Taps by where visitors came from', visits);
+}
 async function loadClickStats() {
   const box = document.getElementById('clickStats');
   if (!box) return;
   if (!sbClient) { box.textContent = 'Available when the CRM is connected to the database.'; return; }
   const since = Date.now() - 30 * 86400000;
-  const { data, error } = await sbClient.from('events').select('name, device').gte('created_at', since).limit(20000);
+  let { data, error } = await sbClient.from('events').select('name, device, came_from').gte('created_at', since).limit(20000);
+  if (error && /came_from/.test(error.message || '')) ({ data, error } = await sbClient.from('events').select('name, device').gte('created_at', since).limit(20000));
   if (!box.isConnected) return;
   if (error) { box.textContent = 'Click counting is not switched on yet (run supabase/events.sql in Supabase).'; return; }
   const n = {}, ph = {};
@@ -1638,7 +1653,7 @@ async function loadClickStats() {
       <div class="funnel-stage" style="width:190px">${label}</div>
       <div class="funnel-fill"><div class="funnel-fill-bar" style="width:${((n[k] || 0) / max) * 100}%;background:var(--brass)"></div></div>
       <div class="funnel-count" title="on phones: ${ph[k] || 0}">${n[k] || 0}</div>
-    </div>`).join('') + '<div style="margin-top:8px;font-size:0.75rem">These are taps, not leads — real requests are in your Leads list. Hover a number to see how many came from phones. Counts are anonymous.</div>';
+    </div>`).join('') + sourcesHtml(data) + '<div style="margin-top:8px;font-size:0.75rem">These are taps, not leads — real requests are in your Leads list. Hover a number to see how many came from phones. Counts are anonymous.</div>';
 }
 
 function renderPipeline(c) {
@@ -2066,6 +2081,7 @@ function openCandidate(id) {
       ${field('Available from', esc(x.availability || '—'))}
       ${field('Work permit', esc(x.permit || '—'))}
       ${field('Source', esc(x.source || '—'))}
+      ${x.came_from ? field('Came from', esc(x.came_from)) : ''}
       ${x.cv_path ? `<div class="file-links" style="margin-top:8px;"><a class="pending" data-path="${esc(x.cv_path)}" target="_blank" rel="noopener">Open CV</a></div>` : ''}
     </div>
     <div class="detail-section">

@@ -2049,7 +2049,7 @@ body.calc-open { overflow: hidden; }
       <li><strong>Clientes:</strong> dados de identificação e faturação (incluindo NIF e morada), dados do imóvel, comunicações e registos fotográficos da obra.</li>
       <li><strong>Candidatos a emprego:</strong> nome, contactos, CV, experiência profissional, disponibilidade, local de residência, situação quanto à autorização de trabalho e notas das entrevistas.</li>
       <li><strong>Assistente de IA do site:</strong> as mensagens que escreve no chat são enviadas à Google (Gemini API), que as processa por nossa conta apenas para gerar a resposta. Não guardamos o histórico do chat; os seus contactos só nos chegam se enviar o formulário. Não escreva dados sensíveis no chat.</li>
-      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Contamos de forma anónima os toques em botões (por exemplo «Ligar» ou «WhatsApp») — apenas o nome do botão, a página, o tipo de dispositivo e o idioma, sem dados pessoais nem cookies. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento e ao Google Fonts (ver a <a href="#" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
+      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Contamos de forma anónima os toques em botões (por exemplo «Ligar» ou «WhatsApp») — apenas o nome do botão, a página, o tipo de dispositivo, o idioma e o tipo de site de onde veio (por exemplo o Google), sem dados pessoais nem cookies. Quando envia um pedido, guardamos essa mesma origem com ele. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento e ao Google Fonts (ver a <a href="#" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
     </ul>
     <p>Não tratamos categorias especiais de dados (por exemplo, saúde) e pedimos-lhe que não as inclua no CV ou nas mensagens.</p>
 
@@ -2133,7 +2133,7 @@ body.calc-open { overflow: hidden; }
       <li><strong>Clients:</strong> identification and billing data (including tax number and address), property details, communications and photo records of the works.</li>
       <li><strong>Job applicants:</strong> name, contact details, CV, work experience, availability, place of residence, work-permit status and interview notes.</li>
       <li><strong>Website AI assistant:</strong> the messages you type in the chat are sent to Google (Gemini API), which processes them on our behalf only to generate the answer. We do not keep the chat history; your contact details reach us only if you send the form. Please do not type sensitive data in the chat.</li>
-      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. We count button taps anonymously (for example “Call” or “WhatsApp”) — only the button name, page, device type and language, with no personal data and no cookies. When the page loads, your IP address is disclosed to the hosting provider and to Google Fonts (see the <a href="#" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
+      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. We count button taps anonymously (for example “Call” or “WhatsApp”) — only the button name, page, device type, language and the kind of site you came from (for example Google), with no personal data and no cookies. When you send a request, we save that same source with it. When the page loads, your IP address is disclosed to the hosting provider and to Google Fonts (see the <a href="#" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
     </ul>
     <p>We do not process special categories of data (e.g. health data) and ask you not to include them in your CV or messages.</p>
 
@@ -3090,7 +3090,7 @@ async function submitApplication(e) {
       const cv = await uploadFiles('cv/' + id, document.getElementById('a_cv').files, 1);
       const now = Date.now();
       const pos = document.getElementById('a_position').value;
-      const { error } = await sb.from('candidates').insert({
+      const { error } = await btsInsert('candidates', {
         id, name: val('a_name'), phone: val('a_phone'), email: val('a_email'),
         vacancy_id: pos === 'pedreiro' ? 'vac_pedreiro' : pos === 'cofragem' ? 'vac_cofragem' : pos === 'pladur' ? 'vac_pladur' : '',
         experience: optEn('a_exp'), availability: optEn('a_start'), city: val('a_city'),
@@ -3148,7 +3148,7 @@ async function submitEstimate(e) {
       const id = uuid();
       const photos = await uploadFiles('leads/' + id, document.getElementById('c_photos').files, 5);
       const now = Date.now();
-      const { error } = await sb.from('leads').insert({
+      const { error } = await btsInsert('leads', {
         id, name: val('c_name'), email: val('c_email'), phone: val('c_phone'),
         location: optEn('c_location'), service: optEn('c_service'), timing: optEn('c_timing'),
         description: val('c_desc'), budget: lastCalc ? budgetBucket(lastCalc) : '',
@@ -3187,7 +3187,7 @@ async function submitResolve(e) {
       const id = uuid();
       const photos = await uploadFiles('leads/' + id, document.getElementById('r_photos').files, 5);
       const now = Date.now();
-      const { error } = await sb.from('leads').insert({
+      const { error } = await btsInsert('leads', {
         id, name: val('r_name'), phone: val('r_phone'), location: val('r_place'),
         service: 'BTS Resolve', description: val('r_desc'), photo_paths: photos,
         source: 'Website', stage: 'new', lang: currentLang, consent: true, created_at: now, updated_at: now
@@ -3209,6 +3209,33 @@ function editEstimate() {
 // ── Backend (Supabase) — switched on by config.js; without it forms fall back to WhatsApp ──
 const BTS = window.BTS_CONFIG || {};
 let sb = null;
+// Where the visitor came from (no cookies, kept only in this page view)
+const BTS_CAME_FROM = (function () {
+  try {
+    const q = new URLSearchParams(location.search);
+    const utm = (q.get('utm_source') || '').trim();
+    if (utm) return utm.slice(0, 40);
+    if (q.get('gclid')) return 'Google Ads';
+    if (q.get('fbclid')) return 'Facebook / Instagram';
+    const ref = document.referrer;
+    if (!ref) return 'Direct / app (WhatsApp, email…)';
+    const host = new URL(ref).hostname.replace(/^www\./, '');
+    if (host === location.hostname.replace(/^www\./, '')) return 'Direct / app (WhatsApp, email…)';
+    const known = [[/(^|\.)google\./, 'Google'], [/(^|\.)bing\.com$/, 'Bing'], [/facebook\.com$|(^|\.)fb\.com$/, 'Facebook'],
+      [/instagram\.com$/, 'Instagram'], [/linkedin\.com$|lnkd\.in$/, 'LinkedIn'], [/(^|\.)t\.co$|twitter\.com$|(^|\.)x\.com$/, 'X / Twitter'],
+      [/chatgpt\.com$|openai\.com$/, 'ChatGPT'], [/perplexity\.ai$/, 'Perplexity'], [/whatsapp\.com$/, 'WhatsApp'],
+      [/duckduckgo\.com$/, 'DuckDuckGo'], [/yahoo\./, 'Yahoo']];
+    for (const [re, name] of known) if (re.test(host)) return name;
+    return host.slice(0, 40);
+  } catch (e) { return null; }
+})();
+// Save a row with the visitor's source; if the database has no came_from column yet, save it without
+async function btsInsert(table, row) {
+  if (!sb) return { error: new Error('no backend') };
+  const res = await sb.from(table).insert(BTS_CAME_FROM ? Object.assign({ came_from: BTS_CAME_FROM }, row) : row);
+  if (res.error && /came_from/.test(res.error.message || '')) return sb.from(table).insert(row);
+  return res;
+}
 (function initBackend() {
   if (!BTS.supabaseUrl || !BTS.supabaseKey) return;
   const s = document.createElement('script');
@@ -4027,7 +4054,7 @@ document.querySelectorAll('.footer-grid > div:not(.footer-brand) > h4').forEach(
     if (last[name] && now - last[name] < 3000) return;
     last[name] = now; once[name] = true;
     const active = document.querySelector('.page-view.active');
-    sb.from('events').insert({
+    btsInsert('events', {
       name: name,
       page: active ? active.id.replace('page-', '') : null,
       device: window.matchMedia('(max-width: 768px)').matches ? 'phone' : 'computer',
