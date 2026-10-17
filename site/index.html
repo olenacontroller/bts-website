@@ -3211,8 +3211,8 @@ function goEstimate(serviceKey) {
 // Replace with the BTS price list before relying on them.
 const CALC_TYPES = {
   renovation: { unit: 'm2', min: 30, max: 400, def: 100, step: 5, perM2: { standard: [450, 650], premium: [650, 950], luxury: [950, 1400] }, weeks: a => [Math.round(6 + a * 0.07), Math.round(10 + a * 0.11)], service: 'f_opt_reno' },
-  kitchen:    { unit: 'size', sizes: { s: [9000, 14000], m: [14000, 22000], l: [22000, 35000] }, mult: { standard: 1, premium: 1.35, luxury: 1.8 }, weeks: () => [4, 7], service: 'f_opt_kb' },
-  bathroom:   { unit: 'size', sizes: { s: [6000, 9000], m: [9000, 14000], l: [14000, 22000] }, mult: { standard: 1, premium: 1.35, luxury: 1.8 }, weeks: () => [3, 5], service: 'f_opt_kb' },
+  kitchen:    { unit: 'size', sizes: { s: [9000, 14000], m: [14000, 22000], l: [22000, 35000] }, mult: { standard: 1, premium: 1.35, luxury: 1.8 }, weeks: () => [2, 6], service: 'f_opt_kb' },
+  bathroom:   { unit: 'size', sizes: { s: [6000, 9000], m: [9000, 14000], l: [14000, 22000] }, mult: { standard: 1, premium: 1.35, luxury: 1.8 }, weeks: () => [2, 6], service: 'f_opt_kb' },
   roof:       { unit: 'm2', min: 30, max: 400, def: 120, step: 5, perM2: { standard: [70, 110], premium: [110, 160], luxury: [160, 220] }, weeks: a => [Math.max(1, Math.round(1 + a / 80)), Math.round(3 + a / 60)], service: 'f_opt_roof' },
   pool:       { unit: 'size', sizes: { s: [25000, 35000], m: [35000, 50000], l: [50000, 75000] }, mult: { standard: 1, premium: 1.25, luxury: 1.6 }, weeks: () => [8, 14], service: 'f_opt_pool' },
   newbuild:   { unit: 'm2', min: 60, max: 500, def: 150, step: 10, perM2: { standard: [1100, 1400], premium: [1400, 1900], luxury: [1900, 2600] }, weeks: a => [Math.round(32 + a * 0.05), Math.round(48 + a * 0.08)], service: 'f_opt_new' },
