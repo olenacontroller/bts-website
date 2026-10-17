@@ -55,11 +55,11 @@ const TOOLS = [{
     },
     {
       name: 'open_job_application',
-      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, outro = other trade.',
+      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, pladur = drywall / plasterboard / LSF installer, outro = other trade.',
       parameters: {
         type: 'OBJECT',
         properties: {
-          position: { type: 'STRING', enum: ['pedreiro', 'cofragem', 'outro'] },
+          position: { type: 'STRING', enum: ['pedreiro', 'cofragem', 'pladur', 'outro'] },
           name: { type: 'STRING' },
           phone: { type: 'STRING' }
         },

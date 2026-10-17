@@ -1642,6 +1642,29 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 
     <div class="cr-jobs">
       <article class="cr-job">
+        <span class="cr-status" data-i18n="cr_j3_status">Urgent · immediate start</span>
+        <h3>Montador de Gesso Cartonado / Pladur</h3>
+        <div class="cr-job-sub" data-i18n="cr_j3_sub">Drywall &amp; LSF installer</div>
+        <div class="cr-meta">
+          <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-i18n="cr_j3_loc">Greater Porto — Maia · Valongo</span></span>
+          <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span data-i18n="cr_j3_type">Employment or subcontract</span></span>
+          <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span data-i18n="cr_j3_exp">Drywall / LSF experience</span></span>
+          <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg><span data-i18n="cr_j3_home">Accommodation available</span></span>
+        </div>
+        <div class="cr-block">
+          <h4 data-i18n="cr_do">What you'll do</h4>
+          <ul data-i18n="cr_j3_do"><li>Large sites — about 1,300 m² of walls and ceilings, incl. Panattoni Park (Campo, Valongo)</li><li>LSF partition walls with standard and moisture-resistant plasterboard (double 15 mm boards, rock wool core)</li><li>Fire-rated walls in PROMATECT® 100X board with mineral wool insulation</li><li>Independent ceilings in PROMATECT® 100X calcium silicate boards with rock wool</li></ul>
+        </div>
+        <div class="cr-block">
+          <h4 data-i18n="cr_need">What we're looking for</h4>
+          <ul data-i18n="cr_j3_need"><li>Experience installing plasterboard (pladur) and LSF framing</li><li>Experience with PROMAT fire-protection systems is a plus</li><li>Precision, quality finishing and responsibility</li><li>Available to start immediately</li><li>Individual installers, teams and subcontractors welcome</li></ul>
+        </div>
+        <div class="cr-job-actions">
+          <button type="button" class="btn btn-primary" onclick="applyFor('pladur')" data-i18n="cr_apply_btn">Apply for this job</button>
+        </div>
+      </article>
+
+      <article class="cr-job">
         <span class="cr-status" data-i18n="cr_open">Open position</span>
         <h3>Pedreiro</h3>
         <div class="cr-job-sub" data-i18n="cr_j1_sub">Stonemason · Bricklayer</div>
@@ -1708,7 +1731,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label" for="a_email">Email</label><input class="form-input" type="email" id="a_email" autocomplete="email"></div>
-          <div class="form-group"><label class="form-label" for="a_position" data-i18n="cr_f_pos">Position *</label><select class="form-input" id="a_position" required><option value="" data-i18n="cr_f_pos_sel">Select position</option><option value="pedreiro" data-i18n="cr_opt_j1">Pedreiro (Stonemason)</option><option value="cofragem" data-i18n="cr_opt_j2">Carpinteiro de Cofragem (Formwork Carpenter)</option><option value="outro" data-i18n="cr_opt_other">Other trade (spontaneous application)</option></select></div>
+          <div class="form-group"><label class="form-label" for="a_position" data-i18n="cr_f_pos">Position *</label><select class="form-input" id="a_position" required><option value="" data-i18n="cr_f_pos_sel">Select position</option><option value="pedreiro" data-i18n="cr_opt_j1">Pedreiro (Stonemason)</option><option value="cofragem" data-i18n="cr_opt_j2">Carpinteiro de Cofragem (Formwork Carpenter)</option><option value="pladur" data-i18n="cr_opt_j3">Montador de Pladur (Drywall installer)</option><option value="outro" data-i18n="cr_opt_other">Other trade (spontaneous application)</option></select></div>
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label" for="a_exp" data-i18n="cr_f_exp">Years of Experience</label><select class="form-input" id="a_exp"><option value="" data-i18n="cr_f_sel">Select</option><option data-i18n="cr_e1">Less than 1 year</option><option data-i18n="cr_e2">1–3 years</option><option data-i18n="cr_e3">3–5 years</option><option data-i18n="cr_e4">5–10 years</option><option data-i18n="cr_e5">More than 10 years</option></select></div>
@@ -2314,6 +2337,15 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 let currentLang = 'en';
 
 const T = {
+  cr_j3_status: { en: 'Urgent · immediate start', pt: 'Urgente · início imediato' },
+  cr_j3_sub: { en: 'Drywall &amp; LSF installer', pt: 'Gesso cartonado e estruturas LSF' },
+  cr_j3_loc: { en: 'Greater Porto — Maia · Valongo', pt: 'Grande Porto — Maia · Valongo' },
+  cr_j3_type: { en: 'Employment or subcontract', pt: 'Contrato ou subempreitada' },
+  cr_j3_exp: { en: 'Drywall / LSF experience', pt: 'Experiência em pladur / LSF' },
+  cr_j3_home: { en: 'Accommodation available', pt: 'Possibilidade de alojamento' },
+  cr_j3_do: { en: '<li>Large sites — about 1,300 m² of walls and ceilings, incl. Panattoni Park (Campo, Valongo)</li><li>LSF partition walls with standard and moisture-resistant plasterboard (double 15 mm boards, rock wool core)</li><li>Fire-rated walls in PROMATECT® 100X board with mineral wool insulation</li><li>Independent ceilings in PROMATECT® 100X calcium silicate boards with rock wool</li>', pt: '<li>Obras de grande dimensão — cerca de 1.300 m² de paredes e tetos, incl. Panattoni Park (Campo, Valongo)</li><li>Paredes divisórias em LSF com gesso cartonado standard e hidrófugo (placas duplas de 15 mm, núcleo em lã de rocha)</li><li>Paredes corta-fogo em placa PROMATECT® 100X com isolamento em lã mineral</li><li>Tetos independentes em placas de silicato de cálcio PROMATECT® 100X com lã de rocha</li>' },
+  cr_j3_need: { en: '<li>Experience installing plasterboard (pladur) and LSF framing</li><li>Experience with PROMAT fire-protection systems is a plus</li><li>Precision, quality finishing and responsibility</li><li>Available to start immediately</li><li>Individual installers, teams and subcontractors welcome</li>', pt: '<li>Experiência em montagem de gesso cartonado / pladur e estruturas LSF</li><li>Experiência com sistemas de proteção contra incêndio (PROMAT) — valorizada</li><li>Rigor, qualidade de acabamento e responsabilidade</li><li>Disponibilidade imediata</li><li>Contratação direta, equipas e subempreiteiros</li>' },
+  cr_opt_j3: { en: 'Montador de Pladur (Drywall installer)', pt: 'Montador de Pladur / Gesso Cartonado' },
   tips_open: { en: 'Tips for owners', pt: 'Dicas para proprietários' },
   swipe_hint: { en: 'Swipe to see more →', pt: 'Deslize para ver mais →' },
   up_add_photos: { en: 'Add photos', pt: 'Adicionar fotos' },
@@ -2928,7 +2960,7 @@ async function submitApplication(e) {
       const pos = document.getElementById('a_position').value;
       const { error } = await sb.from('candidates').insert({
         id, name: val('a_name'), phone: val('a_phone'), email: val('a_email'),
-        vacancy_id: pos === 'pedreiro' ? 'vac_pedreiro' : pos === 'cofragem' ? 'vac_cofragem' : '',
+        vacancy_id: pos === 'pedreiro' ? 'vac_pedreiro' : pos === 'cofragem' ? 'vac_cofragem' : pos === 'pladur' ? 'vac_pladur' : '',
         experience: optEn('a_exp'), availability: optEn('a_start'), city: val('a_city'),
         permit: optEn('a_permit'), notes: val('a_msg'), source: 'Website',
         cv_received: cv.length > 0, cv_path: cv[0] || null, stage: 'applied', lang: currentLang, consent: true,
@@ -3485,7 +3517,7 @@ function aiOpenForm(i) {
   return 'The estimate form is now open on the page and pre-filled. The visitor must review it, tick the consent box and press Send.';
 }
 function aiOpenJob(i) {
-  const pos = ['pedreiro', 'cofragem', 'outro'].includes(i.position) ? i.position : 'outro';
+  const pos = ['pedreiro', 'cofragem', 'pladur', 'outro'].includes(i.position) ? i.position : 'outro';
   applyFor(pos);
   if (i.name) document.getElementById('a_name').value = String(i.name).slice(0, 200);
   if (i.phone) document.getElementById('a_phone').value = String(i.phone).slice(0, 60);
@@ -3520,8 +3552,8 @@ function aiToolList() {
         description: { type: 'string', description: 'Short summary of the project in the visitor\'s words, including any estimate you gave' } } },
       execute: i => aiOpenForm(i) },
     { name: 'open_job_application',
-      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, outro = other trade.',
-      inputSchema: { type: 'object', properties: { position: { type: 'string', enum: ['pedreiro', 'cofragem', 'outro'] }, name: { type: 'string' }, phone: { type: 'string' } }, required: ['position'] },
+      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, pladur = drywall / plasterboard / LSF installer, outro = other trade.',
+      inputSchema: { type: 'object', properties: { position: { type: 'string', enum: ['pedreiro', 'cofragem', 'pladur', 'outro'] }, name: { type: 'string' }, phone: { type: 'string' } }, required: ['position'] },
       execute: i => aiOpenJob(i) },
     { name: 'show_section',
       description: 'Scrolls the website to a section so the visitor can see it.',
