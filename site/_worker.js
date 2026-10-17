@@ -61,7 +61,8 @@ const TOOLS = [{
         properties: {
           position: { type: 'STRING', enum: ['pedreiro', 'cofragem', 'pladur', 'outro'] },
           name: { type: 'STRING' },
-          phone: { type: 'STRING' }
+          phone: { type: 'STRING' },
+          proposed_rate: { type: 'STRING', description: "The applicant's own price proposal, e.g. '12 €/m2, labour only'" }
         },
         required: ['position']
       }
@@ -91,6 +92,7 @@ function systemPrompt(pageLanguage) {
     '- Call estimate_cost only for whole projects: a full renovation, a completely new kitchen or bathroom, a new roof, a pool, a new house or a facade. Give the range it returns. If it is unclear whether the visitor needs a repair or a whole project, ask one short question first (for example: is it a repair, or a complete renovation?).\n' +
     '- When the visitor wants a quote, a site visit or to be contacted: ask for their name and phone or email (and property location if unknown), then call open_estimate_form with what they told you. Then tell them to check the form, tick the consent box and press Send.\n' +
     '- For job questions, explain the vacancy; if they want to apply, call open_job_application.\n' +
+    '- Pay for workers and subcontractors: NEVER state, suggest or estimate any wage, hourly rate or price per m2 that BTS pays, for any trade. Ask the applicant how much they propose instead. For drywall / pladur / LSF work ask for their price per m2 (and whether it includes materials or labour only); for other trades ask their expected daily or monthly rate. Say the team will review their proposal and call them back. When you call open_job_application, put the proposal they gave in proposed_rate.\n' +
     '- Use show_section when it helps the visitor to see something on the page.\n' +
     '- Never ask for sensitive data (health, ID or bank details).\n' +
     '- If they want a person: WhatsApp +351 91 396 55 33 or phone +351 933 255 248.\n' +
