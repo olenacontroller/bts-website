@@ -85,9 +85,10 @@ def build(page):
     return html
 
 
-if DIST.exists():
-    shutil.rmtree(DIST)
-shutil.copytree(SITE, DIST)
+DIST.mkdir(exist_ok=True)
+for child in DIST.iterdir():
+    shutil.rmtree(child) if child.is_dir() else child.unlink()
+shutil.copytree(SITE, DIST, dirs_exist_ok=True)
 for page, (path, _, _) in PAGES.items():
     target = DIST / path.strip("/") / "index.html" if path != "/" else DIST / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
