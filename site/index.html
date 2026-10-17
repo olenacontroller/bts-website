@@ -1111,6 +1111,38 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   .pg-cap span { color: #fff; opacity: .85; }
   .swipe-hint { display: block; text-align: center; font-size: 0.8rem; color: var(--text-soft); margin-top: 2px; }
 }
+
+/* ── Phone: menu, steps, tips, footer ── */
+.tips-open { display: none; }
+@media (max-width: 760px) {
+  .nav-links { display: none !important; }
+  .nav-inner { flex-wrap: nowrap; height: 72px; padding-top: 0; }
+  .mobile-menu { top: 72px; }
+  .page-top { padding-top: 104px; }
+}
+@media (max-width: 768px) {
+  .ft-passos { gap: 0; margin-top: 26px; }
+  .ft-passo { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding: 12px 0; border-bottom: 1px solid #E6EAF0; }
+  .ft-passo:last-child { border-bottom: 0; }
+  .ft-passo i { grid-row: 1 / span 3; width: 40px; height: 40px; margin: 0; background: var(--pri, #C99A2E) !important; color: var(--pri, #C99A2E) !important; box-shadow: none; }
+  .ft-passo i svg { width: 18px; height: 18px; }
+  .ft-passo small { font-size: 12px; color: var(--pri, #C99A2E); }
+  .ft-passo h4 { margin: 0 0 2px; }
+  #tips .ft-grelha3 { display: none; }
+  #tips.tips-shown .ft-grelha3 { display: flex; }
+  .tips-open { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 0; border: 0; background: none; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--navy, #1F1F23); cursor: pointer; }
+  .tips-open svg { color: var(--pri, #C99A2E); }
+  .footer-grid { gap: 0; }
+  .footer-grid > div:not(.footer-brand) { border-top: 1px solid var(--border); }
+  .footer-grid > div:not(.footer-brand) > h4 { display: flex; justify-content: space-between; align-items: center; margin: 0; padding: 14px 0; cursor: pointer; }
+  .footer-grid > div:not(.footer-brand) > h4::after { content: '+'; font-size: 1.2rem; font-weight: 400; }
+  .footer-grid > div.open > h4::after { content: '–'; }
+  .footer-grid > div:not(.footer-brand) > a { display: none; }
+  .footer-grid > div:not(.footer-brand) > .footer-ai { display: none !important; }
+  .footer-grid > div.open > a { display: block; }
+  .footer-grid > div.open { padding-bottom: 12px; }
+  .footer-brand { padding-bottom: 18px; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1366,6 +1398,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
         <div class="ft-eyebrow"><span data-i18n="ft_d_eyebrow">Tips and advice</span></div>
         <h2 class="ft-h2"><span data-i18n="ft_d_title">Advice for your project</span></h2>
         <p class="ft-lead"><span data-i18n="ft_d_sub">Practical advice to look after your property and know when to call a professional.</span></p>
+        <button type="button" class="tips-open" onclick="document.getElementById('tips').classList.add('tips-shown');this.hidden=true"><span data-i18n="tips_open">Tips for owners</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
     <div class="ft-grelha3">
@@ -2281,6 +2314,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 let currentLang = 'en';
 
 const T = {
+  tips_open: { en: 'Tips for owners', pt: 'Dicas para proprietários' },
   swipe_hint: { en: 'Swipe to see more →', pt: 'Deslize para ver mais →' },
   up_add_photos: { en: 'Add photos', pt: 'Adicionar fotos' },
   up_add_cv: { en: 'Attach your CV', pt: 'Anexar o CV' },
@@ -3764,6 +3798,17 @@ document.querySelectorAll('.up-input').forEach(inp => inp.addEventListener('chan
   const set = () => { if (!mq.matches) more.open = true; };
   set(); mq.addEventListener('change', set);
 })();
+</script>
+
+<script>
+// Footer groups fold on phones: tap the heading to open
+document.querySelectorAll('.footer-grid > div:not(.footer-brand) > h4').forEach(h => {
+  h.setAttribute('role', 'button');
+  h.tabIndex = 0;
+  const toggle = () => { if (window.matchMedia('(max-width: 768px)').matches) h.parentElement.classList.toggle('open'); };
+  h.addEventListener('click', toggle);
+  h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
 </script>
 </body>
 </html>
