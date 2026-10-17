@@ -1189,6 +1189,18 @@ body.calc-open { overflow: hidden; }
 /* HomeCare: what emergency response means */
 .sla-def { max-width: 760px; margin: 14px auto 0; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface, #fff); font-size: 0.9rem; line-height: 1.6; color: var(--text-soft); text-align: left; }
 .sla-def strong { color: var(--text); }
+
+/* Mobile journey fixes */
+.upload-box { position: relative; }
+.upload-box .up-input { position: absolute; left: 0; top: 0; width: 1px !important; height: 1px; opacity: 0; overflow: hidden; }
+@media (max-width: 600px) {
+  .sp-table { min-width: 0; font-size: 0.74rem; table-layout: fixed; }
+  .sp-table th { white-space: normal; padding: 10px 4px; font-size: 0.72rem; }
+  .sp-table td { padding: 9px 4px; }
+  .sp-table th:first-child, .sp-table td:first-child { width: 34%; }
+  .sp-table tr.cat-row td { width: auto; }
+  .sp-compare { padding-left: 16px; padding-right: 16px; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1394,8 +1406,9 @@ body.calc-open { overflow: hidden; }
           <div class="calc-chip ft-inteiro" id="calcChip" hidden></div>
           <input class="form-input" type="text" id="c_name" required placeholder="Name *" data-i18n-ph="ft_ph_name">
           <input class="form-input" type="tel" id="c_phone" required placeholder="Phone / WhatsApp *" data-i18n-ph="ft_ph_phone">
+          <div class="ft-inteiro"><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Property location</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select></div>
                     <div class="ft-inteiro"><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
-          <div hidden><details class="form-more" id="formMore"><summary></summary><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Select area</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></details></div>
+          <div hidden><details class="form-more" id="formMore"><summary></summary><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></details></div>
           <textarea class="form-input ft-inteiro" id="c_desc" placeholder="Tell us a little about the work…" data-i18n-ph="ft_ph_desc"></textarea>
           <details class="ft-inteiro ft-more" id="ftMore"><summary><span data-i18n="ft_more_fields">+ Email and photos (optional)</span></summary><div class="ft-more-body"><input class="form-input" type="email" id="c_email" placeholder="Email" data-i18n-ph="ft_ph_email"><div class="ft-inteiro"><div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" class="up-input" id="c_photos" accept="image/*,application/pdf" multiple><label for="c_photos" class="up-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span data-i18n="up_add_photos">Add photos</span></label><span class="up-names" aria-live="polite"></span><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div></div></div></details>
           <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="c_website" tabindex="-1" autocomplete="off"></label></div>
@@ -1607,7 +1620,7 @@ body.calc-open { overflow: hidden; }
   <h1 data-i18n="rs_h1">Something broken at home? <span>BTS resolves it.</span></h1>
   <p data-i18n="rs_sub">Send us a photo. We tell you what needs doing and what it costs — before anyone comes.</p>
   <div class="rs-btns">
-    <a class="btn cr-wa-btn" href="https://wa.me/351913965533?text=BTS%20Resolve%20%E2%80%94%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="rs_wa">Send a photo on WhatsApp</span></a>
+    <a class="btn cr-wa-btn" href="https://wa.me/351913965533?text=BTS%20Resolve%20%E2%80%94%20" target="_blank" rel="noopener" onclick="this.href='https://wa.me/351913965533?text='+encodeURIComponent(T.rs_wa_msg[currentLang]||T.rs_wa_msg.en)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="rs_wa">Send a photo on WhatsApp</span></a>
     <a class="btn btn-outline rs-call" href="tel:+351933255248" data-i18n="rs_call">Call +351 933 255 248</a>
   </div>
   <div class="rs-trust" data-i18n="rs_trust">Own team · IMPIC licence 115511 · Invoice for every job</div>
@@ -2396,6 +2409,7 @@ body.calc-open { overflow: hidden; }
 let currentLang = 'en';
 
 const T = {
+  rs_wa_msg: { en: 'BTS Resolve — I have a problem at my property and would like a price.\nLocation: \nProblem: \n(I will attach photos.)', pt: 'BTS Resolve — tenho um problema no meu imóvel e gostaria de um preço.\nLocal: \nProblema: \n(Vou anexar fotografias.)' },
   cmp_emerg_row: { en: 'Emergency arrival on site', pt: 'Chegada ao local em emergência' },
   cmp_emerg_act: { en: '2–4 h (7 days)', pt: '2–4 h (7 dias)' },
   cmp_emerg_gq: { en: '2–4 h, priority (24/7)', pt: '2–4 h, prioritária (24/7)' },
@@ -2690,7 +2704,7 @@ const T = {
   f_name: { en: 'Full Name *', pt: 'Nome Completo *' },
   f_phone: { en: 'Phone / WhatsApp', pt: 'Telefone / WhatsApp' },
   f_location: { en: 'Property Location', pt: 'Localização do Imóvel' },
-  f_sel_area: { en: 'Select area', pt: 'Selecionar zona' },
+  f_sel_area: { en: 'Property location', pt: 'Localização do imóvel' },
   f_other: { en: 'Other', pt: 'Outro' },
   f_type: { en: 'Project Type', pt: 'Tipo de Projeto' },
   f_sel_type: { en: 'Select type', pt: 'Selecionar tipo' },
