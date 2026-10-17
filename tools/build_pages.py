@@ -34,7 +34,23 @@ PAGES = {
 }
 
 src = (SITE / "index.html").read_text(encoding="utf-8")
-starts = [(m.start(), m.group(1)) for m in re.finditer(r'<div class="page-view[^"]*" id="page-([a-z]+)">', src)]
+
+# FAQ answers are normally added by JavaScript; write them into the HTML too so readers without JavaScript see them
+faq_block = re.search(r"const faqData = \{\s*en: \[(.*?)\],\s*pt:", src, re.S)
+if not faq_block:
+    raise SystemExit("FAQ data not found in index.html")
+FAQ = [(q.replace("\\'", "'"), a.replace("\\'", "'"))
+       for q, a in re.findall(r"q: '((?:[^'\\]|\\.)*)', a: '((?:[^'\\]|\\.)*)'", faq_block.group(1))]
+FAQ_EMPTY = '<div id="faqList" style="display:flex;flex-direction:column;gap:8px;"></div>'
+if FAQ_EMPTY not in src:
+    raise SystemExit("FAQ container changed in index.html — update tools/build_pages.py")
+src = src.replace(FAQ_EMPTY, FAQ_EMPTY[:-6] + "".join(
+    f'<details class="faq-static"><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q, a in FAQ) + "</div>")
+FAQ_LD = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
+    ensure_ascii=False).replace("</", "<\\/")
+
+starts =[(m.start(), m.group(1)) for m in re.finditer(r'<div class="page-view[^"]*" id="page-([a-z]+)">', src)]
 end_all = src.index("<footer")
 if sorted(n for _, n in starts) != sorted(PAGES):
     raise SystemExit(f"Pages in index.html changed: {[n for _, n in starts]} — update PAGES in tools/build_pages.py")
@@ -75,6 +91,8 @@ def build(page):
     url = DOMAIN + path
     head = (f'<base href="/">\n' if path != "/" else "")
     head += f'<link rel="canonical" href="{url}">\n<meta property="og:url" content="{url}">\n'
+    if page == "works":
+        head += f'<script type="application/ld+json">{FAQ_LD}</script>\n'
     html = html.replace("<head>", "<head>\n" + head, 1) if "<head>\n" in html else html
     html = re.sub(r"<title>.*?</title>", f"<title>{escape(title)}</title>", html, count=1, flags=re.S)
     html = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{escape(desc)}">', html, count=1)

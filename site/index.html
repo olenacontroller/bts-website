@@ -1180,6 +1180,11 @@ body.calc-open { overflow: hidden; }
 .wa-step { font-size: 0.86rem; line-height: 1.5; margin: 4px 0 10px; color: var(--text-soft, #5F6B7A); }
 .is-pending .cr-done-icon { display: none; }
 .wa-step-pending { color: #7A4B00; background: #FFF6E0; border: 1px solid #F1D48A; border-radius: 8px; padding: 10px 12px; }
+
+/* FAQ written into the page for readers without JavaScript (replaced by the interactive list on load) */
+.faq-static { border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; }
+.faq-static summary { font-weight: 600; cursor: pointer; }
+.faq-static p { margin: 8px 0 0; color: var(--text-soft); line-height: 1.6; }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -3794,24 +3799,26 @@ if (baRange) baRange.addEventListener('input', () => { baBefore.style.clipPath =
 // Homepage FAQ
 const faqData = {
   en: [
-    { q: 'Do you work with clients who live outside Portugal?', a: 'Yes — many of our clients manage their projects remotely from the UK, Germany, France, the Netherlands, and the US. We provide regular photo/video updates, schedule video calls for key decisions, and handle all local coordination, permits, and supplier management on your behalf.' },
-    { q: 'What areas do you cover?', a: 'We serve Northern Portugal, focused on Aveiro, Porto, and the Douro Valley. We also take projects in Braga, Viseu, and surrounding municipalities.' },
-    { q: 'How does pricing work?', a: 'After a free site visit or remote assessment, we provide a detailed written quote with itemised costs. The price for the agreed work is what you pay — no hidden charges, no pressure.' },
+    { q: 'Which areas do you cover?', a: 'Northern Portugal: Aveiro, Porto and the Douro Valley, and also Braga and Viseu. Small repairs (BTS Resolve) cover the Douro Valley, Aveiro and Porto. Tell us where the property is and we confirm.' },
+    { q: 'Can you assess my property if I live abroad?', a: 'Yes. The site visit is free, and we can do the assessment by video call so you do not need to travel. You receive the written quote by email and follow the work through weekly photo and video updates.' },
+    { q: 'How long does a typical project take?', a: 'It depends on the scope: a kitchen or bathroom about 4–6 weeks, a full house renovation 3–6 months, a new build 8–14 months. Your written quote includes the planned timeline.' },
     { q: 'What happens if unexpected work is found?', a: 'Old buildings sometimes hide problems, such as rotten beams or damaged pipes behind walls. We stop, show you photos and send a separate written variation with the price. Nothing is done or charged without your approval.' },
-    { q: 'Are you a licensed contractor?', a: 'Yes. We are registered with IMPIC under Portuguese construction law. Fully insured, fully compliant.' },
-    { q: 'What services do you offer?', a: 'Full property renovations, new builds, kitchen and bathroom remodels, roofing, pool construction, landscaping, retaining walls, foundations, drainage, waterproofing, and ongoing property care subscriptions.' },
-    { q: 'How long does a typical renovation take?', a: 'It depends on scope. A kitchen remodel might take 4-6 weeks; a full villa renovation 3-6 months; a new build 8-14 months.' },
-    { q: 'Can I visit the site during construction?', a: 'Absolutely. You are welcome on site at any time. For remote clients, we schedule walkthrough video calls and send regular photo documentation.' }
+    { q: 'Do you give a warranty on your work?', a: 'Yes. Our work is covered by the legal warranty under Portuguese law, and the terms are written in your quote. If a defect appears that is our responsibility, we come back and repair it at no cost.' },
+    { q: 'How does pricing work?', a: 'After a free site visit or video assessment, we send a detailed written quote with itemised costs. The price for the agreed work is what you pay — no hidden charges, no pressure.' },
+    { q: 'Are you a licensed contractor?', a: 'Yes. We hold IMPIC licence (alvará) n.º 115511 - PUB under Portuguese construction law, and we are fully insured.' },
+    { q: 'What services do you offer?', a: 'New builds, full renovations, restoration of old stone houses, kitchens and bathrooms, roofs and waterproofing, pools, masonry and retaining walls, small repairs (BTS Resolve) and HomeCare maintenance plans.' },
+    { q: 'Can I visit the site during construction?', a: 'Yes, you are welcome on site at any time. If you are abroad, we schedule video walkthroughs and send photos every week.' }
   ],
   pt: [
-    { q: 'Trabalham com clientes que vivem fora de Portugal?', a: 'Sim — muitos dos nossos clientes gerem os seus projetos remotamente a partir do Reino Unido, Alemanha, França, Países Baixos e EUA. Fornecemos atualizações regulares de fotos/vídeos, agendamos videochamadas para decisões importantes e tratamos de toda a coordenação local, licenças e gestão de fornecedores.' },
-    { q: 'Que áreas cobrem?', a: 'Servimos o Norte de Portugal, com foco em Aveiro, Porto e Vale do Douro. Também aceitamos projetos em Braga, Viseu e municípios circundantes.' },
-    { q: 'Como funciona o preço?', a: 'Após uma visita gratuita ao local ou avaliação remota, fornecemos um orçamento escrito detalhado com custos discriminados. O preço dos trabalhos acordados é o que paga — sem custos ocultos, sem pressão.' },
+    { q: 'Que zonas cobrem?', a: 'Norte de Portugal: Aveiro, Porto e Vale do Douro, e também Braga e Viseu. As pequenas reparações (BTS Resolve) cobrem o Vale do Douro, Aveiro e Porto. Diga-nos onde fica o imóvel e confirmamos.' },
+    { q: 'Podem avaliar o meu imóvel se eu viver no estrangeiro?', a: 'Sim. A visita é gratuita e podemos fazer a avaliação por videochamada, sem precisar de viajar. Recebe o orçamento escrito por email e acompanha a obra com fotos e vídeos todas as semanas.' },
+    { q: 'Quanto tempo demora uma obra típica?', a: 'Depende do âmbito: cozinha ou casa de banho cerca de 4–6 semanas, renovação completa de moradia 3–6 meses, construção nova 8–14 meses. O orçamento escrito inclui o prazo previsto.' },
     { q: 'E se surgirem trabalhos imprevistos?', a: 'Os edifícios antigos escondem por vezes problemas, como vigas podres ou canos danificados atrás das paredes. Paramos, mostramos-lhe fotografias e enviamos uma alteração escrita à parte com o preço. Nada é feito nem cobrado sem a sua aprovação.' },
-    { q: 'São um empreiteiro licenciado?', a: 'Sim. Estamos registados no IMPIC ao abrigo da lei portuguesa da construção. Totalmente segurados, totalmente conformes.' },
-    { q: 'Que serviços oferecem?', a: 'Renovações completas, construções novas, remodelação de cozinhas e casas de banho, coberturas, construção de piscinas, paisagismo, muros de contenção, fundações, drenagem, impermeabilização e subscrições de manutenção contínua de propriedades.' },
-    { q: 'Quanto tempo demora uma renovação típica?', a: 'Depende do âmbito. Uma remodelação de cozinha pode levar 4-6 semanas; uma renovação completa de moradia 3-6 meses; uma construção nova 8-14 meses.' },
-    { q: 'Posso visitar a obra durante a construção?', a: 'Absolutamente. É bem-vindo na obra a qualquer momento. Para clientes remotos, agendamos videochamadas de visita e enviamos documentação fotográfica regular.' }
+    { q: 'Dão garantia dos trabalhos?', a: 'Sim. Os nossos trabalhos têm a garantia prevista na lei portuguesa, e as condições constam do seu orçamento. Se surgir um defeito da nossa responsabilidade, voltamos e reparamos sem custos.' },
+    { q: 'Como funciona o preço?', a: 'Após uma visita gratuita ou avaliação por vídeo, enviamos um orçamento escrito detalhado com custos discriminados. O preço dos trabalhos acordados é o que paga — sem custos ocultos, sem pressão.' },
+    { q: 'São um empreiteiro licenciado?', a: 'Sim. Temos o alvará IMPIC n.º 115511 - PUB ao abrigo da lei portuguesa da construção e estamos totalmente segurados.' },
+    { q: 'Que serviços oferecem?', a: 'Construção nova, renovações completas, restauro de casas de pedra antigas, cozinhas e casas de banho, coberturas e impermeabilização, piscinas, alvenaria e muros de contenção, pequenas reparações (BTS Resolve) e planos de manutenção HomeCare.' },
+    { q: 'Posso visitar a obra durante a construção?', a: 'Sim, é bem-vindo na obra a qualquer momento. Se estiver no estrangeiro, marcamos visitas por vídeo e enviamos fotografias todas as semanas.' }
   ]
 };
 
