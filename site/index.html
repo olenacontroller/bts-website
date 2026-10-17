@@ -1135,8 +1135,9 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   .footer-grid { gap: 0; }
   .footer-grid > div:not(.footer-brand) { border-top: 1px solid var(--border); }
   .footer-grid > div:not(.footer-brand) > h3 { display: flex; justify-content: space-between; align-items: center; margin: 0; padding: 14px 0; cursor: pointer; }
-  .footer-grid > div:not(.footer-brand) > h3::after { content: '+'; font-size: 1.2rem; font-weight: 400; }
-  .footer-grid > div.open > h3::after { content: '–'; }
+  .footer-grid > div:not(.footer-brand) > h3 .foot-toggle::after { content: '+'; font-size: 1.2rem; font-weight: 400; }
+  .footer-grid > div:not(.footer-brand) > h3 .foot-toggle { width: 100%; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .footer-grid > div.open > h3 .foot-toggle::after { content: '–'; }
   .footer-grid > div:not(.footer-brand) > a { display: none; }
   .footer-grid > div:not(.footer-brand) > .footer-ai { display: none !important; }
   .footer-grid > div.open > a { display: block; }
@@ -1238,6 +1239,9 @@ body.calc-open { overflow: hidden; }
 .ft-btn, .m-bar .m-bar-quote { color: #1F1F23 !important; }
 .ft-btn:hover { background: #D4A63C; }
 .m-bar .m-bar-wa, .hc-wa, .calc-wa, .cr-wa-btn { color: #0B2E1A !important; }
+
+/* footer heading buttons look like plain headings */
+.foot-toggle { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; text-align: left; cursor: default; }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -4043,11 +4047,19 @@ document.querySelectorAll('.up-input').forEach(inp => inp.addEventListener('chan
 <script>
 // Footer groups fold on phones: tap the heading to open
 document.querySelectorAll('.footer-grid > div:not(.footer-brand) > h3').forEach(h => {
-  h.setAttribute('role', 'button');
-  h.tabIndex = 0;
-  const toggle = () => { if (window.matchMedia('(max-width: 768px)').matches) h.parentElement.classList.toggle('open'); };
-  h.addEventListener('click', toggle);
-  h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  // a real button inside the heading (a heading itself must not act as a button)
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'foot-toggle';
+  while (h.firstChild) b.appendChild(h.firstChild);
+  if (h.hasAttribute('data-i18n')) { b.setAttribute('data-i18n', h.getAttribute('data-i18n')); h.removeAttribute('data-i18n'); }
+  b.setAttribute('aria-expanded', 'false');
+  h.appendChild(b);
+  b.addEventListener('click', () => {
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    const open = h.parentElement.classList.toggle('open');
+    b.setAttribute('aria-expanded', String(open));
+  });
 });
 </script>
 
