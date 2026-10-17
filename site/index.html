@@ -1967,7 +1967,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       <li><strong>Clientes:</strong> dados de identificação e faturação (incluindo NIF e morada), dados do imóvel, comunicações e registos fotográficos da obra.</li>
       <li><strong>Candidatos a emprego:</strong> nome, contactos, CV, experiência profissional, disponibilidade, local de residência, situação quanto à autorização de trabalho e notas das entrevistas.</li>
       <li><strong>Assistente de IA do site:</strong> as mensagens que escreve no chat são enviadas à Google (Gemini API), que as processa por nossa conta apenas para gerar a resposta. Não guardamos o histórico do chat; os seus contactos só nos chegam se enviar o formulário. Não escreva dados sensíveis no chat.</li>
-      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento e ao Google Fonts (ver a <a href="#" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
+      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Contamos de forma anónima os toques em botões (por exemplo «Ligar» ou «WhatsApp») — apenas o nome do botão, a página, o tipo de dispositivo e o idioma, sem dados pessoais nem cookies. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento e ao Google Fonts (ver a <a href="#" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
     </ul>
     <p>Não tratamos categorias especiais de dados (por exemplo, saúde) e pedimos-lhe que não as inclua no CV ou nas mensagens.</p>
 
@@ -2051,7 +2051,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       <li><strong>Clients:</strong> identification and billing data (including tax number and address), property details, communications and photo records of the works.</li>
       <li><strong>Job applicants:</strong> name, contact details, CV, work experience, availability, place of residence, work-permit status and interview notes.</li>
       <li><strong>Website AI assistant:</strong> the messages you type in the chat are sent to Google (Gemini API), which processes them on our behalf only to generate the answer. We do not keep the chat history; your contact details reach us only if you send the form. Please do not type sensitive data in the chat.</li>
-      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. When the page loads, your IP address is disclosed to the hosting provider and to Google Fonts (see the <a href="#" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
+      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. We count button taps anonymously (for example “Call” or “WhatsApp”) — only the button name, page, device type and language, with no personal data and no cookies. When the page loads, your IP address is disclosed to the hosting provider and to Google Fonts (see the <a href="#" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
     </ul>
     <p>We do not process special categories of data (e.g. health data) and ask you not to include them in your CV or messages.</p>
 
@@ -2128,7 +2128,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
     <p>Cookies são pequenos ficheiros que um site guarda no seu dispositivo. Tecnologias semelhantes, como o armazenamento local do navegador (localStorage), funcionam de forma parecida. A lei portuguesa exige o seu consentimento prévio para guardar ou ler informação no seu dispositivo, exceto quando isso seja estritamente necessário para prestar o serviço que pediu (art. 5.º da Lei n.º 41/2004).</p>
 
     <h2>2. Os cookies que usamos</h2>
-    <p><strong>Este site não utiliza cookies</strong> — nem próprios, nem de análise, publicidade ou redes sociais — e não guarda qualquer informação no seu dispositivo. Por esse motivo, não apresentamos um banner de consentimento de cookies.</p>
+    <p><strong>Este site não utiliza cookies</strong> — nem próprios, nem de análise, publicidade ou redes sociais — e não guarda informação pessoal no seu dispositivo — apenas uma preferência técnica que lembra que fechou a mensagem de boas-vindas do assistente. Por esse motivo, não apresentamos um banner de consentimento de cookies.</p>
 
     <h2>3. Serviços de terceiros</h2>
     <div class="legal-table-wrap"><table class="legal-table">
@@ -2158,7 +2158,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
     <p>Cookies are small files a website stores on your device. Similar technologies, such as the browser's local storage, work in a similar way. Portuguese law requires your prior consent to store or read information on your device, except where strictly necessary to provide the service you asked for (Art. 5 of Law No. 41/2004).</p>
 
     <h2>2. The cookies we use</h2>
-    <p><strong>This site uses no cookies</strong> — no first-party, analytics, advertising or social-media cookies — and stores no information on your device. That is why we do not show a cookie consent banner.</p>
+    <p><strong>This site uses no cookies</strong> — no first-party, analytics, advertising or social-media cookies — and stores no personal information on your device — only one technical setting that remembers you closed the assistant's greeting. That is why we do not show a cookie consent banner.</p>
 
     <h2>3. Third-party services</h2>
     <div class="legal-table-wrap"><table class="legal-table">
@@ -3259,6 +3259,7 @@ function renderCalc() {
     const dur = durText(r.weeks);
     const summary = t.summary.replace('{type}', t.types[calc.type][0]).replace('{size}', calcSizeText(currentLang)).replace('{finish}', t.finish[calc.finish][0]).replace('{price}', price).replace('{dur}', dur);
     lastCalc = { type: calc.type, area: calc.area, size: calc.size, finish: calc.finish, low: r.low, high: r.high, weeks: r.weeks, summary };
+    if (window.btsTrack) btsTrack('calc_done', true);
     const waText = (currentLang === 'pt' ? 'Olá BTS! Fiz a estimativa no site: ' : 'Hi BTS! I used the cost calculator on your website: ') + summary + (currentLang === 'pt' ? '. Gostaria de um orçamento fechado.' : '. I would like a fixed quote.');
     html += '<div class="calc-result"><div>' +
       '<div class="calc-price-label">' + t.priceLabel + '</div><div class="calc-price">' + price + '</div>' +
@@ -3885,6 +3886,51 @@ document.querySelectorAll('.footer-grid > div:not(.footer-brand) > h4').forEach(
   h.addEventListener('click', toggle);
   h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
 });
+</script>
+
+<script>
+// Anonymous click counts (no cookies, no personal data): button name, page, phone/computer, language
+(function () {
+  const last = {};
+  const once = {};
+  window.btsTrack = function (name, onlyOnce) {
+    if (typeof sb === 'undefined' || !sb) return;
+    const now = Date.now();
+    if (onlyOnce && once[name]) return;
+    if (last[name] && now - last[name] < 3000) return;
+    last[name] = now; once[name] = true;
+    const active = document.querySelector('.page-view.active');
+    sb.from('events').insert({
+      name: name,
+      page: active ? active.id.replace('page-', '') : null,
+      device: window.matchMedia('(max-width: 768px)').matches ? 'phone' : 'computer',
+      lang: currentLang === 'pt' ? 'pt' : 'en'
+    }).then(() => {}, () => {});
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('tel:')) btsTrack('call');
+    else if (href.includes('wa.me/')) btsTrack('whatsapp');
+  }, true);
+  const PAGE_EVENTS = { resolve: 'resolve_open', services: 'homecare_open', careers: 'careers_open' };
+  const origShowPage = showPage;
+  showPage = function (page, scrollTo) {
+    if (PAGE_EVENTS[page]) btsTrack(PAGE_EVENTS[page]);
+    if (scrollTo === 'contact') btsTrack('quote_open');
+    if (scrollTo === 'calculator') btsTrack('calc_open');
+    return origShowPage(page, scrollTo);
+  };
+  const origApplyFor = applyFor;
+  applyFor = function (position) { btsTrack('job_apply'); return origApplyFor(position); };
+  const origAiToggle = aiToggle;
+  aiToggle = function (open) { if (open) btsTrack('ai_open'); return origAiToggle(open); };
+  const startPage = (document.querySelector('.page-view.active') || {}).id;
+  if (startPage && PAGE_EVENTS[startPage.replace('page-', '')]) btsTrack(PAGE_EVENTS[startPage.replace('page-', '')]);
+  const pg = document.querySelector('.pg-grid');
+  if (pg) pg.addEventListener('scroll', () => btsTrack('gallery_swipe', true), { passive: true });
+})();
 </script>
 </body>
 </html>

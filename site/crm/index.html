@@ -1605,8 +1605,40 @@ function renderDashboard(c) {
             }).join('')}
         </div>
       </div>
+      <div class="dash-panel" style="margin-top:20px">
+        <div class="dash-panel-title">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+          Website clicks — last 30 days
+        </div>
+        <div id="clickStats" style="font-size:0.85rem;color:var(--text-secondary)">Loading…</div>
+      </div>
     </div>
   `;
+  loadClickStats();
+}
+
+const CLICK_LABELS = [
+  ['call', 'Call button (phone)'], ['whatsapp', 'WhatsApp'], ['quote_open', 'Opened quote form'], ['calc_open', 'Opened cost calculator'],
+  ['calc_done', 'Finished cost calculator'], ['resolve_open', 'Opened BTS Resolve'], ['homecare_open', 'Opened HomeCare plans'],
+  ['gallery_swipe', 'Swiped project photos'], ['ai_open', 'Opened AI assistant'], ['careers_open', 'Opened Careers'], ['job_apply', 'Pressed “Apply for this job”']
+];
+async function loadClickStats() {
+  const box = document.getElementById('clickStats');
+  if (!box) return;
+  if (!sbClient) { box.textContent = 'Available when the CRM is connected to the database.'; return; }
+  const since = Date.now() - 30 * 86400000;
+  const { data, error } = await sbClient.from('events').select('name, device').gte('created_at', since).limit(20000);
+  if (!box.isConnected) return;
+  if (error) { box.textContent = 'Click counting is not switched on yet (run supabase/events.sql in Supabase).'; return; }
+  const n = {}, ph = {};
+  data.forEach(r => { n[r.name] = (n[r.name] || 0) + 1; if (r.device === 'phone') ph[r.name] = (ph[r.name] || 0) + 1; });
+  const max = Math.max(1, ...Object.values(n));
+  box.innerHTML = CLICK_LABELS.map(([k, label]) => `
+    <div class="funnel-bar">
+      <div class="funnel-stage" style="width:190px">${label}</div>
+      <div class="funnel-fill"><div class="funnel-fill-bar" style="width:${((n[k] || 0) / max) * 100}%;background:var(--brass)"></div></div>
+      <div class="funnel-count" title="on phones: ${ph[k] || 0}">${n[k] || 0}</div>
+    </div>`).join('') + '<div style="margin-top:8px;font-size:0.75rem">Hover a number to see how many came from phones. Counts are anonymous.</div>';
 }
 
 function renderPipeline(c) {
