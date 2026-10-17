@@ -1225,6 +1225,11 @@ body.calc-open { overflow: hidden; }
   .hc-wa { justify-content: center; }
   .hc-link { text-align: center; }
 }
+
+/* Calculator: free video visit */
+.calc-video { background: #fff; color: var(--navy, #1F1F23); border: 1.5px solid var(--border, #D9E0E8); }
+.calc-video:hover { border-color: var(--pri, #C99A2E); }
+.calc-video-note { margin: -4px 0 2px; font-size: 0.8rem; color: var(--text-soft); text-align: center; }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -3299,7 +3304,7 @@ const CT = {
     includes: 'Usually included',
     incl: { renovation: ['Demolition and waste removal', 'Plumbing and electrical renewal', 'Plaster, flooring and painting', 'Project management and weekly updates'], kitchen: ['Removal of the old kitchen', 'Plumbing and electrical points', 'Cabinets, worktop and tiling', 'Installation of appliances'], bathroom: ['Stripping and waterproofing', 'Sanitary ware and shower/bath', 'Tiling and lighting', 'Plumbing connections'], roof: ['Scaffolding and safety', 'Removal of old covering', 'Insulation and waterproof membrane', 'Tiles or panels, gutters'], pool: ['Excavation and structure', 'Filtration and plumbing', 'Tiling or liner', 'Surrounding deck edge'], newbuild: ['Foundations and structure', 'Roof, walls and windows', 'Plumbing, electrics, finishes', 'Licensing support and project management'], facade: ['Scaffolding', 'Surface repair and cleaning', 'Insulation or render', 'Paint finish'] },
     note: '<b>Indicative estimate only; your fixed written quote follows a property assessment</b> (a free site visit, or a video call if you are abroad). Market range for Northern Portugal, labour and materials, VAT not included.',
-    cta: 'Get My Exact Fixed Quote', wa: 'Send This to WhatsApp', summary: '{type}, {size}, {finish} — {price}, {dur}'
+    cta: 'Get My Exact Fixed Quote', wa: 'Send This to WhatsApp', video: 'Book a free video visit', videoNote: 'Abroad? We show you the property on a live video call.', summary: '{type}, {size}, {finish} — {price}, {dur}'
   },
   pt: {
     step: 'Passo {n} de 3', q1: 'O que pretende fazer?', q2area: 'Qual é a área?', q2size: 'Qual é a dimensão?', q3: 'Que nível de acabamento?',
@@ -3311,7 +3316,7 @@ const CT = {
     includes: 'Normalmente incluído',
     incl: { renovation: ['Demolição e remoção de entulho', 'Renovação de canalização e eletricidade', 'Estuque, pavimentos e pintura', 'Gestão de obra e relatórios semanais'], kitchen: ['Remoção da cozinha antiga', 'Pontos de água e eletricidade', 'Móveis, bancada e revestimentos', 'Instalação de eletrodomésticos'], bathroom: ['Demolição e impermeabilização', 'Loiças sanitárias e base de duche/banheira', 'Revestimentos e iluminação', 'Ligações de canalização'], roof: ['Andaimes e segurança', 'Remoção da cobertura antiga', 'Isolamento e membrana impermeável', 'Telha ou painel, caleiras'], pool: ['Escavação e estrutura', 'Filtragem e canalização', 'Revestimento ou liner', 'Bordadura e deck'], newbuild: ['Fundações e estrutura', 'Cobertura, paredes e caixilharia', 'Canalização, eletricidade, acabamentos', 'Apoio ao licenciamento e gestão de obra'], facade: ['Andaimes', 'Reparação e limpeza da superfície', 'Isolamento ou reboco', 'Pintura final'] },
     note: '<b>Estimativa apenas indicativa; o seu orçamento escrito e fechado segue-se a uma avaliação do imóvel</b> (visita gratuita, ou videochamada se estiver no estrangeiro). Intervalo de mercado para o Norte de Portugal, mão de obra e materiais, IVA não incluído.',
-    cta: 'Receber o Meu Orçamento Fechado', wa: 'Enviar Isto por WhatsApp', summary: '{type}, {size}, {finish} — {price}, {dur}'
+    cta: 'Receber o Meu Orçamento Fechado', wa: 'Enviar Isto por WhatsApp', video: 'Marcar visita gratuita por vídeo', videoNote: 'No estrangeiro? Mostramos-lhe o imóvel numa videochamada.', summary: '{type}, {size}, {finish} — {price}, {dur}'
   }
 };
 const calc = { step: 1, type: null, area: null, size: null, finish: null };
@@ -3376,6 +3381,7 @@ function renderCalc() {
     lastCalc = { type: calc.type, area: calc.area, size: calc.size, finish: calc.finish, low: r.low, high: r.high, weeks: r.weeks, summary };
     if (window.btsTrack) btsTrack('calc_done', true);
     const waText = (currentLang === 'pt' ? 'Olá BTS! Fiz a estimativa no site: ' : 'Hi BTS! I used the cost calculator on your website: ') + summary + (currentLang === 'pt' ? '. Gostaria de um orçamento fechado.' : '. I would like a fixed quote.');
+    const videoText = (currentLang === 'pt' ? 'Olá BTS! Gostaria de marcar uma visita gratuita por vídeo ao meu imóvel. Estimativa do site: ' : 'Hi BTS! I would like to book a free video visit of my property. Website estimate: ') + summary + (currentLang === 'pt' ? '.\nLocalização do imóvel: \nMelhores dias/horas: ' : '.\nProperty location: \nBest days/times: ');
     html += '<div class="calc-result"><div>' +
       '<div class="calc-price-label">' + t.priceLabel + '</div><div class="calc-price">' + price + '</div>' +
       '<div class="calc-meta"><div><span>' + t.project + '</span><b>' + t.types[calc.type][0] + ' · ' + calcSizeText(currentLang) + '</b></div>' +
@@ -3385,6 +3391,7 @@ function renderCalc() {
       '<div><div class="calc-incl"><h4>' + t.includes + '</h4><ul>' + t.incl[calc.type].map(x => '<li>' + x + '</li>').join('') + '</ul></div>' +
       '<div class="calc-actions"><button type="button" class="btn btn-primary" onclick="calcToForm()">' + t.cta + '</button>' +
       '<a class="btn calc-wa" href="https://wa.me/351913965533?text=' + encodeURIComponent(waText) + '" target="_blank" rel="noopener">' + t.wa + '</a>' +
+      '<a class="btn calc-video" href="https://wa.me/351913965533?text=' + encodeURIComponent(videoText) + '" target="_blank" rel="noopener">' + t.video + '</a><p class="calc-video-note">' + t.videoNote + '</p>' +
       '<button type="button" class="calc-back" onclick="calcReset()">' + t.again + '</button></div></div></div>';
   }
   el.innerHTML = html;
