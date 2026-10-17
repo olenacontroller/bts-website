@@ -1084,6 +1084,33 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 .vx-content .hx-wa svg { width: 24px; height: 24px; }
 .vx-content .hx-wa .wa-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 900px) { .vx-content .hx-btns { align-items: stretch; } .vx-content .hx-wa { padding: 0; align-self: center; } }
+
+/* ── Phone polish: hero buttons, robot bubble, swipe rows, upload buttons ── */
+.swipe-hint { display: none; }
+.up-input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.up-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 8px; background: #fff; color: var(--text); font-weight: 600; font-size: 0.9rem; cursor: pointer; }
+.up-btn:hover, .up-input:focus-visible + .up-btn { border-color: var(--blue-mid, #0072B0); }
+.up-names { display: block; margin-top: 8px; font-size: 0.84rem; color: var(--text-soft); }
+.up-names:empty { display: none; }
+.ft-more { border-top: 1px solid var(--border); padding-top: 10px; }
+.ft-more summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; color: var(--blue-mid, #0072B0); list-style: none; padding: 4px 0; }
+.ft-more summary::-webkit-details-marker { display: none; }
+.ft-more-body { display: grid; gap: 14px; margin-top: 10px; }
+@media (min-width: 769px) { .ft-more { border: 0; padding: 0; } .ft-more summary { display: none; } .ft-more-body { margin-top: 0; } }
+@media (max-width: 768px) {
+  .hx-btns .hx-wa, .hx-btns .hx-ai { display: none !important; }
+  body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 1; pointer-events: auto; }
+  .ft-grelha3 { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; margin: 0 -20px; padding: 4px 20px 14px; scrollbar-width: none; }
+  .ft-grelha3::-webkit-scrollbar { display: none; }
+  .ft-grelha3 > .ft-cartao { flex: 0 0 78%; scroll-snap-align: start; }
+  .ft-grelha3 .ft-foto { aspect-ratio: 16/10; }
+  .ft-grelha3 .ft-cartao p { margin-bottom: 10px; }
+  .pg-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; margin: 0 -20px; padding: 0 20px 14px; scrollbar-width: none; }
+  .pg-grid::-webkit-scrollbar { display: none; }
+  .pg-card, .pg-card:first-child, .pg-card.pg-wide { flex: 0 0 84%; height: 260px; scroll-snap-align: start; }
+  .pg-cap span { color: #fff; opacity: .85; }
+  .swipe-hint { display: block; text-align: center; font-size: 0.8rem; color: var(--text-soft); margin-top: 2px; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1236,6 +1263,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
         </div>
       </a>
     </div>
+    <div class="swipe-hint" data-i18n="swipe_hint">Swipe to see more →</div>
     <a class="ft-faixa-mini" href="#" onclick="showPage('services');return false;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><span><span data-i18n="ft_care">Away from your property? HomeCare plans keep it checked and maintained.</span></span><b><span data-i18n="ft_care_btn">See plans</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></b></a>
   </div>
 </section>
@@ -1273,6 +1301,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       <div class="pg-card"><img src="img/bts-room-sofa-g.jpg" style="object-position:50% 55%" alt="Room finished and handed back clean" loading="lazy"><div class="pg-cap"><span data-i18n="pg10_tag">Interiors</span><b data-i18n="pg10">Room finished and handed back clean</b></div></div>
       <div class="pg-card pg-wide"><img src="img/bts-schist-wall-g.jpg" style="object-position:50% 40%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
     </div>
+    <div class="swipe-hint" data-i18n="swipe_hint">Swipe to see more →</div>
   </div>
 </section>
 
@@ -1287,11 +1316,10 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
           <div class="calc-chip ft-inteiro" id="calcChip" hidden></div>
           <input class="form-input" type="text" id="c_name" required placeholder="Name *" data-i18n-ph="ft_ph_name">
           <input class="form-input" type="tel" id="c_phone" required placeholder="Phone / WhatsApp *" data-i18n-ph="ft_ph_phone">
-          <input class="form-input ft-inteiro" type="email" id="c_email" placeholder="Email" data-i18n-ph="ft_ph_email">
-          <div class="ft-inteiro"><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
+                    <div class="ft-inteiro"><select class="form-input" id="c_service"><option value="" data-i18n="f_sel_type">Select type</option><option data-i18n="f_opt_reno">Full Renovation</option><option data-i18n="f_opt_new">New Build</option><option data-i18n="f_opt_kb">Kitchen &amp; Bathroom</option><option data-i18n="f_opt_roof">Roofing</option><option data-i18n="f_opt_pool">Pool Construction</option><option data-i18n="f_opt_land">Landscaping</option><option data-i18n="f_opt_infra">Infrastructure</option><option data-i18n="f_opt_care">HomeCare Plan</option><option data-i18n="f_other">Other</option></select></div>
           <div hidden><details class="form-more" id="formMore"><summary></summary><select class="form-input" id="c_location"><option value="" data-i18n="f_sel_area">Select area</option><option>Aveiro</option><option>Porto</option><option>Douro Valley</option><option>Braga</option><option>Viseu</option><option data-i18n="f_other">Other</option></select><select class="form-input" id="c_timing"><option value="" data-i18n="f_sel_time">Select timing</option><option data-i18n="f_asap">As soon as possible</option><option data-i18n="f_3m">Within 3 months</option><option data-i18n="f_36m">3-6 months</option><option data-i18n="f_612m">6-12 months</option><option data-i18n="f_explore">Just exploring</option></select></details></div>
           <textarea class="form-input ft-inteiro" id="c_desc" placeholder="Tell us a little about the work…" data-i18n-ph="ft_ph_desc"></textarea>
-          <div class="ft-inteiro"><div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" id="c_photos" accept="image/*,application/pdf" multiple><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div></div>
+          <details class="ft-inteiro ft-more" id="ftMore"><summary><span data-i18n="ft_more_fields">+ Email and photos (optional)</span></summary><div class="ft-more-body"><input class="form-input" type="email" id="c_email" placeholder="Email" data-i18n-ph="ft_ph_email"><div class="ft-inteiro"><div class="form-group backend-only" hidden><label class="form-label" for="c_photos" data-i18n="f_photos">Photos of the Property (optional)</label><div class="upload-box"><input type="file" class="up-input" id="c_photos" accept="image/*,application/pdf" multiple><label for="c_photos" class="up-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span data-i18n="up_add_photos">Add photos</span></label><span class="up-names" aria-live="polite"></span><div class="upload-hint" data-i18n="f_photos_hint">Up to 5 files — photos or plans (JPG, PNG, PDF), max 10 MB each.</div></div></div></div></div></details>
           <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="c_website" tabindex="-1" autocomplete="off"></label></div>
           <div class="ft-inteiro"><label class="form-consent"><input type="checkbox" id="c_consent" required><span data-i18n="f_consent">I agree that Blame The Stars, Lda. may use my details to answer this request, as described in the <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</span></label></div>
           <button class="ft-btn ft-inteiro" type="submit"><span data-i18n="ft_quote">Get a free quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
@@ -1545,7 +1573,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       </div>
       <div class="form-group"><label class="form-label" for="r_place" data-i18n="rs_f_place">Where is the property?</label><input class="form-input" type="text" id="r_place" placeholder="Peso da Régua"></div>
       <div class="form-group"><label class="form-label" for="r_desc" data-i18n="rs_f_desc">What is the problem? *</label><textarea class="form-input" id="r_desc" rows="3" required data-i18n-ph="rs_f_desc_ph" placeholder="e.g. Water is dripping from the kitchen ceiling"></textarea></div>
-      <div class="form-group backend-only" hidden><label class="form-label" for="r_photos" data-i18n="rs_f_photos">Photos of the problem (optional)</label><div class="upload-box"><input type="file" id="r_photos" accept="image/*" multiple></div></div>
+      <div class="form-group backend-only" hidden><label class="form-label" for="r_photos" data-i18n="rs_f_photos">Photos of the problem (optional)</label><div class="upload-box"><input type="file" class="up-input" id="r_photos" accept="image/*" multiple><label for="r_photos" class="up-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span data-i18n="up_add_photos">Add photos</span></label><span class="up-names" aria-live="polite"></span></div></div>
       <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="r_website" tabindex="-1" autocomplete="off"></label></div>
       <label class="form-consent"><input type="checkbox" id="r_consent" required><span data-i18n="f_consent">I agree that Blame The Stars, Lda. may use my details to answer this request, as described in the <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</span></label>
       <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="rs_submit">Send</button>
@@ -1658,7 +1686,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
           <div class="form-group"><label class="form-label" for="a_permit" data-i18n="cr_f_permit">Authorised to Work in Portugal?</label><select class="form-input" id="a_permit"><option value="" data-i18n="cr_f_sel">Select</option><option data-i18n="cr_yes">Yes</option><option data-i18n="cr_inproc">In progress</option><option data-i18n="cr_no">No</option></select></div>
         </div>
         <div class="form-group"><label class="form-label" for="a_msg" data-i18n="cr_f_msg">Tell Us About Your Experience</label><textarea class="form-input" id="a_msg" rows="4" data-i18n-ph="cr_f_msg_ph" placeholder="Main jobs you've done, companies you've worked for, tools and machines you can use…"></textarea></div>
-        <div class="form-group backend-only" hidden><label class="form-label" for="a_cv" data-i18n="cr_f_cv">Your CV</label><div class="upload-box"><input type="file" id="a_cv" accept=".pdf,.doc,.docx,image/*"><div class="upload-hint" data-i18n="cr_f_cv_hint">PDF, Word or a photo of your CV — max 10 MB. No CV? You can still apply.</div></div></div>
+        <div class="form-group backend-only" hidden><label class="form-label" for="a_cv" data-i18n="cr_f_cv">Your CV</label><div class="upload-box"><input type="file" class="up-input" id="a_cv" accept=".pdf,.doc,.docx,image/*"><label for="a_cv" class="up-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span data-i18n="up_add_cv">Attach your CV</span></label><span class="up-names" aria-live="polite"></span><div class="upload-hint" data-i18n="cr_f_cv_hint">PDF, Word or a photo of your CV — max 10 MB. No CV? You can still apply.</div></div></div>
         <div class="hp-field" aria-hidden="true"><label>Website<input type="text" id="a_website" tabindex="-1" autocomplete="off"></label></div>
         <label class="cr-consent"><input type="checkbox" id="a_consent" required><span data-i18n="cr_consent">I agree that Blame The Stars, Lda. may keep my details and CV for recruitment purposes only (GDPR / RGPD).</span></label>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="cr_submit">Continue — Send My CV</button>
@@ -2253,6 +2281,11 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 let currentLang = 'en';
 
 const T = {
+  swipe_hint: { en: 'Swipe to see more →', pt: 'Deslize para ver mais →' },
+  up_add_photos: { en: 'Add photos', pt: 'Adicionar fotos' },
+  up_add_cv: { en: 'Attach your CV', pt: 'Anexar o CV' },
+  up_files: { en: 'files selected', pt: 'ficheiros selecionados' },
+  ft_more_fields: { en: '+ Email and photos (optional)', pt: '+ Email e fotos (opcional)' },
   pg10: { en: 'Room finished and handed back clean', pt: 'Divisão concluída e entregue limpa' },
   pg10_tag: { en: 'Interiors', pt: 'Interiores' },
   hx_ai: { en: 'Ask our AI assistant', pt: 'Pergunte ao assistente' },
@@ -3277,7 +3310,7 @@ function aiEnable() {
   let seen = false;
   try { seen = localStorage.getItem('btsBuddy') === '1'; } catch (err) { /* storage blocked */ }
   const showBubble = () => {
-    if (!document.getElementById('aiPanel').hidden) return;
+    if (!document.getElementById('aiPanel').hidden || window.scrollY > 120) return;
     document.getElementById('aiBuddyBubble').hidden = false;
     if (window.innerWidth <= 768) setTimeout(() => { document.getElementById('aiBuddyBubble').hidden = true; }, 12000);
   };
@@ -3708,6 +3741,29 @@ document.querySelectorAll('.sp-plan, .sp-compare, .sp-faq').forEach(s => spObs.o
 buildFAQ();
 buildSPFAQ();
 renderCalc();
+</script>
+
+<script>
+// Robot bubble: hide once the visitor scrolls
+window.addEventListener('scroll', function hideBubble() {
+  if (window.scrollY < 120) return;
+  const b = document.getElementById('aiBuddyBubble');
+  if (b && !b.hidden) b.hidden = true;
+}, { passive: true });
+// Upload buttons: show what was chosen
+document.querySelectorAll('.up-input').forEach(inp => inp.addEventListener('change', () => {
+  const out = inp.parentElement.querySelector('.up-names');
+  const n = inp.files.length;
+  out.textContent = n === 1 ? inp.files[0].name : n > 1 ? n + ' ' + (T.up_files[currentLang] || T.up_files.en) : '';
+}));
+// Quote form: extra fields open on computers, folded on phones
+(function () {
+  const more = document.getElementById('ftMore');
+  if (!more) return;
+  const mq = window.matchMedia('(max-width: 768px)');
+  const set = () => { if (!mq.matches) more.open = true; };
+  set(); mq.addEventListener('change', set);
+})();
 </script>
 </body>
 </html>
