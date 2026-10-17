@@ -1175,6 +1175,11 @@ body.calc-open { overflow: hidden; }
 
 /* phone numbers never break across lines */
 .ft-alt b, .cr-side-contact b { white-space: nowrap; }
+
+/* WhatsApp hand-off: say whether the request is already sent */
+.wa-step { font-size: 0.86rem; line-height: 1.5; margin: 4px 0 10px; color: var(--text-soft, #5F6B7A); }
+.is-pending .cr-done-icon { display: none; }
+.wa-step-pending { color: #7A4B00; background: #FFF6E0; border: 1px solid #F1D48A; border-radius: 8px; padding: 10px 12px; }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1391,7 +1396,8 @@ body.calc-open { overflow: hidden; }
         <div class="cr-done est-done" id="estDone" hidden>
         <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
         <h3 data-i18n="est_done_t">Almost done — send your enquiry</h3>
-        <p data-i18n="est_done_d">Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.</p>
+        <p data-i18n="est_done_d">Your details are ready to send. Photos of the property are welcome.</p>
+        <p class="wa-step" hidden data-i18n="wa_step"></p>
         <a id="estWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
         <p style="font-size:0.84rem;" data-i18n="est_or_email">Prefer email? Send your details to:</p>
         <div class="cr-email-row"><b id="estEmail">geral@bts-grupo.com</b><button type="button" class="cr-copy" onclick="copyText('estEmail', this)" data-i18n="cr_copy">Copy</button></div>
@@ -1646,8 +1652,9 @@ body.calc-open { overflow: hidden; }
     <div class="cr-done est-done" id="rsDone" hidden>
       <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
       <h3 data-i18n="est_done_t">Almost done — send your enquiry</h3>
-      <p data-i18n="est_done_d">Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.</p>
-      <a id="rsWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
+      <p data-i18n="est_done_d">Your details are ready to send. Photos of the property are welcome.</p>
+      <p class="wa-step" hidden data-i18n="wa_step"></p>
+        <a id="rsWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
       <button type="button" class="cr-back" onclick="document.getElementById('rsForm').hidden=false;document.getElementById('rsDone').hidden=true;" data-i18n="rs_edit">← Edit my request</button>
     </div>
   </div>
@@ -1783,7 +1790,8 @@ body.calc-open { overflow: hidden; }
       <div class="cr-done" id="crDone" hidden>
         <div class="cr-done-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
         <h3 data-i18n="cr_done_t">Almost done — send your CV</h3>
-        <p data-i18n="cr_done_d">Your application is ready. Tap the button to open WhatsApp with your details already filled in, then attach your CV (PDF or photo) and press send.</p>
+        <p data-i18n="cr_done_d">Your application is ready to send. Have your CV (PDF or photo) at hand.</p>
+        <p class="wa-step" hidden data-i18n="wa_step"></p>
         <a id="crWa" class="btn cr-wa-btn" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span data-i18n="cr_wa_btn">Send via WhatsApp</span></a>
         <p style="font-size:0.84rem;" data-i18n="cr_or_email">Prefer email? Send your CV and details to:</p>
         <div class="cr-email-row"><b id="crEmail">geral@bts-grupo.com</b><button type="button" class="cr-copy" onclick="copyCrEmail(this)" data-i18n="cr_copy">Copy</button></div>
@@ -2378,6 +2386,11 @@ body.calc-open { overflow: hidden; }
 let currentLang = 'en';
 
 const T = {
+  wa_step: { en: '<b>Not sent yet.</b> 1. Tap the button — WhatsApp opens with your message already written. 2. Press <b>Send</b> in WhatsApp. Only then does your request reach us.', pt: '<b>Ainda não foi enviado.</b> 1. Carregue no botão — o WhatsApp abre com a mensagem já escrita. 2. Carregue em <b>Enviar</b> no WhatsApp. Só então o pedido nos chega.' },
+  wa_step_cv: { en: '<b>Not sent yet.</b> 1. Tap the button — WhatsApp opens with your details already written. 2. Attach your CV. 3. Press <b>Send</b> in WhatsApp. Only then does your application reach us.', pt: '<b>Ainda não foi enviado.</b> 1. Carregue no botão — o WhatsApp abre com os seus dados já escritos. 2. Anexe o CV. 3. Carregue em <b>Enviar</b> no WhatsApp. Só então a candidatura nos chega.' },
+  wa_step_optional: { en: 'Optional — your request is already with us. WhatsApp is only for sending photos or a faster chat.', pt: 'Opcional — o seu pedido já nos chegou. O WhatsApp serve apenas para enviar fotos ou falar mais depressa.' },
+  wa_btn_pending: { en: 'Open WhatsApp, then press Send', pt: 'Abrir o WhatsApp e carregar em Enviar' },
+  wa_btn_optional: { en: 'Also message us on WhatsApp', pt: 'Escrever-nos também no WhatsApp' },
   lbl_call: { en: 'Calls', pt: 'Chamadas' },
   lbl_msg: { en: 'Messages (WhatsApp)', pt: 'Mensagens (WhatsApp)' },
   lbl_careers: { en: 'Careers &amp; CVs (WhatsApp)', pt: 'Candidaturas e CV (WhatsApp)' },
@@ -2899,14 +2912,14 @@ const T = {
   cr_f_cv: { en: 'Your CV', pt: 'O Seu CV' },
   cr_f_cv_hint: { en: 'PDF, Word or a photo of your CV — max 10 MB. No CV? You can still apply.', pt: 'PDF, Word ou fotografia do CV — máx. 10 MB. Não tem CV? Pode candidatar-se na mesma.' },
   cr_done_t: { en: 'Almost done — send your CV', pt: 'Quase pronto — envie o seu CV' },
-  cr_done_d: { en: 'Your application is ready. Tap the button to open WhatsApp with your details already filled in, then attach your CV (PDF or photo) and press send.', pt: 'A sua candidatura está pronta. Carregue no botão para abrir o WhatsApp com os seus dados já preenchidos, anexe o seu CV (PDF ou fotografia) e envie.' },
+  cr_done_d: { en: 'Your application is ready to send. Have your CV (PDF or photo) at hand.', pt: 'A sua candidatura está pronta a enviar. Tenha o seu CV (PDF ou fotografia) à mão.' },
   cr_wa_btn: { en: 'Send via WhatsApp', pt: 'Enviar por WhatsApp' },
   cr_or_email: { en: 'Prefer email? Send your CV and details to:', pt: 'Prefere email? Envie o seu CV e dados para:' },
   cr_copy: { en: 'Copy', pt: 'Copiar' },
   cr_copied: { en: 'Copied', pt: 'Copiado' },
   cr_edit: { en: '← Edit my application', pt: '← Editar a candidatura' },
   est_done_t: { en: 'Almost done — send your enquiry', pt: 'Quase pronto — envie o seu pedido' },
-  est_done_d: { en: 'Your enquiry is ready. Tap the button to open WhatsApp with your details already filled in, then press send. Photos of the property are welcome.', pt: 'O seu pedido está pronto. Carregue no botão para abrir o WhatsApp com os seus dados já preenchidos e envie. Fotografias da propriedade são bem-vindas.' },
+  est_done_d: { en: 'Your details are ready to send. Photos of the property are welcome.', pt: 'Os seus dados estão prontos a enviar. Fotografias da propriedade são bem-vindas.' },
   est_or_email: { en: 'Prefer email? Send your details to:', pt: 'Prefere email? Envie os seus dados para:' },
   est_edit: { en: '← Edit my enquiry', pt: '← Editar o pedido' },
 
@@ -3165,6 +3178,16 @@ function setDone(panelId, titleKey, descKey) {
   const h = p.querySelector('h3'), d = p.querySelector('h3 + p');
   h.setAttribute('data-i18n', titleKey); h.innerHTML = T[titleKey][currentLang];
   d.setAttribute('data-i18n', descKey); d.innerHTML = T[descKey][currentLang];
+  // Not saved: the request reaches BTS only when the visitor presses Send inside WhatsApp
+  const pending = /_done_t$/.test(titleKey);
+  const step = p.querySelector('.wa-step');
+  const btn = p.querySelector('.cr-wa-btn span[data-i18n]');
+  const stepKey = pending ? (panelId === 'crDone' ? 'wa_step_cv' : 'wa_step') : 'wa_step_optional';
+  step.setAttribute('data-i18n', stepKey); step.innerHTML = T[stepKey][currentLang]; step.hidden = false;
+  step.classList.toggle('wa-step-pending', pending);
+  p.classList.toggle('is-pending', pending);
+  const btnKey = pending ? 'wa_btn_pending' : 'wa_btn_optional';
+  btn.setAttribute('data-i18n', btnKey); btn.innerHTML = T[btnKey][currentLang];
 }
 function selectByKey(selectId, key) {
   const s = document.getElementById(selectId);
