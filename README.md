@@ -12,13 +12,14 @@
 - **Сайт:** https://bts-grupo.com (старый адрес olenacontroller.github.io/bts-website перенаправляет сюда)
 - **CRM:** https://bts-grupo.com/crm/ (вход по email и паролю из Supabase)
 - **Домен:** Squarespace (DNS: 4 записи A @ → 185.199.108–111.153, CNAME www → olenacontroller.github.io; записи Google Workspace для почты не трогать). Файл `site/CNAME` не удалять.
-- **Код:** https://github.com/olenacontroller/bts-website — публикуется из ветки `gh-pages` (= содержимое папки `site`).
+- **Код:** https://github.com/olenacontroller/bts-website — публикуется из ветки `gh-pages`, которую собирает `tools/publish.py` из папки `site` (у каждой страницы свой адрес: /services/, /small-repairs/, /careers/, /property-care/, /privacy/, /cookies/, /complaints/).
 
 Обновить сайт после изменений (делает Claude, или вручную в Git Bash из папки проекта):
 ```bash
 git add -A && git commit -m "Update site" && git push origin main
-git push origin `git subtree split --prefix site main`:gh-pages --force
+python tools/publish.py
 ```
+Не публикуйте папку `site` напрямую (`git subtree …`): сайт заработает, но отдельные адреса страниц пропадут.
 Через ~1 минуту изменения видны на сайте.
 
 ## Как всё связано
