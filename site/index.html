@@ -3482,7 +3482,7 @@ navHeroState();
 window.addEventListener('hashchange', routeHash);
 // The first screen has its own WhatsApp and AI buttons: hide the floating ones while those are visible
 if ('IntersectionObserver' in window) { const hb = document.querySelector('.hx-btns'); if (hb) new IntersectionObserver(es => { const home = document.getElementById('page-home').classList.contains('active'); document.body.classList.toggle('hero-cta-visible', home && es[0].isIntersecting); }).observe(hb); }
-window.addEventListener('load', () => { const id = location.hash.slice(1); const el = id && HASH_PAGES[location.hash] && document.getElementById(id); if (el) setTimeout(() => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'instant' }), 150); });
+window.addEventListener('load', () => { const id = location.hash.slice(1); const el = id && document.getElementById(id); if (el && (HASH_PAGES[location.hash] || el.closest('.page-view.active'))) setTimeout(() => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'instant' }), 300); });
 // In-page links (#contact, #calculator…) open the page that holds that section
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]');

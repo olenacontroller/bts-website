@@ -71,7 +71,7 @@ PAGES_JS = ("(function(){var d=" + ALL_PAGES + ";"
             "for(var k in d){var el=document.getElementById('page-'+k);if(el&&!el.childElementCount)el.innerHTML=d[k];}})();\n")
 PAGES_JS_VERSION = hashlib.sha1(PAGES_JS.encode("utf-8")).hexdigest()[:10]
 
-REDIRECTS = {"legal": "/complaints/", "cost-calculator": "/services/#calculator"}
+REDIRECTS = {"legal": "/complaints/", "cost-calculator": "/services/#calculator", "homecare": "/property-care/", "faq": "/services/#faq", "advice": "/#tips"}
 SCRIPT_FILES = {}
 
 
