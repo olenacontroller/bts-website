@@ -1201,6 +1201,30 @@ body.calc-open { overflow: hidden; }
   .sp-table tr.cat-row td { width: auto; }
   .sp-compare { padding-left: 16px; padding-right: 16px; }
 }
+
+/* HomeCare teaser on the home page */
+.hc-teaser { margin-top: 26px; padding: 20px 22px; border: 1px solid var(--linha, #E3E8EF); border-radius: var(--raio, 12px); background: var(--fundo, #F6F7F9); }
+.hc-head { display: flex; gap: 12px; align-items: flex-start; }
+.hc-head > svg { color: var(--pri, #C99A2E); flex-shrink: 0; margin-top: 2px; }
+.hc-head b { display: block; font-size: 16px; color: var(--navy, #1F1F23); }
+.hc-head small { display: block; font-size: 13.5px; color: var(--cinza, #5F6B7A); margin-top: 2px; }
+.hc-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+.hc-plan { display: flex; justify-content: space-between; gap: 10px; padding: 12px 14px; background: #fff; border: 1px solid var(--linha, #E3E8EF); border-radius: 10px; }
+.hc-plan b { display: block; font-size: 14px; color: var(--navy, #1F1F23); }
+.hc-plan span { display: block; font-size: 12.5px; color: var(--cinza, #5F6B7A); line-height: 1.4; margin-top: 2px; }
+.hc-plan em { font-style: normal; font-weight: 700; font-size: 16px; color: var(--pri, #C99A2E); white-space: nowrap; }
+.hc-plan em small { font-size: 11px; font-weight: 500; color: var(--cinza, #5F6B7A); }
+.hc-actions { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
+.hc-link { font-weight: 600; font-size: 14px; color: var(--navy, #1F1F23); text-decoration: none; }
+.hc-link:hover { color: var(--pri, #C99A2E); }
+.hc-wa { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 8px; background: #25D366; color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
+@media (max-width: 768px) {
+  .hc-teaser { padding: 16px; }
+  .hc-plans { grid-template-columns: 1fr; gap: 8px; }
+  .hc-actions { flex-direction: column; align-items: stretch; }
+  .hc-wa { justify-content: center; }
+  .hc-link { text-align: center; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1354,7 +1378,11 @@ body.calc-open { overflow: hidden; }
       </a>
     </div>
     <div class="swipe-hint" data-i18n="swipe_hint">Swipe to see more →</div>
-    <a class="ft-faixa-mini" href="#" onclick="showPage('services');return false;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><span><span data-i18n="ft_care">Away from your property? HomeCare plans keep it checked and maintained.</span><small class="care-prices" data-i18n="ft_care_prices">Essential €99 · Active Host €249 · Grand Quinta €499 per month</small></span><b><span data-i18n="ft_care_btn">See plans</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></b></a>
+    <div class="hc-teaser">
+      <div class="hc-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><div><b data-i18n="hc_title">HomeCare — for owners who are often away</b><small data-i18n="hc_sub">Regular inspections, maintenance and help in an emergency.</small></div></div>
+      <div class="hc-plans"><div class="hc-plan"><div><b>Essential Care</b><span data-i18n="hc_ess">Second homes and properties left empty</span></div><em>€99<small data-i18n="hc_mo">/month</small></em></div><div class="hc-plan"><div><b>Active Host</b><span data-i18n="hc_act">Holiday rentals (Alojamento Local) that must stay guest-ready</span></div><em>€249<small data-i18n="hc_mo">/month</small></em></div><div class="hc-plan"><div><b>Grand Quinta Care</b><span data-i18n="hc_gq">Quintas, vineyards and heritage estates</span></div><em>€499<small data-i18n="hc_mo">/month</small></em></div></div>
+      <div class="hc-actions"><a class="hc-link" href="#" onclick="showPage('services');return false;"><span data-i18n="hc_details">See full plan details</span> →</a><a class="hc-wa" href="https://wa.me/351913965533" target="_blank" rel="noopener" onclick="this.href='https://wa.me/351913965533?text='+encodeURIComponent(T.hc_wa_msg[currentLang]||T.hc_wa_msg.en)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a15 15 0 0 1-1.6-.6 12 12 0 0 1-4.6-4.1c-.4-.5-1-1.4-1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.3-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg><span data-i18n="hc_ask">Ask which plan fits my property</span></a></div>
+    </div>
   </div>
 </section>
 
@@ -2409,6 +2437,15 @@ body.calc-open { overflow: hidden; }
 let currentLang = 'en';
 
 const T = {
+  hc_title: { en: 'HomeCare — for owners who are often away', pt: 'HomeCare — para proprietários que estão muitas vezes fora' },
+  hc_sub: { en: 'Regular inspections, maintenance and help in an emergency.', pt: 'Inspeções regulares, manutenção e ajuda em emergências.' },
+  hc_ess: { en: 'Second homes and properties left empty', pt: 'Segundas habitações e imóveis desocupados' },
+  hc_act: { en: 'Holiday rentals (Alojamento Local) that must stay guest-ready', pt: 'Alojamento Local que tem de estar sempre pronto para hóspedes' },
+  hc_gq: { en: 'Quintas, vineyards and heritage estates', pt: 'Quintas, vinhas e propriedades patrimoniais' },
+  hc_mo: { en: '/month', pt: '/mês' },
+  hc_details: { en: 'See full plan details', pt: 'Ver todos os detalhes dos planos' },
+  hc_ask: { en: 'Ask which plan fits my property', pt: 'Perguntar que plano serve o meu imóvel' },
+  hc_wa_msg: { en: 'Hello BTS, which HomeCare plan fits my property?\nLocation: \nType of property: ', pt: 'Olá BTS, que plano HomeCare serve o meu imóvel?\nLocalização: \nTipo de imóvel: ' },
   rs_wa_msg: { en: 'BTS Resolve — I have a problem at my property and would like a price.\nLocation: \nProblem: \n(I will attach photos.)', pt: 'BTS Resolve — tenho um problema no meu imóvel e gostaria de um preço.\nLocal: \nProblema: \n(Vou anexar fotografias.)' },
   cmp_emerg_row: { en: 'Emergency arrival on site', pt: 'Chegada ao local em emergência' },
   cmp_emerg_act: { en: '2–4 h (7 days)', pt: '2–4 h (7 dias)' },
