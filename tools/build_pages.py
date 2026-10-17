@@ -106,6 +106,14 @@ def build(page):
         html = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{escape(desc)}">', html, count=1)
     html = html.replace('<meta property="og:image" content="img/', f'<meta property="og:image" content="{DOMAIN}/img/')
 
+    # Smaller styles: drop comments and extra spaces (the source file stays readable)
+    def mini(m):
+        css = re.sub(r"/\*.*?\*/", "", m.group(1), flags=re.S)
+        css = re.sub(r"\s+", " ", css)
+        css = re.sub(r"\s*([{};,])\s*", r"\1", css)
+        return "<style>" + css.strip() + "</style>"
+    html = re.sub(r"<style>(.*?)</style>", mini, html, flags=re.S)
+
     # Move the site's own scripts (translations, forms, assistant…) to shared files, in the same order
     def externalize(m):
         code = m.group(1)
