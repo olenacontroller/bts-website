@@ -1143,6 +1143,20 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   .footer-grid > div.open { padding-bottom: 12px; }
   .footer-brand { padding-bottom: 18px; }
 }
+
+/* ── Review fixes: phone action bar, HomeCare prices ── */
+.care-prices { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 600; color: var(--pri, #C99A2E); }
+.m-bar { display: none; }
+@media (max-width: 768px) {
+  .m-bar { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 85; padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); background: #fff; border-top: 1px solid #E3E8EF; box-shadow: 0 -6px 18px rgba(15,30,51,.08); }
+  .m-bar a { display: flex; align-items: center; justify-content: center; gap: 6px; height: 46px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; color: var(--navy, #1F1F23); border: 1.5px solid #D9E0E8; background: #fff; }
+  .m-bar .m-bar-wa { color: #fff; background: #25D366; border-color: #25D366; }
+  .m-bar .m-bar-quote { color: #fff; background: var(--pri, #C99A2E); border-color: var(--pri, #C99A2E); }
+  .fab-stack { display: none !important; }
+  .ai-buddy { bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important; }
+  body { padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px)); }
+  body:has(#aiPanel:not([hidden])) .m-bar { display: none; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1296,7 +1310,7 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       </a>
     </div>
     <div class="swipe-hint" data-i18n="swipe_hint">Swipe to see more →</div>
-    <a class="ft-faixa-mini" href="#" onclick="showPage('services');return false;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><span><span data-i18n="ft_care">Away from your property? HomeCare plans keep it checked and maintained.</span></span><b><span data-i18n="ft_care_btn">See plans</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></b></a>
+    <a class="ft-faixa-mini" href="#" onclick="showPage('services');return false;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><span><span data-i18n="ft_care">Away from your property? HomeCare plans keep it checked and maintained.</span><small class="care-prices" data-i18n="ft_care_prices">Essential €99 · Active Host €249 · Grand Quinta €499 per month</small></span><b><span data-i18n="ft_care_btn">See plans</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></b></a>
   </div>
 </section>
 
@@ -1324,14 +1338,14 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
       <p class="section-sub" data-i18n="pg_sub">Photos from our own projects in Northern Portugal — new builds, stonework, pools and interiors.</p>
     </div>
     <div class="pg-grid">
-      <div class="pg-card"><img src="img/bts-douro-pool-g.jpg" style="object-position:50% 60%" alt="Infinity pool over the Douro valley" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Pools</span><b data-i18n="pg1">Infinity pool over the Douro valley</b></div></div>
-      <div class="pg-card"><img src="img/bts-schist-window-g.jpg" style="object-position:50% 45%" alt="New window opening in an old schist wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Rehabilitation</span><b data-i18n="pg3">New window opening in an old schist wall</b></div></div>
-      <div class="pg-card"><img src="img/bts-stone-clad-houses-g.jpg" style="object-position:50% 45%" alt="Terraced houses with stone-clad pillars" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">New construction</span><b data-i18n="pg4">Terraced houses with stone-clad pillars</b></div></div>
-      <div class="pg-card"><img src="img/bts-steel-window-g.jpg" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
-      <div class="pg-card"><img src="img/bts-painting-hd.jpg" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
-      <div class="pg-card"><img src="img/bts-room-finished-g.jpg" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
-      <div class="pg-card"><img src="img/bts-room-sofa-g.jpg" style="object-position:50% 55%" alt="Room finished and handed back clean" loading="lazy"><div class="pg-cap"><span data-i18n="pg10_tag">Interiors</span><b data-i18n="pg10">Room finished and handed back clean</b></div></div>
-      <div class="pg-card pg-wide"><img src="img/bts-schist-wall-g.jpg" style="object-position:50% 40%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
+      <div class="pg-card"><img src="img/bts-douro-pool-g.jpg" srcset="img/bts-douro-pool-g-m.jpg 640w, img/bts-douro-pool-g.jpg 787w" sizes="(max-width: 768px) 84vw, 66vw" style="object-position:50% 60%" alt="Infinity pool over the Douro valley" loading="lazy"><div class="pg-cap"><span data-i18n="pg1_tag">Pools</span><b data-i18n="pg1">Infinity pool over the Douro valley</b></div></div>
+      <div class="pg-card"><img src="img/bts-schist-window-g.jpg" srcset="img/bts-schist-window-g-m.jpg 640w, img/bts-schist-window-g.jpg 1050w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 45%" alt="New window opening in an old schist wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg3_tag">Rehabilitation</span><b data-i18n="pg3">New window opening in an old schist wall</b></div></div>
+      <div class="pg-card"><img src="img/bts-stone-clad-houses-g.jpg" srcset="img/bts-stone-clad-houses-g-m.jpg 640w, img/bts-stone-clad-houses-g.jpg 787w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 45%" alt="Terraced houses with stone-clad pillars" loading="lazy"><div class="pg-cap"><span data-i18n="pg4_tag">New construction</span><b data-i18n="pg4">Terraced houses with stone-clad pillars</b></div></div>
+      <div class="pg-card"><img src="img/bts-steel-window-g.jpg" srcset="img/bts-steel-window-g-m.jpg 640w, img/bts-steel-window-g.jpg 787w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 40%" alt="Steel window frame above a stone wall" loading="lazy"><div class="pg-cap"><span data-i18n="pg5_tag">Façades</span><b data-i18n="pg5">Steel window frame above a stone wall</b></div></div>
+      <div class="pg-card"><img src="img/bts-painting-hd.jpg" srcset="img/bts-painting-hd-m.jpg 640w, img/bts-painting-hd.jpg 1050w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 45%" alt="Walls repainted by our team" loading="lazy"><div class="pg-cap"><span data-i18n="pg6_tag">Interiors</span><b data-i18n="pg6">Walls repainted by our team</b></div></div>
+      <div class="pg-card"><img src="img/bts-room-finished-g.jpg" srcset="img/bts-room-finished-g-m.jpg 640w, img/bts-room-finished-g.jpg 1050w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 55%" alt="Room ready after repainting" loading="lazy"><div class="pg-cap"><span data-i18n="pg7_tag">Interiors</span><b data-i18n="pg7">Room ready after repainting</b></div></div>
+      <div class="pg-card"><img src="img/bts-room-sofa-g.jpg" srcset="img/bts-room-sofa-g-m.jpg 640w, img/bts-room-sofa-g.jpg 1050w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 55%" alt="Room finished and handed back clean" loading="lazy"><div class="pg-cap"><span data-i18n="pg10_tag">Interiors</span><b data-i18n="pg10">Room finished and handed back clean</b></div></div>
+      <div class="pg-card pg-wide"><img src="img/bts-schist-wall-g.jpg" srcset="img/bts-schist-wall-g-m.jpg 640w, img/bts-schist-wall-g.jpg 1400w" sizes="(max-width: 768px) 84vw, 33vw" style="object-position:50% 40%" alt="Schist stone walls laid by hand" loading="lazy"><div class="pg-cap"><span data-i18n="pg2_tag">Stonework</span><b data-i18n="pg2">Schist stone walls laid by hand</b></div></div>
     </div>
     <div class="swipe-hint" data-i18n="swipe_hint">Swipe to see more →</div>
   </div>
@@ -2323,6 +2337,11 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
   </button>
 </div>
 
+<nav class="m-bar" aria-label="Quick contact">
+  <a href="tel:+351933255248"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span data-i18n="mbar_call">Call</span></a>
+  <a class="m-bar-wa" href="https://wa.me/351913965533" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a15 15 0 0 1-1.6-.6 12 12 0 0 1-4.6-4.1c-.4-.5-1-1.4-1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.3-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg><span>WhatsApp</span></a>
+  <a class="m-bar-quote" href="#contact" onclick="showPage('home','contact');return false;"><span data-i18n="mbar_quote">Free quote</span></a>
+</nav>
 <div class="fab-stack">
 <button type="button" class="ai-fab" id="aiFab" onclick="aiToggle()" hidden>
   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.9 9.9 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
@@ -2337,6 +2356,9 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 let currentLang = 'en';
 
 const T = {
+  mbar_call: { en: 'Call', pt: 'Ligar' },
+  mbar_quote: { en: 'Free quote', pt: 'Orçamento grátis' },
+  ft_care_prices: { en: 'Essential €99 · Active Host €249 · Grand Quinta €499 per month', pt: 'Essential €99 · Active Host €249 · Grand Quinta €499 por mês' },
   cr_j3_status: { en: 'Urgent · immediate start', pt: 'Urgente · início imediato' },
   cr_j3_sub: { en: 'Drywall &amp; LSF installer', pt: 'Gesso cartonado e estruturas LSF' },
   cr_j3_loc: { en: 'Greater Porto — Maia · Valongo', pt: 'Grande Porto — Maia · Valongo' },
