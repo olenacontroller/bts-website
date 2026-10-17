@@ -1618,7 +1618,7 @@ function renderDashboard(c) {
 }
 
 const CLICK_LABELS = [
-  ['call', 'Call button (phone)'], ['whatsapp', 'WhatsApp'], ['quote_open', 'Opened quote form'], ['calc_open', 'Opened cost calculator'],
+  ['call', 'Tapped Call (not a lead yet)'], ['whatsapp', 'Opened WhatsApp (not a lead yet)'], ['quote_open', 'Opened quote form'], ['calc_open', 'Opened cost calculator'],
   ['calc_done', 'Finished cost calculator'], ['resolve_open', 'Opened BTS Resolve'], ['homecare_open', 'Opened HomeCare plans'],
   ['gallery_swipe', 'Swiped project photos'], ['ai_open', 'Opened AI assistant'], ['careers_open', 'Opened Careers'], ['job_apply', 'Pressed “Apply for this job”']
 ];
@@ -1638,7 +1638,7 @@ async function loadClickStats() {
       <div class="funnel-stage" style="width:190px">${label}</div>
       <div class="funnel-fill"><div class="funnel-fill-bar" style="width:${((n[k] || 0) / max) * 100}%;background:var(--brass)"></div></div>
       <div class="funnel-count" title="on phones: ${ph[k] || 0}">${n[k] || 0}</div>
-    </div>`).join('') + '<div style="margin-top:8px;font-size:0.75rem">Hover a number to see how many came from phones. Counts are anonymous.</div>';
+    </div>`).join('') + '<div style="margin-top:8px;font-size:0.75rem">These are taps, not leads — real requests are in your Leads list. Hover a number to see how many came from phones. Counts are anonymous.</div>';
 }
 
 function renderPipeline(c) {
