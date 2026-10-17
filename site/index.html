@@ -1185,6 +1185,10 @@ body.calc-open { overflow: hidden; }
 .faq-static { border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; }
 .faq-static summary { font-weight: 600; cursor: pointer; }
 .faq-static p { margin: 8px 0 0; color: var(--text-soft); line-height: 1.6; }
+
+/* HomeCare: what emergency response means */
+.sla-def { max-width: 760px; margin: 14px auto 0; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface, #fff); font-size: 0.9rem; line-height: 1.6; color: var(--text-soft); text-align: left; }
+.sla-def strong { color: var(--text); }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BTS — Renovate your home in Portugal, even from abroad">
@@ -1814,6 +1818,7 @@ body.calc-open { overflow: hidden; }
   <div class="sp-header-eyebrow" data-i18n="sp_eyebrow">HomeCare by BTS</div>
   <h1 data-i18n="sp_h1">Care Plans: Full Service Guide</h1>
   <p data-i18n="sp_intro">Everything included in your subscription, what requires additional payment, labour rates, response times, and billing. No surprises, no hidden costs.</p>
+      <p class="sla-def" data-i18n="sla_def"><strong>How emergency response works.</strong> “Response” means a technician arriving at your property — not just a reply. The clock starts when you report the emergency to us by phone or WhatsApp. It applies to properties in our service area (Douro Valley, Aveiro, Porto, Braga and Viseu). The exact arrival time, between 2 and 4 hours, is agreed in your contract according to where the property is. Essential Care: a technician visits on the next business day.</p>
 </header>
 
 <nav class="sp-plan-nav">
@@ -1840,7 +1845,7 @@ body.calc-open { overflow: hidden; }
   <div class="sp-cat"><div class="sp-cat-title" data-i18n="cat_maint">Maintenance & Repairs</div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_m1">Minor preventive adjustments during inspections</div><span class="sp-tag included" data-i18n="tag_incl">Included</span><div class="sp-svc-desc" data-i18n="ess_m1d">Small tasks under 15 minutes requiring no materials: tightening handles, resetting breakers, clearing gutters by hand, checking water pressure, running taps to prevent pipe seal dry-out.</div></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_m2">Handyman hours for scheduled maintenance</div><span class="sp-tag not" data-i18n="tag_not">Not included</span><div class="sp-svc-desc" data-i18n="ess_m2d">Repairs beyond minor adjustments are billed at the member rate of <strong>€25–40/hour</strong> plus materials at cost. Written quote provided before any work begins. Included monthly hours available with Active Host (2 hrs) and Grand Quinta Care (4 hrs).</div></div>
-    <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_m3">Emergency call-out and repair</div><span class="sp-tag extra" data-i18n="tag_extra_rate">Extra — member rate</span><div class="sp-svc-desc" data-i18n="ess_m3d">Call-out fee €60, plus labour at €25–40/hr and materials at cost. Next-business-day response. Faster SLAs with Active Host (4 hrs) and Grand Quinta Care (2 hrs).</div></div>
+    <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_m3">Emergency call-out and repair</div><span class="sp-tag extra" data-i18n="tag_extra_rate">Extra — member rate</span><div class="sp-svc-desc" data-i18n="ess_m3d">Call-out fee €60, plus labour at €25–40/hr and materials at cost. A technician visits on the next business day. Active Host and Grand Quinta Care include faster emergency arrival on site (2–4 hours, set by property location).</div></div>
   </div>
   <div class="sp-cat"><div class="sp-cat-title" data-i18n="cat_comm">Communication & Reporting</div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_c1">English-language inspection reports with photos & video</div><span class="sp-tag included" data-i18n="tag_incl">Included</span><div class="sp-svc-desc" data-i18n="ess_c1d">Structured report via email with timestamped photographs, video clips, written observations, condition summary, and recommended actions with estimated costs.</div></div>
@@ -1851,19 +1856,19 @@ body.calc-open { overflow: hidden; }
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_d2">AICCOPN Class-2 licensed tradespeople only</div><span class="sp-tag included" data-i18n="tag_incl">Included</span><div class="sp-svc-desc" data-i18n="ess_d2d">Every technician holds AICCOPN certification and carries full professional liability insurance.</div></div>
   </div>
   <div class="sp-note"><p data-i18n="sp_not_covered"><strong>What is NOT covered by any plan:</strong> Utility bills, property taxes (IMI), condominium fees, insurance premiums, furniture or appliance purchases, pool chemical supplies, garden landscaping redesign, or any cosmetic renovation project.</p></div>
-  <div class="sp-upgrade"><p data-i18n="ess_upgrade">Need faster emergency response, monthly handyman hours, or WhatsApp access? <strong>Upgrade to Active Host</strong> and get a 4-hour emergency SLA plus 2 included maintenance hours every month.</p><a href="#sp-active" class="sp-upgrade-link" onclick="spScrollTo('sp-active');return false;">See Active Host &darr;</a></div>
+  <div class="sp-upgrade"><p data-i18n="ess_upgrade">Need faster emergency help, monthly handyman hours, or WhatsApp access? <strong>Upgrade to Active Host</strong>: a technician on site within 2–4 hours (set by property location) plus 2 included maintenance hours every month.</p><a href="#sp-active" class="sp-upgrade-link" onclick="spScrollTo('sp-active');return false;">See Active Host &darr;</a></div>
 </section>
 
 <!-- ACTIVE HOST -->
 <section class="sp-plan" id="sp-active">
   <div class="sp-plan-header"><div class="sp-plan-name">Active Host</div><div class="sp-price-block"><div class="sp-price-main"><span class="sym">&euro;</span><span class="val">249</span><span class="per">/month</span></div><div class="sp-price-alt">or &euro;289/month billed quarterly &middot; &euro;2,988/year</div></div></div>
   <p class="sp-ideal" data-i18n="act_ideal"><strong>Ideal for:</strong> rental properties (Alojamento Local), frequently visited estates, and owners who need their property continuously guest-ready.</p>
-  <div class="sp-sla"><div class="sp-sla-title" data-i18n="sla_title">Service Level Agreement</div><div class="sp-sla-grid"><div><div class="sp-sla-label" data-i18n="sla_freq">Inspection Frequency</div><div class="sp-sla-value" data-i18n="act_freq_val">Monthly (12/year)</div></div><div><div class="sp-sla-label" data-i18n="sla_emerg">Emergency Response</div><div class="sp-sla-value" data-i18n="act_emerg_val">4 hours (7 days/week)</div></div><div><div class="sp-sla-label" data-i18n="sla_comm">Communication</div><div class="sp-sla-value">WhatsApp + email</div></div><div><div class="sp-sla-label" data-i18n="sla_maint">Included Maintenance</div><div class="sp-sla-value" data-i18n="act_maint_val">2 handyman hours/month</div></div></div></div>
+  <div class="sp-sla"><div class="sp-sla-title" data-i18n="sla_title">Service Level Agreement</div><div class="sp-sla-grid"><div><div class="sp-sla-label" data-i18n="sla_freq">Inspection Frequency</div><div class="sp-sla-value" data-i18n="act_freq_val">Monthly (12/year)</div></div><div><div class="sp-sla-label" data-i18n="sla_emerg">Emergency Response</div><div class="sp-sla-value" data-i18n="act_emerg_val">Arrival on site within 2–4 h (set by location) · 7 days/week</div></div><div><div class="sp-sla-label" data-i18n="sla_comm">Communication</div><div class="sp-sla-value">WhatsApp + email</div></div><div><div class="sp-sla-label" data-i18n="sla_maint">Included Maintenance</div><div class="sp-sla-value" data-i18n="act_maint_val">2 handyman hours/month</div></div></div></div>
   <div class="sp-cat"><div class="sp-cat-title" data-i18n="act_plus">Everything in Essential Care, plus:</div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s1">Monthly property inspection (doubled frequency)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s2">2 hours of handyman maintenance per month</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="ess_s3">Thermal moisture-mapping scan</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
-    <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s4">4-hour emergency response SLA (7 days/week)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
+    <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s4">Emergency arrival on site within 2–4 hours, set in your contract by property location (7 days/week)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s5">WhatsApp direct line to your estate manager</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s6">Pre-arrival guest readiness turnaround</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_s7">Proactive maintenance scheduling</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
@@ -1875,16 +1880,16 @@ body.calc-open { overflow: hidden; }
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="act_e4">Guest turnarounds beyond 6/year</div><span class="sp-tag extra">Extra — &euro;75 each</span></div>
   </div>
   <div class="sp-note"><p data-i18n="act_note"><strong>About materials costs:</strong> All materials are billed at cost with supplier receipts provided. We never mark up materials. You benefit from our trade accounts — typically 10–20% below retail prices.</p></div>
-  <div class="sp-upgrade"><p data-i18n="act_upgrade">Managing a vineyard, boutique hotel, or premium quinta? <strong>Upgrade to Grand Quinta Care</strong> for a 2-hour priority SLA, 4 monthly maintenance hours, drone inspections, and a dedicated estate manager.</p><a href="#sp-grand" class="sp-upgrade-link" onclick="spScrollTo('sp-grand');return false;">See Grand Quinta Care &darr;</a></div>
+  <div class="sp-upgrade"><p data-i18n="act_upgrade">Managing a vineyard, boutique hotel, or premium quinta? <strong>Upgrade to Grand Quinta Care</strong> for priority 24/7 emergency arrival (2–4 hours, set by location), 4 monthly maintenance hours, drone inspections, and a dedicated estate manager.</p><a href="#sp-grand" class="sp-upgrade-link" onclick="spScrollTo('sp-grand');return false;">See Grand Quinta Care &darr;</a></div>
 </section>
 
 <!-- GRAND QUINTA -->
 <section class="sp-plan" id="sp-grand">
   <div class="sp-plan-header"><div class="sp-plan-name">Grand Quinta Care</div><div class="sp-price-block"><div class="sp-price-main"><span class="sym">&euro;</span><span class="val">499</span><span class="per">/month</span></div><div class="sp-price-alt">or &euro;579/month billed quarterly &middot; &euro;5,988/year</div></div></div>
   <p class="sp-ideal" data-i18n="gq_ideal"><strong>Ideal for:</strong> premium estates with vineyards, boutique wine hotels (Quintas), luxury guesthouses, and high-value heritage properties.</p>
-  <div class="sp-sla"><div class="sp-sla-title" data-i18n="sla_title">Service Level Agreement</div><div class="sp-sla-grid"><div><div class="sp-sla-label" data-i18n="sla_freq">Inspection Frequency</div><div class="sp-sla-value" data-i18n="gq_freq_val">Monthly + ad-hoc storm checks</div></div><div><div class="sp-sla-label" data-i18n="sla_emerg">Emergency Response</div><div class="sp-sla-value" data-i18n="gq_emerg_val">2 hours — priority dispatch</div></div><div><div class="sp-sla-label" data-i18n="sla_comm">Communication</div><div class="sp-sla-value" data-i18n="gq_comm_val">Dedicated estate manager</div></div><div><div class="sp-sla-label" data-i18n="sla_maint">Included Maintenance</div><div class="sp-sla-value" data-i18n="gq_maint_val">4 handyman hours/month</div></div></div></div>
+  <div class="sp-sla"><div class="sp-sla-title" data-i18n="sla_title">Service Level Agreement</div><div class="sp-sla-grid"><div><div class="sp-sla-label" data-i18n="sla_freq">Inspection Frequency</div><div class="sp-sla-value" data-i18n="gq_freq_val">Monthly + ad-hoc storm checks</div></div><div><div class="sp-sla-label" data-i18n="sla_emerg">Emergency Response</div><div class="sp-sla-value" data-i18n="gq_emerg_val">Priority arrival on site within 2–4 h (set by location) · 24/7</div></div><div><div class="sp-sla-label" data-i18n="sla_comm">Communication</div><div class="sp-sla-value" data-i18n="gq_comm_val">Dedicated estate manager</div></div><div><div class="sp-sla-label" data-i18n="sla_maint">Included Maintenance</div><div class="sp-sla-value" data-i18n="gq_maint_val">4 handyman hours/month</div></div></div></div>
   <div class="sp-cat"><div class="sp-cat-title" data-i18n="gq_plus">Everything in Active Host, plus:</div>
-    <div class="sp-svc"><div class="sp-svc-name" data-i18n="gq_s1">Priority 2-hour emergency SLA (24/7, 365 days)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
+    <div class="sp-svc"><div class="sp-svc-name" data-i18n="gq_s1">Priority emergency arrival on site within 2–4 hours, set in your contract by property location (24/7, 365 days)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="gq_s2">4 hours of handyman maintenance per month</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="gq_s3">Dedicated estate manager (named contact)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
     <div class="sp-svc"><div class="sp-svc-name" data-i18n="gq_s4">Drone aerial inspection (2 flights/year)</div><span class="sp-tag included" data-i18n="tag_incl">Included</span></div>
@@ -1922,7 +1927,7 @@ body.calc-open { overflow: hidden; }
         <tr><td data-i18n="cmp_rate">Additional labour rate</td><td>&euro;25–40/hr</td><td>&euro;25–40/hr</td><td>&euro;25–40/hr</td></tr>
         <tr><td data-i18n="cmp_pm">Project management fee</td><td data-i18n="tag_quoted2">Quoted</td><td data-i18n="tag_quoted2">Quoted</td><td data-i18n="tag_incl">Included</td></tr>
         <tr class="cat-row"><td colspan="4" data-i18n="cmp_emerg_cat">Emergency Response</td></tr>
-        <tr><td>Emergency SLA</td><td data-i18n="ess_emerg_val">Next business day</td><td>4h (7 days)</td><td>2h (24/7)</td></tr>
+        <tr><td data-i18n="cmp_emerg_row">Emergency arrival on site</td><td data-i18n="ess_emerg_val">Next business day</td><td data-i18n="cmp_emerg_act">2–4 h (7 days)</td><td data-i18n="cmp_emerg_gq">2–4 h, priority (24/7)</td></tr>
         <tr><td data-i18n="cmp_callout">Emergency call-out fee</td><td>&euro;60</td><td data-i18n="cmp_waived">Waived</td><td data-i18n="cmp_waived">Waived</td></tr>
         <tr><td data-i18n="cmp_incllab">Included emergency labour</td><td class="dash">&mdash;</td><td>30 min</td><td>60 min</td></tr>
         <tr class="cat-row"><td colspan="4" data-i18n="cat_comm">Communication</td></tr>
@@ -2391,6 +2396,10 @@ body.calc-open { overflow: hidden; }
 let currentLang = 'en';
 
 const T = {
+  cmp_emerg_row: { en: 'Emergency arrival on site', pt: 'Chegada ao local em emergência' },
+  cmp_emerg_act: { en: '2–4 h (7 days)', pt: '2–4 h (7 dias)' },
+  cmp_emerg_gq: { en: '2–4 h, priority (24/7)', pt: '2–4 h, prioritária (24/7)' },
+  sla_def: { en: '<strong>How emergency response works.</strong> “Response” means a technician arriving at your property — not just a reply. The clock starts when you report the emergency to us by phone or WhatsApp. It applies to properties in our service area (Douro Valley, Aveiro, Porto, Braga and Viseu). The exact arrival time, between 2 and 4 hours, is agreed in your contract according to where the property is. Essential Care: a technician visits on the next business day.', pt: '<strong>Como funciona a resposta a emergências.</strong> «Resposta» significa um técnico a chegar ao seu imóvel — não apenas uma resposta à mensagem. O prazo começa a contar quando nos comunica a emergência por telefone ou WhatsApp. Aplica-se a imóveis na nossa área de serviço (Vale do Douro, Aveiro, Porto, Braga e Viseu). O tempo exato de chegada, entre 2 e 4 horas, é acordado no seu contrato conforme a localização do imóvel. Essential Care: um técnico desloca-se no próximo dia útil.' },
   wa_step: { en: '<b>Not sent yet.</b> 1. Tap the button — WhatsApp opens with your message already written. 2. Press <b>Send</b> in WhatsApp. Only then does your request reach us.', pt: '<b>Ainda não foi enviado.</b> 1. Carregue no botão — o WhatsApp abre com a mensagem já escrita. 2. Carregue em <b>Enviar</b> no WhatsApp. Só então o pedido nos chega.' },
   wa_step_cv: { en: '<b>Not sent yet.</b> 1. Tap the button — WhatsApp opens with your details already written. 2. Attach your CV. 3. Press <b>Send</b> in WhatsApp. Only then does your application reach us.', pt: '<b>Ainda não foi enviado.</b> 1. Carregue no botão — o WhatsApp abre com os seus dados já escritos. 2. Anexe o CV. 3. Carregue em <b>Enviar</b> no WhatsApp. Só então a candidatura nos chega.' },
   wa_step_optional: { en: 'Optional — your request is already with us. WhatsApp is only for sending photos or a faster chat.', pt: 'Opcional — o seu pedido já nos chegou. O WhatsApp serve apenas para enviar fotos ou falar mais depressa.' },
@@ -2759,7 +2768,7 @@ const T = {
   ess_m2: { en: 'Handyman hours for scheduled maintenance', pt: 'Horas de faz-tudo para manutenção programada' },
   ess_m2d: { en: 'Repairs beyond minor adjustments are billed at the member rate of <strong>€25–40/hour</strong> plus materials at cost. Written quote provided before any work begins. Included monthly hours available with Active Host (2 hrs) and Grand Quinta Care (4 hrs).', pt: 'Reparações além de ajustes menores são faturadas à tarifa de membro de <strong>€25–40/hora</strong> mais materiais ao custo. Orçamento escrito fornecido antes de qualquer trabalho. Horas mensais incluídas disponíveis com Active Host (2h) e Grand Quinta Care (4h).' },
   ess_m3: { en: 'Emergency call-out and repair', pt: 'Chamada de emergência e reparação' },
-  ess_m3d: { en: 'Call-out fee €60, plus labour at €25–40/hr and materials at cost. Next-business-day response. Faster SLAs with Active Host (4 hrs) and Grand Quinta Care (2 hrs).', pt: 'Taxa de deslocação €60, mais mão-de-obra a €25–40/h e materiais ao custo. Resposta no próximo dia útil. SLAs mais rápidos com Active Host (4h) e Grand Quinta Care (2h).' },
+  ess_m3d: { en: 'Call-out fee €60, plus labour at €25–40/hr and materials at cost. A technician visits on the next business day. Active Host and Grand Quinta Care include faster emergency arrival on site (2–4 hours, set by property location).', pt: 'Taxa de deslocação €60, mais mão-de-obra a €25–40/h e materiais ao custo. Um técnico desloca-se no próximo dia útil. O Active Host e o Grand Quinta Care incluem chegada mais rápida ao local em emergência (2–4 horas, conforme a localização do imóvel).' },
   ess_c1: { en: 'English-language inspection reports with photos & video', pt: 'Relatórios de inspeção em inglês com fotos e vídeo' },
   ess_c1d: { en: 'Structured report via email with timestamped photographs, video clips, written observations, condition summary, and recommended actions with estimated costs.', pt: 'Relatório estruturado por email com fotografias com data/hora, clips de vídeo, observações escritas, resumo do estado e ações recomendadas com custos estimados.' },
   ess_c2: { en: 'WhatsApp direct line to estate manager', pt: 'Linha direta WhatsApp com o gestor de propriedade' },
@@ -2769,17 +2778,17 @@ const T = {
   ess_d2: { en: 'AICCOPN Class-2 licensed tradespeople only', pt: 'Apenas profissionais licenciados AICCOPN Classe 2' },
   ess_d2d: { en: 'Every technician holds AICCOPN certification and carries full professional liability insurance.', pt: 'Cada técnico possui certificação AICCOPN e seguro de responsabilidade profissional completo.' },
   sp_not_covered: { en: '<strong>What is NOT covered by any plan:</strong> Utility bills, property taxes (IMI), condominium fees, insurance premiums, furniture or appliance purchases, pool chemical supplies, garden landscaping redesign, or any cosmetic renovation project.', pt: '<strong>O que NÃO está coberto por nenhum plano:</strong> Contas de serviços públicos, impostos sobre imóveis (IMI), quotas de condomínio, prémios de seguro, compra de mobiliário ou eletrodomésticos, produtos químicos para piscina, redesenho paisagístico ou qualquer projeto de renovação cosmética.' },
-  ess_upgrade: { en: 'Need faster emergency response, monthly handyman hours, or WhatsApp access? <strong>Upgrade to Active Host</strong> and get a 4-hour emergency SLA plus 2 included maintenance hours every month.', pt: 'Precisa de resposta a emergências mais rápida, horas mensais de faz-tudo ou acesso WhatsApp? <strong>Faça upgrade para Active Host</strong> e tenha um SLA de emergência de 4 horas mais 2 horas de manutenção incluídas por mês.' },
+  ess_upgrade: { en: 'Need faster emergency help, monthly handyman hours, or WhatsApp access? <strong>Upgrade to Active Host</strong>: a technician on site within 2–4 hours (set by property location) plus 2 included maintenance hours every month.', pt: 'Precisa de ajuda mais rápida em emergências, horas mensais de faz-tudo ou acesso WhatsApp? <strong>Faça upgrade para Active Host</strong>: um técnico no local em 2–4 horas (conforme a localização do imóvel) mais 2 horas de manutenção incluídas por mês.' },
 
   // Active Host
   act_ideal: { en: '<strong>Ideal for:</strong> rental properties (Alojamento Local), frequently visited estates, and owners who need their property continuously guest-ready.', pt: '<strong>Ideal para:</strong> imóveis para arrendamento (Alojamento Local), propriedades visitadas frequentemente e proprietários que precisam do imóvel sempre pronto para hóspedes.' },
   act_freq_val: { en: 'Monthly (12/year)', pt: 'Mensal (12/ano)' },
-  act_emerg_val: { en: '4 hours (7 days/week)', pt: '4 horas (7 dias/semana)' },
+  act_emerg_val: { en: 'Arrival on site within 2–4 h (set by location) · 7 days/week', pt: 'Chegada ao local em 2–4 h (conforme a localização) · 7 dias/semana' },
   act_maint_val: { en: '2 handyman hours/month', pt: '2 horas de faz-tudo/mês' },
   act_plus: { en: 'Everything in Essential Care, plus:', pt: 'Tudo no Essential Care, mais:' },
   act_s1: { en: 'Monthly property inspection (doubled frequency)', pt: 'Inspeção mensal do imóvel (frequência duplicada)' },
   act_s2: { en: '2 hours of handyman maintenance per month', pt: '2 horas de manutenção por mês' },
-  act_s4: { en: '4-hour emergency response SLA (7 days/week)', pt: 'SLA de resposta de emergência 4 horas (7 dias/semana)' },
+  act_s4: { en: 'Emergency arrival on site within 2–4 hours, set in your contract by property location (7 days/week)', pt: 'Chegada ao local em emergência em 2–4 horas, definida no contrato conforme a localização do imóvel (7 dias/semana)' },
   act_s5: { en: 'WhatsApp direct line to your estate manager', pt: 'Linha direta WhatsApp com o seu gestor' },
   act_s6: { en: 'Pre-arrival guest readiness turnaround', pt: 'Preparação pré-chegada de hóspedes' },
   act_s7: { en: 'Proactive maintenance scheduling', pt: 'Programação proativa de manutenção' },
@@ -2788,16 +2797,16 @@ const T = {
   act_e3: { en: 'Major structural works', pt: 'Obras estruturais de grande porte' },
   act_e4: { en: 'Guest turnarounds beyond 6/year', pt: 'Preparações para hóspedes além de 6/ano' },
   act_note: { en: '<strong>About materials costs:</strong> All materials are billed at cost with supplier receipts provided. We never mark up materials. You benefit from our trade accounts — typically 10–20% below retail prices.', pt: '<strong>Sobre custos de materiais:</strong> Todos os materiais são faturados ao custo com recibos do fornecedor. Nunca aplicamos margem nos materiais. Beneficia das nossas contas comerciais — tipicamente 10–20% abaixo dos preços de retalho.' },
-  act_upgrade: { en: 'Managing a vineyard, boutique hotel, or premium quinta? <strong>Upgrade to Grand Quinta Care</strong> for a 2-hour priority SLA, 4 monthly maintenance hours, drone inspections, and a dedicated estate manager.', pt: 'Gere uma vinha, hotel boutique ou quinta premium? <strong>Faça upgrade para Grand Quinta Care</strong> para um SLA prioritário de 2 horas, 4 horas mensais de manutenção, inspeções por drone e um gestor de propriedade dedicado.' },
+  act_upgrade: { en: 'Managing a vineyard, boutique hotel, or premium quinta? <strong>Upgrade to Grand Quinta Care</strong> for priority 24/7 emergency arrival (2–4 hours, set by location), 4 monthly maintenance hours, drone inspections, and a dedicated estate manager.', pt: 'Gere uma vinha, hotel boutique ou quinta premium? <strong>Faça upgrade para Grand Quinta Care</strong> para chegada prioritária em emergência 24/7 (2–4 horas, conforme a localização), 4 horas mensais de manutenção, inspeções por drone e um gestor de propriedade dedicado.' },
 
   // Grand Quinta
   gq_ideal: { en: '<strong>Ideal for:</strong> premium estates with vineyards, boutique wine hotels (Quintas), luxury guesthouses, and high-value heritage properties.', pt: '<strong>Ideal para:</strong> propriedades premium com vinhas, hotéis vinícolas boutique (Quintas), casas de hóspedes de luxo e propriedades patrimoniais de alto valor.' },
   gq_freq_val: { en: 'Monthly + ad-hoc storm checks', pt: 'Mensal + verificações pós-tempestade' },
-  gq_emerg_val: { en: '2 hours — priority dispatch', pt: '2 horas — despacho prioritário' },
+  gq_emerg_val: { en: 'Priority arrival on site within 2–4 h (set by location) · 24/7', pt: 'Chegada prioritária ao local em 2–4 h (conforme a localização) · 24/7' },
   gq_comm_val: { en: 'Dedicated estate manager', pt: 'Gestor de propriedade dedicado' },
   gq_maint_val: { en: '4 handyman hours/month', pt: '4 horas de faz-tudo/mês' },
   gq_plus: { en: 'Everything in Active Host, plus:', pt: 'Tudo no Active Host, mais:' },
-  gq_s1: { en: 'Priority 2-hour emergency SLA (24/7, 365 days)', pt: 'SLA de emergência prioritário 2 horas (24/7, 365 dias)' },
+  gq_s1: { en: 'Priority emergency arrival on site within 2–4 hours, set in your contract by property location (24/7, 365 days)', pt: 'Chegada prioritária ao local em emergência em 2–4 horas, definida no contrato conforme a localização do imóvel (24/7, 365 dias)' },
   gq_s2: { en: '4 hours of handyman maintenance per month', pt: '4 horas de manutenção por mês' },
   gq_s3: { en: 'Dedicated estate manager (named contact)', pt: 'Gestor de propriedade dedicado (contacto nomeado)' },
   gq_s4: { en: 'Drone aerial inspection (2 flights/year)', pt: 'Inspeção aérea por drone (2 voos/ano)' },
@@ -3844,7 +3853,7 @@ function buildFAQ() {
 // SP FAQ
 const spFaqData = {
   en: [
-    { q: 'What happens if something breaks between inspections?', a: 'Contact us via your plan\'s communication channel. We dispatch a technician according to your SLA: next business day (Essential), 4 hours (Active Host), or 2 hours (Grand Quinta).' },
+    { q: 'What happens if something breaks between inspections?', a: 'Contact us by phone or WhatsApp. Essential Care: a technician visits on the next business day. Active Host and Grand Quinta Care: a technician arrives on site within 2–4 hours of your report, the exact time agreed in your contract according to the property location.' },
     { q: 'Do unused handyman hours roll over?', a: 'No. Hours reset each billing cycle. Your estate manager will proactively suggest preventive tasks to maximise your plan\'s value.' },
     { q: 'Who pays for materials?', a: 'You do, but only at cost. We never mark up materials. Supplier receipts provided with every invoice.' },
     { q: 'What if I need a major renovation?', a: 'We handle major works as separate quoted projects. Labour at member rate, materials at cost. Grand Quinta members receive project management at no additional fee.' },
@@ -3854,7 +3863,7 @@ const spFaqData = {
     { q: 'Do you cover properties outside the Douro Valley?', a: 'Yes. Our HomeCare plans serve Aveiro, Porto, Douro Valley, Braga, and Viseu. Other areas considered case-by-case.' }
   ],
   pt: [
-    { q: 'O que acontece se algo avariar entre inspeções?', a: 'Contacte-nos pelo canal de comunicação do seu plano. Enviamos um técnico de acordo com o seu SLA: próximo dia útil (Essential), 4 horas (Active Host), ou 2 horas (Grand Quinta).' },
+    { q: 'O que acontece se algo avariar entre inspeções?', a: 'Contacte-nos por telefone ou WhatsApp. Essential Care: um técnico desloca-se no próximo dia útil. Active Host e Grand Quinta Care: um técnico chega ao local em 2–4 horas após a comunicação, com o tempo exato acordado no contrato conforme a localização do imóvel.' },
     { q: 'As horas de faz-tudo não utilizadas transitam?', a: 'Não. As horas reiniciam a cada ciclo de faturação. O seu gestor irá proativamente sugerir tarefas preventivas para maximizar o valor do seu plano.' },
     { q: 'Quem paga os materiais?', a: 'O cliente, mas apenas ao custo. Nunca aplicamos margem nos materiais. Recibos do fornecedor incluídos em cada fatura.' },
     { q: 'E se precisar de uma grande renovação?', a: 'Tratamos obras maiores como projetos orçamentados separadamente. Mão-de-obra à tarifa de membro, materiais ao custo. Membros Grand Quinta recebem gestão de projeto sem custo adicional.' },
