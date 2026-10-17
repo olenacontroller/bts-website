@@ -1,11 +1,12 @@
 """Build dist/: the published site, with one real web address per page.
 
 site/index.html stays the single source. For every page (home, /careers/, /small-repairs/ …) this writes a copy
-whose visible HTML holds only that page; the other pages are packed into JSON blocks and unpacked by a small
-script before the site's own code runs, so navigation inside the site keeps working without reloads.
+whose HTML holds only that page; the other pages load from one shared file, /pages.js, before the site's own
+code runs, so navigation inside the site keeps working without reloads.
 
 Run:  python tools/build_pages.py      (tools/publish.py runs it for you)
 """
+import hashlib
 import json
 import re
 import shutil
@@ -65,11 +66,19 @@ for i, (s, name) in enumerate(starts):
 
 
 
+ALL_PAGES = json.dumps({name: inner for name, _, _, _, inner, _ in blocks}, ensure_ascii=False).replace("</", "<\\/")
+PAGES_JS = ("(function(){var d=" + ALL_PAGES + ";"
+            "for(var k in d){var el=document.getElementById('page-'+k);if(el&&!el.childElementCount)el.innerHTML=d[k];}})();\n")
+PAGES_JS_VERSION = hashlib.sha1(PAGES_JS.encode("utf-8")).hexdigest()[:10]
+
+REDIRECTS = {"legal": "/complaints/", "cost-calculator": "/services/#calculator"}
+SCRIPT_FILES = {}
+
+
 def build(page):
     path, title, desc = PAGES[page]
     out = []
     pos = 0
-    packed = {}
     for name, s, e, open_tag, inner, tail in blocks:
         out.append(src[pos:s])
         tag = re.sub(r'class="page-view( active)?"', 'class="page-view active"' if name == page else 'class="page-view"', open_tag)
@@ -77,16 +86,12 @@ def build(page):
             out.append(tag + inner + tail)
         else:
             out.append(tag + tail)
-            packed[name] = inner
         pos = e
     html = "".join(out) + src[pos:]
 
-    payload = json.dumps(packed, ensure_ascii=False).replace("</", "<\\/")
-    unpack = ('<script type="application/json" id="packed-pages">' + payload + '</script>\n'
-              '<script>(function(){var d=JSON.parse(document.getElementById("packed-pages").textContent);'
-              'for(var k in d){var el=document.getElementById("page-"+k);if(el&&!el.childElementCount)el.innerHTML=d[k];}})();</script>\n')
+    # The other pages come from one shared file, so each address's own code holds only its own page
     i = html.index("<script>\nlet currentLang")
-    html = html[:i] + unpack + html[i:]
+    html = html[:i] + f'<script src="/pages.js?v={PAGES_JS_VERSION}"></script>\n' + html[i:]
 
     url = DOMAIN + path
     head = (f'<base href="/">\n' if path != "/" else "")
@@ -100,6 +105,15 @@ def build(page):
         html = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{escape(title)}">', html, count=1)
         html = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{escape(desc)}">', html, count=1)
     html = html.replace('<meta property="og:image" content="img/', f'<meta property="og:image" content="{DOMAIN}/img/')
+
+    # Move the site's own scripts (translations, forms, assistant…) to shared files, in the same order
+    def externalize(m):
+        code = m.group(1)
+        name = "js/app-" + hashlib.sha1(code.encode("utf-8")).hexdigest()[:10] + ".js"
+        SCRIPT_FILES[name] = code
+        return f'<script src="/{name}"></script>'
+    body_at = html.index("<body")
+    html = html[:body_at] + re.sub(r"<script>(.*?)</script>", externalize, html[body_at:], flags=re.S)
     return html
 
 
@@ -111,6 +125,16 @@ for page, (path, _, _) in PAGES.items():
     target = DIST / path.strip("/") / "index.html" if path != "/" else DIST / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(build(page), encoding="utf-8")
+(DIST / "pages.js").write_text(PAGES_JS, encoding="utf-8")
+(DIST / "js").mkdir(exist_ok=True)
+for name, code in SCRIPT_FILES.items():
+    (DIST / name).write_text(code, encoding="utf-8")
+for slug, dest in REDIRECTS.items():
+    (DIST / slug).mkdir(exist_ok=True)
+    (DIST / slug / "index.html").write_text(
+        f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>BTS</title>'
+        f'<link rel="canonical" href="{DOMAIN}{dest.split("#")[0]}"><meta http-equiv="refresh" content="0; url={dest}">'
+        f'<script>location.replace("{dest}");</script></head><body><a href="{dest}">BTS</a></body></html>\n', encoding="utf-8")
 
 (DIST / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
