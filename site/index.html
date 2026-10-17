@@ -7,7 +7,169 @@
 <style>:root{color-scheme:only light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>BTS — Building The Solution</title>
 <meta name="description" content="Construction and Renovation for Real Estate Owners in Northern Portugal — Aveiro, Porto, Douro Valley">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap"></noscript>
+<link rel="preload" href="/fonts/outfit-latin-6.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin-4.woff2" as="font" type="font/woff2" crossorigin><style>
+/* Fonts served from this site (no Google Fonts request) */
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/caveat-latin-ext-1.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/caveat-latin-2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/inter-latin-ext-3.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/inter-latin-4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/inter-latin-ext-3.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/inter-latin-4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/inter-latin-ext-3.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/inter-latin-4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/inter-latin-ext-3.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/inter-latin-4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-ext-5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-ext-5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-ext-5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-ext-5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-ext-5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/outfit-latin-6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 
 <style>
 :root {
@@ -2064,7 +2226,7 @@ body.calc-open { overflow: hidden; }
       <li><strong>Clientes:</strong> dados de identificação e faturação (incluindo NIF e morada), dados do imóvel, comunicações e registos fotográficos da obra.</li>
       <li><strong>Candidatos a emprego:</strong> nome, contactos, CV, experiência profissional, disponibilidade, local de residência, situação quanto à autorização de trabalho e notas das entrevistas.</li>
       <li><strong>Assistente de IA do site:</strong> as mensagens que escreve no chat são enviadas à Google (Gemini API), que as processa por nossa conta apenas para gerar a resposta. Não guardamos o histórico do chat; os seus contactos só nos chegam se enviar o formulário. Não escreva dados sensíveis no chat.</li>
-      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Contamos de forma anónima os toques em botões (por exemplo «Ligar» ou «WhatsApp») — apenas o nome do botão, a página, o tipo de dispositivo, o idioma e o tipo de site de onde veio (por exemplo o Google), sem dados pessoais nem cookies. Quando envia um pedido, guardamos essa mesma origem com ele. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento e ao Google Fonts (ver a <a href="/cookies/" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
+      <li><strong>Navegação:</strong> o site não utiliza cookies de análise ou de publicidade. Contamos de forma anónima os toques em botões (por exemplo «Ligar» ou «WhatsApp») — apenas o nome do botão, a página, o tipo de dispositivo, o idioma e o tipo de site de onde veio (por exemplo o Google), sem dados pessoais nem cookies. Quando envia um pedido, guardamos essa mesma origem com ele. Ao carregar a página, o seu endereço IP é comunicado ao serviço de alojamento (ver a <a href="/cookies/" onclick="showPage('cookies');return false;">Política de Cookies</a>).</li>
     </ul>
     <p>Não tratamos categorias especiais de dados (por exemplo, saúde) e pedimos-lhe que não as inclua no CV ou nas mensagens.</p>
 
@@ -2148,7 +2310,7 @@ body.calc-open { overflow: hidden; }
       <li><strong>Clients:</strong> identification and billing data (including tax number and address), property details, communications and photo records of the works.</li>
       <li><strong>Job applicants:</strong> name, contact details, CV, work experience, availability, place of residence, work-permit status and interview notes.</li>
       <li><strong>Website AI assistant:</strong> the messages you type in the chat are sent to Google (Gemini API), which processes them on our behalf only to generate the answer. We do not keep the chat history; your contact details reach us only if you send the form. Please do not type sensitive data in the chat.</li>
-      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. We count button taps anonymously (for example “Call” or “WhatsApp”) — only the button name, page, device type, language and the kind of site you came from (for example Google), with no personal data and no cookies. When you send a request, we save that same source with it. When the page loads, your IP address is disclosed to the hosting provider and to Google Fonts (see the <a href="/cookies/" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
+      <li><strong>Browsing:</strong> this site uses no analytics or advertising cookies. We count button taps anonymously (for example “Call” or “WhatsApp”) — only the button name, page, device type, language and the kind of site you came from (for example Google), with no personal data and no cookies. When you send a request, we save that same source with it. When the page loads, your IP address is disclosed to the hosting provider (see the <a href="/cookies/" onclick="showPage('cookies');return false;">Cookie Policy</a>).</li>
     </ul>
     <p>We do not process special categories of data (e.g. health data) and ask you not to include them in your CV or messages.</p>
 
@@ -2231,7 +2393,6 @@ body.calc-open { overflow: hidden; }
     <div class="legal-table-wrap"><table class="legal-table">
       <thead><tr><th>Serviço</th><th>O que acontece</th><th>Quando</th></tr></thead>
       <tbody>
-        <tr><td>Google Fonts (Google Ireland Limited)</td><td>O navegador descarrega os tipos de letra do site a partir dos servidores da Google, que recebem o seu endereço IP e dados técnicos do navegador. Segundo a Google, este serviço não define cookies.</td><td>Ao abrir o site</td></tr>
         <tr><td>Alojamento do site</td><td>O servidor pode registar dados técnicos (endereço IP, data e hora, página pedida) para segurança e funcionamento.</td><td>Ao abrir o site</td></tr>
         <tr><td>WhatsApp (WhatsApp Ireland Limited)</td><td>Só quando clica num botão do WhatsApp é aberta uma ligação ao WhatsApp, que passa a aplicar as suas próprias regras de privacidade e de cookies.</td><td>Apenas se clicar</td></tr>
       </tbody>
@@ -2261,7 +2422,6 @@ body.calc-open { overflow: hidden; }
     <div class="legal-table-wrap"><table class="legal-table">
       <thead><tr><th>Service</th><th>What happens</th><th>When</th></tr></thead>
       <tbody>
-        <tr><td>Google Fonts (Google Ireland Limited)</td><td>Your browser downloads the site's typefaces from Google's servers, which receive your IP address and technical browser data. According to Google, this service sets no cookies.</td><td>When you open the site</td></tr>
         <tr><td>Website hosting</td><td>The server may log technical data (IP address, date and time, page requested) for security and operation.</td><td>When you open the site</td></tr>
         <tr><td>WhatsApp (WhatsApp Ireland Limited)</td><td>Only when you click a WhatsApp button is a link to WhatsApp opened; WhatsApp's own privacy and cookie rules then apply.</td><td>Only if you click</td></tr>
       </tbody>
