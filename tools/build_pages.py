@@ -26,7 +26,7 @@ PAGES = {
     "resolve": ("/small-repairs/", "BTS Resolve — Small Repairs — BTS",
                 "Something broken at home? Send a photo on WhatsApp. We tell you the price before any work starts. Douro Valley, Aveiro, Porto."),
     "careers": ("/careers/", "Careers — Construction Jobs in Northern Portugal — BTS",
-                "Open positions at BTS: drywall / pladur installers, stonemasons and formwork carpenters in Northern Portugal."),
+                "Open positions at BTS: drywall / pladur installers, stonemasons, formwork carpenters and rebar fixers (ferrageiros) in Northern Portugal."),
     "services": ("/property-care/", "HomeCare Property Care Plans — BTS",
                  "HomeCare plans for owners who are often away: inspections, maintenance and emergency response from €99/month."),
     "privacy": ("/privacy/", "Privacy Policy — BTS", "How Blame The Stars, Lda. handles your personal data."),

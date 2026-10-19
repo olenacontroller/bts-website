@@ -55,11 +55,11 @@ const TOOLS = [{
     },
     {
       name: 'open_job_application',
-      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, pladur = drywall / plasterboard / LSF installer, outro = other trade.',
+      description: 'Opens the job application form for a vacancy and pre-fills name and phone if given. pedreiro = stonemason, cofragem = formwork carpenter, pladur = drywall / plasterboard / LSF installer, ferrageiro = rebar fixer (armador de ferro), outro = other trade.',
       parameters: {
         type: 'OBJECT',
         properties: {
-          position: { type: 'STRING', enum: ['pedreiro', 'cofragem', 'pladur', 'outro'] },
+          position: { type: 'STRING', enum: ['pedreiro', 'cofragem', 'pladur', 'ferrageiro', 'outro'] },
           name: { type: 'STRING' },
           phone: { type: 'STRING' },
           proposed_rate: { type: 'STRING', description: "The applicant's own price proposal, e.g. '12 €/m2, labour only'" }

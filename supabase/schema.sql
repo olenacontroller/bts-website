@@ -166,7 +166,10 @@ values
  E'Proven experience as a mason (pedreiro)\nKnowledge of natural stone — granite, schist\nAble to read basic construction drawings\nReliable, tidy and safety-minded; driving licence is a plus'),
 ('vac_cofragem', 'Carpinteiro de Cofragem', 'Formwork Carpenter', 'Aveiro · Porto · Douro Valley', 'Full-time', '2+ years', 1, 'open', true,
  E'Assemble and strip formwork for foundations, slabs, beams, columns and walls\nWork with traditional timber and modular/metal formwork systems\nSet out, level and brace formwork to the drawings\nSupport concrete pours and look after equipment and materials',
- E'Proven experience as a formwork carpenter\nAble to read structural drawings and take accurate measurements\nSafe working at height and with power tools\nTeam player, punctual; driving licence is a plus')
+ E'Proven experience as a formwork carpenter\nAble to read structural drawings and take accurate measurements\nSafe working at height and with power tools\nTeam player, punctual; driving licence is a plus'),
+('vac_ferrageiro', 'Ferrageiro (Armador de Ferro)', 'Rebar fixer · Steel fixer', 'Aveiro · Porto · Douro Valley', 'Full-time', 'Rebar experience', 1, 'open', true,
+ E'Corte e dobragem de armaduras de aço\nMontagem e atadura de armaduras para elementos estruturais\nInterpretação de desenhos de armaduras\nColocação de espaçadores e garantia dos recobrimentos',
+ E'Experiência comprovada como ferrageiro / armador de ferro\nCapacidade de interpretar desenhos de armaduras\nTrabalho seguro com ferramentas de corte e dobragem e em altura\nRigor, pontualidade e espírito de equipa; carta de condução é uma vantagem')
 on conflict (id) do nothing;
 
 -- ============================================================
