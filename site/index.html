@@ -1171,6 +1171,8 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 /* ── First screen: full-width drone video with text on top ── */
 .vx-hero { position: relative; margin-top: 92px; height: calc(100vh - 92px); min-height: 560px; max-height: 860px; overflow: hidden; background: #2b2b31; color: #fff; }
 .vx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; }
+/* Phones held upright: portrait helicopter video (whole house + Douro valley); its poster sits behind until it plays */
+@media (max-width: 768px) and (orientation: portrait) { .vx-hero { background: #2b2b31 url('img/bts-hero-portrait-poster.webp') center top/cover no-repeat; } .vx-video { object-position: 50% 0%; opacity: 0; transition: opacity .6s; } .vx-video.is-playing { opacity: 1; } }
 .vx-shade { position: absolute; inset: 0; background:
   linear-gradient(90deg, rgba(18,18,22,0.42) 0%, rgba(18,18,22,0.2) 35%, rgba(18,18,22,0) 58%),
   linear-gradient(0deg, rgba(18,18,22,0.32) 0%, rgba(18,18,22,0) 38%); }
@@ -1191,6 +1193,7 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 @media (prefers-reduced-motion: reduce) { .vx-content .hx-small, .vx-content .hx-small .rs-arrow { transition: none; } .vx-content .hx-small:hover { transform: none; } }
 @media (max-width: 760px) { .vx-content .hx-small { display: flex; width: 100%; justify-content: center; margin-top: 12px; } }
 @media (prefers-reduced-motion: reduce) { .vx-video { display: none; } .vx-hero { background: #2b2b31 url('img/bts-hero-sunny-poster.webp') center/cover; } }
+@media (prefers-reduced-motion: reduce) and (max-width: 768px) and (orientation: portrait) { .vx-hero { background: #2b2b31 url('img/bts-hero-portrait-poster.webp') center top/cover; } }
 @media (max-width: 900px) {
   .vx-hero { margin-top: 80px; height: calc(100svh - 80px); min-height: 600px; }
   .vx-shade { background: linear-gradient(0deg, rgba(18,18,22,0.7) 0%, rgba(18,18,22,0.4) 38%, rgba(18,18,22,0) 62%); }
@@ -1452,7 +1455,8 @@ body.calc-open { overflow: hidden; }
   ]
 }
 </script>
-<link rel="preload" as="image" href="img/bts-hero-sunny-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/bts-hero-sunny-poster.webp" fetchpriority="high" media="not all and (max-width: 768px) and (orientation: portrait)">
+<link rel="preload" as="image" href="img/bts-hero-portrait-poster.webp" fetchpriority="high" media="(max-width: 768px) and (orientation: portrait)">
 </head>
 <body>
 
@@ -4369,7 +4373,9 @@ window.addEventListener('load', () => setTimeout(() => {
   if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const s = v.querySelector('source[data-src]');
   if (!s) return;
-  s.src = window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
+  const portrait = window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
+  if (portrait) { v.removeAttribute('poster'); v.addEventListener('playing', () => v.classList.add('is-playing'), { once: true }); }
+  s.src = portrait ? 'img/bts-hero-portrait.mp4' : window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
   v.load();
   v.play().catch(() => {});
 }, 800));
