@@ -1256,15 +1256,18 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 .vx-content .hx-wa svg { width: 24px; height: 24px; }
 .vx-content .hx-wa .wa-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 900px) { .vx-content .hx-btns { align-items: stretch; } .vx-content .hx-wa { padding: 0; align-self: center; } }
-/* ── Phones held upright: zoom-in video in a 4:3 frame under the menu, text below on charcoal ── */
+/* ── Sharp vector logo is wider than the old picture: keep the same width as before on tablets and phones ── */
+@media (max-width: 1024px) { .nav-logo { height: 46px; } }
+@media (max-width: 760px) { .nav-logo { height: 37px; } }
+/* ── Phones held upright: full-screen zoom-in video; headline over the sky, buttons over the lawn (all text on the video) ── */
 @media (max-width: 768px) and (orientation: portrait) {
-  .vx-hero { height: auto; min-height: 0; max-height: none; margin-top: 0; padding-top: 80px; background: #1E1F22; display: flex; flex-direction: column; }
-  .vx-video { position: relative; inset: auto; display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%; background: #2b2b31; }
-  .vx-shade { display: none; }
-  .vx-content { position: relative; left: auto; right: auto; bottom: auto; max-width: none; padding: 26px 20px 36px; }
-  .vx-content h1, .vx-sub, .vx-eyebrow { text-shadow: none; }
+  .vx-video { object-position: 50% 42%; }
+  .vx-shade { background: linear-gradient(180deg, rgba(18,18,22,0.30) 0%, rgba(18,18,22,0.12) 30%, rgba(18,18,22,0) 46%), linear-gradient(0deg, rgba(18,18,22,0.32) 0%, rgba(18,18,22,0) 30%); }
+  .vx-content { top: 104px; bottom: 84px; display: flex; flex-direction: column; }
+  .vx-content .hx-btns { margin-top: auto; }
+  .vx-content h1 { text-shadow: 0 2px 14px rgba(0,40,90,0.45); }
+  .vx-sub { text-shadow: 0 1px 10px rgba(0,40,90,0.5); }
 }
-@media (prefers-reduced-motion: reduce) and (max-width: 768px) and (orientation: portrait) { .vx-video { display: block; } .vx-hero { background: #1E1F22; } }
 
 /* ── Phone polish: hero buttons, robot bubble, swipe rows, upload buttons ── */
 .swipe-hint { display: none; }
@@ -1441,7 +1444,7 @@ body.calc-open { overflow: hidden; }
   "legalName": "Blame The Stars, Lda.",
   "alternateName": ["BTS — Building The Solution", "Blame The Stars"],
   "url": "https://bts-grupo.com/",
-  "logo": "https://bts-grupo.com/img/bts-logo-360.png",
+  "logo": "https://bts-grupo.com/img/bts-logo.png",
   "image": "https://bts-grupo.com/img/bts-hero-modern.jpg",
   "priceRange": "€€",
   "description": "Construction, renovation, pools, roofing and property care for real estate owners in Northern Portugal, with bilingual (English/Portuguese) project management and weekly photo and video updates.",
@@ -1468,7 +1471,7 @@ body.calc-open { overflow: hidden; }
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <img width="360" height="84" class="nav-logo" src="img/bts-logo-360.webp" alt="BTS — Building The Solution" onclick="showPage('home')">
+    <img width="453" height="85" class="nav-logo" src="img/bts-logo.svg" alt="BTS — Building The Solution" onclick="showPage('home')">
     <div class="nav-links">
       <a href="/" data-i18n="nav_home" onclick="showPage('home');return false;">Home</a>
       <a href="/#why" data-i18n="nav_about" onclick="showPage('home','why');return false;">About</a>
@@ -2563,7 +2566,7 @@ body.calc-open { overflow: hidden; }
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img width="360" height="84" class="footer-logo" src="img/bts-logo-360.webp" alt="BTS — Building The Solution">
+      <img width="453" height="85" class="footer-logo" src="img/bts-logo.svg" alt="BTS — Building The Solution">
       <p data-i18n="foot_desc">Construction and Renovation for Real Estate Owners in Northern Portugal</p>
       <div class="footer-contacts">
         <div><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><span><span data-i18n="lbl_call">Calls</span>: +351 933 255 248</span></div>
@@ -4375,7 +4378,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalcMod
 // Hero video: the poster shows at once; the video loads after the page is ready (faster first screen)
 (function () { // phones held upright: matching 4:3 still picture until the zoom-in video plays
   const v = document.querySelector('.vx-video');
-  if (v && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches) v.poster = 'img/bts-hero-phone-poster.webp';
+  if (v && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches) v.poster = 'img/bts-hero-phone-full-poster.webp';
 })();
 window.addEventListener('load', () => setTimeout(() => {
   const v = document.querySelector('.vx-video');
@@ -4383,7 +4386,7 @@ window.addEventListener('load', () => setTimeout(() => {
   const s = v.querySelector('source[data-src]');
   if (!s) return;
   const portrait = window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
-  s.src = portrait ? 'img/bts-hero-phone.mp4' : window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
+  s.src = portrait ? 'img/bts-hero-phone-full.mp4' : window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
   v.load();
   v.play().catch(() => {});
 }, 800));
