@@ -1183,7 +1183,7 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 .vx-content .hx-ai { background: rgba(255,255,255,0.95); }
 .vx-content .hx-small { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
 .vx-content .hx-small:hover { color: #E7C36B; }
-@media (prefers-reduced-motion: reduce) { .vx-video { display: none; } .vx-hero { background: #2b2b31 url('img/bts-hero-drone-poster.webp') center/cover; } }
+@media (prefers-reduced-motion: reduce) { .vx-video { display: none; } .vx-hero { background: #2b2b31 url('img/bts-hero-douro-poster.webp') center/cover; } }
 @media (max-width: 900px) {
   .vx-hero { margin-top: 80px; height: calc(100svh - 80px); min-height: 600px; }
   .vx-shade { background: linear-gradient(0deg, rgba(18,18,22,0.85) 0%, rgba(18,18,22,0.55) 45%, rgba(18,18,22,0.15) 75%, rgba(18,18,22,0.05) 100%); }
@@ -1445,7 +1445,7 @@ body.calc-open { overflow: hidden; }
   ]
 }
 </script>
-<link rel="preload" as="image" href="img/bts-hero-drone-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/bts-hero-douro-poster.webp" fetchpriority="high">
 </head>
 <body>
 
@@ -1487,8 +1487,8 @@ body.calc-open { overflow: hidden; }
 <div class="page-view active" id="page-home">
 
 <section class="vx-hero" id="home">
-  <video class="vx-video" muted loop playsinline preload="none" poster="img/bts-hero-drone-poster.webp" aria-hidden="true">
-    <source data-src="img/bts-hero-drone.mp4" type="video/mp4">
+  <video class="vx-video" muted loop playsinline preload="none" poster="img/bts-hero-douro-poster.webp" aria-hidden="true">
+    <source data-src="img/bts-hero-douro.mp4" type="video/mp4">
   </video>
   <div class="vx-shade" aria-hidden="true"></div>
   <div class="vx-content">
@@ -4362,7 +4362,7 @@ window.addEventListener('load', () => setTimeout(() => {
   if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const s = v.querySelector('source[data-src]');
   if (!s) return;
-  s.src = window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-drone-960.mp4' : s.getAttribute('data-src');
+  s.src = window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-douro-960.mp4' : s.getAttribute('data-src');
   v.load();
   v.play().catch(() => {});
 }, 800));
