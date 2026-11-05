@@ -1171,8 +1171,6 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 /* ── First screen: full-width drone video with text on top ── */
 .vx-hero { position: relative; margin-top: 92px; height: calc(100vh - 92px); min-height: 560px; max-height: 860px; overflow: hidden; background: #2b2b31; color: #fff; }
 .vx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; }
-/* Phones held upright: portrait helicopter video (whole house + Douro valley); its poster sits behind until it plays */
-@media (max-width: 768px) and (orientation: portrait) { .vx-hero { background: #2b2b31 url('img/bts-hero-portrait-poster.webp') center top/cover no-repeat; } .vx-video { object-position: 50% 0%; opacity: 0; transition: opacity .6s; } .vx-video.is-playing { opacity: 1; } }
 .vx-shade { position: absolute; inset: 0; background:
   linear-gradient(90deg, rgba(18,18,22,0.42) 0%, rgba(18,18,22,0.2) 35%, rgba(18,18,22,0) 58%),
   linear-gradient(0deg, rgba(18,18,22,0.32) 0%, rgba(18,18,22,0) 38%); }
@@ -1193,7 +1191,6 @@ body.hero-cta-visible .ai-buddy, body.hero-cta-visible .fab-stack { opacity: 0; 
 @media (prefers-reduced-motion: reduce) { .vx-content .hx-small, .vx-content .hx-small .rs-arrow { transition: none; } .vx-content .hx-small:hover { transform: none; } }
 @media (max-width: 760px) { .vx-content .hx-small { display: flex; width: 100%; justify-content: center; margin-top: 12px; } }
 @media (prefers-reduced-motion: reduce) { .vx-video { display: none; } .vx-hero { background: #2b2b31 url('img/bts-hero-sunny-poster.webp') center/cover; } }
-@media (prefers-reduced-motion: reduce) and (max-width: 768px) and (orientation: portrait) { .vx-hero { background: #2b2b31 url('img/bts-hero-portrait-poster.webp') center top/cover; } }
 @media (max-width: 900px) {
   .vx-hero { margin-top: 80px; height: calc(100svh - 80px); min-height: 600px; }
   .vx-shade { background: linear-gradient(0deg, rgba(18,18,22,0.7) 0%, rgba(18,18,22,0.4) 38%, rgba(18,18,22,0) 62%); }
@@ -1259,6 +1256,15 @@ body.nav-hero:has(.mobile-menu.open) .hamburger, body.nav-hero:has(.mobile-menu.
 .vx-content .hx-wa svg { width: 24px; height: 24px; }
 .vx-content .hx-wa .wa-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 900px) { .vx-content .hx-btns { align-items: stretch; } .vx-content .hx-wa { padding: 0; align-self: center; } }
+/* ── Phones held upright: zoom-in video in a 4:3 frame under the menu, text below on charcoal ── */
+@media (max-width: 768px) and (orientation: portrait) {
+  .vx-hero { height: auto; min-height: 0; max-height: none; margin-top: 0; padding-top: 80px; background: #1E1F22; display: flex; flex-direction: column; }
+  .vx-video { position: relative; inset: auto; display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%; background: #2b2b31; }
+  .vx-shade { display: none; }
+  .vx-content { position: relative; left: auto; right: auto; bottom: auto; max-width: none; padding: 26px 20px 36px; }
+  .vx-content h1, .vx-sub, .vx-eyebrow { text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 768px) and (orientation: portrait) { .vx-video { display: block; } .vx-hero { background: #1E1F22; } }
 
 /* ── Phone polish: hero buttons, robot bubble, swipe rows, upload buttons ── */
 .swipe-hint { display: none; }
@@ -1455,8 +1461,7 @@ body.calc-open { overflow: hidden; }
   ]
 }
 </script>
-<link rel="preload" as="image" href="img/bts-hero-sunny-poster.webp" fetchpriority="high" media="not all and (max-width: 768px) and (orientation: portrait)">
-<link rel="preload" as="image" href="img/bts-hero-portrait-poster.webp" fetchpriority="high" media="(max-width: 768px) and (orientation: portrait)">
+<link rel="preload" as="image" href="img/bts-hero-sunny-poster.webp" fetchpriority="high">
 </head>
 <body>
 
@@ -4368,14 +4373,17 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalcMod
 
 <script>
 // Hero video: the poster shows at once; the video loads after the page is ready (faster first screen)
+(function () { // phones held upright: matching 4:3 still picture until the zoom-in video plays
+  const v = document.querySelector('.vx-video');
+  if (v && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches) v.poster = 'img/bts-hero-phone-poster.webp';
+})();
 window.addEventListener('load', () => setTimeout(() => {
   const v = document.querySelector('.vx-video');
   if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const s = v.querySelector('source[data-src]');
   if (!s) return;
   const portrait = window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
-  if (portrait) { v.removeAttribute('poster'); v.addEventListener('playing', () => v.classList.add('is-playing'), { once: true }); }
-  s.src = portrait ? 'img/bts-hero-portrait.mp4' : window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
+  s.src = portrait ? 'img/bts-hero-phone.mp4' : window.matchMedia('(max-width: 768px)').matches ? 'img/bts-hero-sunny-960.mp4' : s.getAttribute('data-src');
   v.load();
   v.play().catch(() => {});
 }, 800));
